@@ -43,6 +43,15 @@ function render() {
     bindFrancheeCaseEvents();
   } else if (view === 'franchisee_financial') {
     app.innerHTML = renderAppShell('franchisee', renderFrancheeFinancial());
+  } else if (view === 'template_t01') {
+    app.innerHTML = renderAppShell('franchisee', renderT01());
+    bindT01Events();
+  } else if (view === 'template_t02') {
+    app.innerHTML = renderAppShell('franchisee', renderT02());
+    bindT02Events();
+  } else if (view === 'template_t03') {
+    app.innerHTML = renderAppShell('franchisee', renderT03());
+    bindT03Events();
   } else if (view === 'candidate_dashboard') {
     app.innerHTML = renderAppShell('candidate', renderCandidateDashboard());
     bindCandidateEvents();

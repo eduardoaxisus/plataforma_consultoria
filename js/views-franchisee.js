@@ -407,40 +407,62 @@ function renderFrancheeCase() {
 }
 
 function showTemplateModal(id, nome) {
+  // T01, T02, T03 têm telas dedicadas com especificação completa
+  const dedicatedRoutes = {
+    T01: 'template_t01',
+    T02: 'template_t02',
+    T03: 'template_t03',
+  };
+
+  if (dedicatedRoutes[id]) {
+    navigate(dedicatedRoutes[id]);
+    return;
+  }
+
+  // T04–T09: modal genérico (próximas ondas de desenvolvimento)
+  const phaseHints = {
+    T04: 'Ishikawa (espinha de peixe) + análise dos 5 Porquês para cada causa identificada.',
+    T05: 'Validação da causa raiz com evidência quantitativa — dado real do cliente.',
+    T06: 'Canvas de Alternativa: uma tela por alternativa de solução candidata.',
+    T07: 'Valor × Complexidade + método WSJF para priorização das alternativas.',
+    T08: 'Plano de implementação 5W2H + Matriz de Riscos + KPIs de acompanhamento.',
+    T09: 'Montagem do A3 Expandido — entregável final da fase Deliver.',
+  };
+
   showModal(`
     <div class="modal" style="max-width:680px;">
       <div class="modal-header">
         <div>
-          <div class="text-xs text-muted">${id}</div>
+          <div class="text-xs text-muted">${id} · Fase ${id <= 'T03' ? 'Define' : id <= 'T05' ? 'Diagnose' : id === 'T06' ? 'Design' : id <= 'T08' ? 'Decide' : 'Deliver'}</div>
           <div class="modal-title">${nome}</div>
         </div>
         <div class="flex gap-2">
-          <button class="btn btn-accent btn-sm" onclick="showToast('IA gerando sugestão...');closeModal()">
+          <button class="btn btn-accent btn-sm" onclick="showToast('IA gerando sugestão com base na biblioteca de casos...')">
             ${icon('ai',14)} Sugerir com IA
           </button>
           <button class="btn btn-ghost btn-icon" onclick="closeModal()">${icon('x',18)}</button>
         </div>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-4">${icon('eye',16)} Preencha todos os campos. O IA Copiloto pode sugerir respostas baseadas na biblioteca de casos.</div>
+        <div class="alert alert-info mb-4">${icon('eye',16)} ${phaseHints[id] || 'Preencha todos os campos conforme a metodologia AXISUS 5D.'}</div>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <div class="form-group">
-            <label class="form-label">Problema Identificado</label>
-            <textarea class="form-textarea">Ineficiência no roteirizamento e falta de visibilidade da cadeia logística geram R$ 280k/ano em custos evitáveis.</textarea>
+            <label class="form-label">Análise Principal</label>
+            <textarea class="form-textarea" rows="4" placeholder="Preencha a análise conforme o template ${id}..."></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">Evidências / Dados de Suporte</label>
-            <textarea class="form-textarea" placeholder="Cole dados, métricas, análises..."></textarea>
+            <textarea class="form-textarea" placeholder="Cole dados, métricas, análises que suportam esta etapa..."></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">Conclusão / Insight Principal</label>
-            <textarea class="form-textarea" placeholder="Principal aprendizado desta análise..."></textarea>
+            <textarea class="form-textarea" placeholder="Principal conclusão desta etapa para a próxima fase..."></textarea>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal()">Salvar Rascunho</button>
-        <button class="btn btn-primary" onclick="closeModal();showToast('Template marcado como completo!')">Marcar como Completo</button>
+        <button class="btn btn-primary" onclick="closeModal();showToast('${id} marcado como completo!')">Marcar como Completo</button>
       </div>
     </div>
   `);
