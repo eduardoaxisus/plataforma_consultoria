@@ -417,6 +417,7 @@ function showTemplateModal(id, nome) {
     T06: 'template_t06',
     T07: 'template_t07',
     T08: 'template_t08',
+    T09: 'template_t09',
   };
 
   if (dedicatedRoutes[id]) {
