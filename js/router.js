@@ -52,6 +52,12 @@ function render() {
   } else if (view === 'template_t03') {
     app.innerHTML = renderAppShell('franchisee', renderT03());
     bindT03Events();
+  } else if (view === 'template_t04') {
+    app.innerHTML = renderT04();
+    bindT04Events();
+  } else if (view === 'template_t05') {
+    app.innerHTML = renderT05();
+    bindT05Events();
   } else if (view === 'candidate_dashboard') {
     app.innerHTML = renderAppShell('candidate', renderCandidateDashboard());
     bindCandidateEvents();
