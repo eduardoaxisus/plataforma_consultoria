@@ -58,6 +58,9 @@ function render() {
   } else if (view === 'template_t05') {
     app.innerHTML = renderT05();
     bindT05Events();
+  } else if (view === 'template_t06') {
+    app.innerHTML = renderT06();
+    bindT06Events();
   } else if (view === 'candidate_dashboard') {
     app.innerHTML = renderAppShell('candidate', renderCandidateDashboard());
     bindCandidateEvents();
