@@ -37,7 +37,9 @@ const ICONS = {
   grid:        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
 };
 
-function icon(name, size = 16) {
+function icon(name, size = 16, color) {
   const svg = ICONS[name] || ICONS.file;
-  return svg.replace('<svg ', `<svg width="${size}" height="${size}" `);
+  let result = svg.replace('<svg ', `<svg width="${size}" height="${size}" `);
+  if (color) result = result.replace(/stroke="[^"]*"/g, `stroke="${color}"`);
+  return result;
 }

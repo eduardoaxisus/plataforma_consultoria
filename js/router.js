@@ -61,6 +61,13 @@ function render() {
   } else if (view === 'template_t06') {
     app.innerHTML = renderT06();
     bindT06Events();
+  } else if (view === 'template_t07') {
+    app.innerHTML = renderT07();
+    bindT07Events();
+  } else if (view === 'template_t08') {
+    app.innerHTML = renderT08();
+    bindT08Events();
+    bindTabEvents();
   } else if (view === 'candidate_dashboard') {
     app.innerHTML = renderAppShell('candidate', renderCandidateDashboard());
     bindCandidateEvents();
