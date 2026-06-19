@@ -148,12 +148,164 @@ const AXISUS = {
     { id: 'pr3', franqueado: 'Ana Paula Rodrigues', caso: 'CASE-2026-0042', status: 'new',         prazo: '2026-06-20', designer: null },
   ],
 
-  // ============ LIBRARY CASES ============
+  // ============ LIBRARY CASES (RAG) ============
   libraryCases: [
-    { id: 'lib1', setor: 'Logística',   problema: 'Custo de frete elevado',      solucao: 'Roteirização dinâmica + cross-docking', roi: '23% redução de custos', lições: 3 },
-    { id: 'lib2', setor: 'Manufatura',  problema: 'OEE abaixo do benchmark',     solucao: 'SMED + TPM nas paradas críticas',       roi: '+18pp de OEE em 90 dias', lições: 5 },
-    { id: 'lib3', setor: 'Varejo',      problema: 'Ruptura de estoque',          solucao: 'Reposição baseada em demanda prevista', roi: '34% menos rupturas',    lições: 2 },
-    { id: 'lib4', setor: 'Saúde',       problema: 'Fila de atendimento longa',   solucao: 'Triagem ágil + agendamento inteligente', roi: '40% redução espera',  lições: 4 },
-    { id: 'lib5', setor: 'Construção',  problema: 'Atraso de obras recorrente',  solucao: 'Planejamento pull + pronto para execução', roi: '28 dias adiantado',  lições: 3 },
-  ]
+    {
+      id: 'lib1', setor: 'Logística', porte: 'Médio', franqueado: 'Ana Paula Rodrigues',
+      titulo: 'Distribuidora Sul — Otimização de Frete',
+      data_conclusao: '2026-05-30', consultas_ia: 47, aprovado_rag: true,
+      problema_reformulado: 'Ineficiência no roteirizamento e falta de visibilidade da cadeia logística geram R$ 280k/ano em custos evitáveis.',
+      causa_raiz: 'Ausência de sistema de roteirização dinâmica e dependência de planilhas manuais por motorista.',
+      causa_raiz_categoria: 'Método',
+      solucao_implementada: 'Implantação de roteirização dinâmica via API + cross-docking em 3 hubs regionais.',
+      resultado: 'R$ 64k/ano de economia • Entregas no prazo: 71% → 94% • NPS cliente: +22 pontos',
+      tags: ['logística', 'frete', 'roteirização', 'last-mile'],
+      fases: { define: 11, diagnose: 19, design: 15, decide: 13, deliver: 7 }
+    },
+    {
+      id: 'lib2', setor: 'Manufatura', porte: 'Grande', franqueado: 'João Carlos Pereira',
+      titulo: 'Metalúrgica Primus — Recuperação de OEE',
+      data_conclusao: '2026-06-10', consultas_ia: 62, aprovado_rag: true,
+      problema_reformulado: 'Paradas não planejadas e setup longo reduzem OEE em 22pp abaixo do benchmark setorial.',
+      causa_raiz: 'Ausência de manutenção preventiva estruturada e setup sem padronização SMED.',
+      causa_raiz_categoria: 'Máquina',
+      solucao_implementada: 'Programa TPM com pilares Manutenção Autônoma e Planejada + kaizen SMED de 3 dias.',
+      resultado: 'OEE: 53% → 74% em 90 dias • Paradas não planejadas -67% • Custo manutenção -R$ 48k/ano',
+      tags: ['manufatura', 'OEE', 'TPM', 'SMED', 'paradas'],
+      fases: { define: 9, diagnose: 22, design: 14, decide: 11, deliver: 8 }
+    },
+    {
+      id: 'lib3', setor: 'Varejo', porte: 'Médio', franqueado: 'Camila Ferreira',
+      titulo: 'Supermercado Express — Ruptura de Estoque',
+      data_conclusao: '2026-03-15', consultas_ia: 31, aprovado_rag: true,
+      problema_reformulado: 'Ruptura de estoque em itens de alto giro gera R$ 180k/ano em venda perdida e perda de clientes.',
+      causa_raiz: 'Curva ABC desatualizada e reposição baseada em histórico simples sem sazonalidade.',
+      causa_raiz_categoria: 'Método',
+      solucao_implementada: 'Reclassificação ABC-XYZ + reposição baseada em previsão de demanda com sazonalidade.',
+      resultado: 'Rupturas: -34% • Venda perdida recuperada: R$ 61k/ano • Giro estoque: +18%',
+      tags: ['varejo', 'estoque', 'ruptura', 'ABC', 'demanda'],
+      fases: { define: 8, diagnose: 14, design: 11, decide: 9, deliver: 5 }
+    },
+    {
+      id: 'lib4', setor: 'Saúde', porte: 'Pequeno', franqueado: 'Fernanda Lopes',
+      titulo: 'Clínica MedCenter — Tempo de Espera',
+      data_conclusao: '2026-04-28', consultas_ia: 28, aprovado_rag: true,
+      problema_reformulado: 'Tempo médio de espera de 47 minutos gera cancelamentos e NPS negativo em especialidades críticas.',
+      causa_raiz: 'Agendamento sem buffer para consultas complexas e ausência de triagem de urgência padronizada.',
+      causa_raiz_categoria: 'Método',
+      solucao_implementada: 'Sistema de triagem em 3 níveis + agendamento inteligente com buffer dinâmico por especialidade.',
+      resultado: 'Tempo espera: 47 min → 18 min • Cancelamentos: -58% • NPS: 6.2 → 8.9',
+      tags: ['saúde', 'clínica', 'espera', 'agendamento', 'triagem'],
+      fases: { define: 7, diagnose: 12, design: 10, decide: 8, deliver: 6 }
+    },
+    {
+      id: 'lib5', setor: 'Construção', porte: 'Grande', franqueado: 'Marcelo Teixeira',
+      titulo: 'Construtora Beta — Atraso de Obras',
+      data_conclusao: '2026-02-20', consultas_ia: 39, aprovado_rag: true,
+      problema_reformulado: 'Atraso médio de 28 dias nas obras causa multas contratuais de R$ 320k/ano e impacta captação.',
+      causa_raiz: 'Planejamento de curto prazo sem look-ahead e ausência de gestão de restrições antes do início de cada frente.',
+      causa_raiz_categoria: 'Método',
+      solucao_implementada: 'Last Planner System com reuniões semanais de PPC e look-ahead de 4 semanas.',
+      resultado: 'PPC: 54% → 81% • Atrasos -72% • Multas contratuais economizadas: R$ 230k',
+      tags: ['construção', 'atraso', 'Last Planner', 'PPC', 'look-ahead'],
+      fases: { define: 10, diagnose: 18, design: 13, decide: 10, deliver: 7 }
+    },
+    {
+      id: 'lib6', setor: 'Tecnologia', porte: 'Médio', franqueado: 'João Carlos Pereira',
+      titulo: 'SoftHouse GX — Entrega de Software',
+      data_conclusao: '2026-01-18', consultas_ia: 22, aprovado_rag: true,
+      problema_reformulado: 'Taxa de retrabalho de 38% nos sprints atrasa entregas em 2–3 semanas e eleva custo de desenvolvimento.',
+      causa_raiz: 'Ausência de Definition of Ready nas histórias: entrada de sprint com requisitos ambíguos.',
+      causa_raiz_categoria: 'Método',
+      solucao_implementada: 'Implantação de DoR + cerimônia de refinamento obrigatória com critérios INVEST.',
+      resultado: 'Retrabalho: 38% → 11% • Velocidade time: +24% • Custo por feature entregue -19%',
+      tags: ['tecnologia', 'software', 'agile', 'DoR', 'retrabalho'],
+      fases: { define: 6, diagnose: 10, design: 9, decide: 7, deliver: 5 }
+    },
+    {
+      id: 'lib7', setor: 'Alimentação', porte: 'Médio', franqueado: 'Camila Ferreira',
+      titulo: 'Frigorífico Delta — Desperdício na Produção',
+      data_conclusao: '2025-12-10', consultas_ia: 34, aprovado_rag: true,
+      problema_reformulado: 'Desperdício de 8,3% do volume processado gera R$ 190k/ano de perda direta e risco sanitário.',
+      causa_raiz: 'Temperatura irregular em câmara de resfriamento por manutenção reativa e falta de monitoramento contínuo.',
+      causa_raiz_categoria: 'Máquina',
+      solucao_implementada: 'Sensores IoT para temperatura + protocolo de manutenção preventiva em câmaras críticas.',
+      resultado: 'Desperdício: 8,3% → 2,1% • Perda financeira recuperada: R$ 118k/ano • Zero autuações sanitárias',
+      tags: ['alimentação', 'frigorífico', 'desperdício', 'temperatura', 'IoT'],
+      fases: { define: 8, diagnose: 16, design: 11, decide: 9, deliver: 6 }
+    },
+    {
+      id: 'lib8', setor: 'RH / Pessoas', porte: 'Grande', franqueado: 'Marcelo Teixeira',
+      titulo: 'Indústria Textil Moderna — Turnover Operacional',
+      data_conclusao: '2025-11-25', consultas_ia: 19, aprovado_rag: true,
+      problema_reformulado: 'Turnover de 74% ao ano no chão de fábrica gera R$ 420k em custos de rescisão e recontratação.',
+      causa_raiz: 'Ausência de feedback estruturado e plano de desenvolvimento individual para operadores nos primeiros 90 dias.',
+      causa_raiz_categoria: 'Mão de obra',
+      solucao_implementada: 'Programa de 90 dias com mentoria, feedbacks quinzenais e trilha de progressão visível.',
+      resultado: 'Turnover: 74% → 31% em 6 meses • Custo rescisão: -R$ 196k/ano • Produtividade turno: +12%',
+      tags: ['RH', 'turnover', 'pessoas', 'onboarding', 'retenção'],
+      fases: { define: 9, diagnose: 14, design: 12, decide: 10, deliver: 7 }
+    },
+  ],
+
+  // ============ IA METRICS (Telemetria simulada — Onda 2) ============
+  iaMetrics: {
+    globalAcceptanceRate: 0.42,
+    avgReviewTimeSeconds: 23,
+    gateCorrelation: 0.87,
+    costPerApprovedCase: 0.43,
+    cacheHitRate: 0.38,
+    totalCallsMonth: 2600,
+    totalCostMonth: 4.31,
+    // Especialistas com métricas de uso
+    specialists: [
+      { nome: 'Ana Paula Rodrigues', nivel: 'Pleno',  usoIACaso: 24, acceptRate: 0.44, alertDependency: false },
+      { nome: 'João Carlos Pereira', nivel: 'Sênior', usoIACaso: 27, acceptRate: 0.39, alertDependency: false },
+      { nome: 'Fernanda Lopes',      nivel: 'Júnior', usoIACaso: 31, acceptRate: 0.61, alertDependency: false },
+      { nome: 'Marcelo Teixeira',    nivel: 'Master', usoIACaso: 22, acceptRate: 0.35, alertDependency: false },
+      { nome: 'Camila Ferreira',     nivel: 'Pleno',  usoIACaso: 18, acceptRate: 0.82, alertDependency: true  },
+    ],
+    // Custos por componente (100 casos/mês, cenário ano 2)
+    costBreakdown: [
+      { componente: 'Chamadas Sonnet (geração)',     volume: 800,  custoUnit: 0.008,  total: 6.40  },
+      { componente: 'Chamadas Haiku (validação)',    volume: 1200, custoUnit: 0.0008, total: 0.96  },
+      { componente: 'Busca RAG (vetorial)',          volume: 600,  custoUnit: 0.0001, total: 0.06  },
+      { componente: 'Embeddings de novos casos',    volume: 100,  custoUnit: 0.0001, total: 0.01  },
+      { componente: 'Cache hits (economia)',         volume: 1040, custoUnit: -0.003, total: -3.12 },
+    ],
+    // 26 pontos de IA P01–P26
+    points: [
+      // Fase Define
+      { id: 'P01', template: 'T01', fase: 'Define',   categoria: 'geracao',  modelo: 'Claude Sonnet 4',              funcao: 'Sugerir casos similares na biblioteca para o briefing',          acceptRate: 0.51, calls: 128, avgMs: 1840 },
+      { id: 'P02', template: 'T01', fase: 'Define',   categoria: 'geracao',  modelo: 'Claude Haiku 4.5',             funcao: 'Sugerir perguntas de aprofundamento para o cliente',              acceptRate: 0.48, calls: 134, avgMs: 620  },
+      { id: 'P03', template: 'T01', fase: 'Define',   categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detectar riscos de reformulação prematura no briefing',           acceptRate: 0.33, calls:  89, avgMs: 210  },
+      { id: 'P04', template: 'T02', fase: 'Define',   categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Sugestões de escopo para dimensões do Is/Is Not',                acceptRate: 0.44, calls: 112, avgMs: 340  },
+      { id: 'P05', template: 'T02', fase: 'Define',   categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Detectar stakeholders esquecidos por setor',                     acceptRate: 0.38, calls:  97, avgMs: 290  },
+      { id: 'P06', template: 'T03', fase: 'Define',   categoria: 'geracao',  modelo: 'Claude Haiku 4.5',             funcao: 'Sugerir indicadores por dimensão (4 dimensões × N indicadores)', acceptRate: 0.55, calls: 143, avgMs: 580  },
+      { id: 'P07', template: 'T03', fase: 'Define',   categoria: 'curadoria',modelo: 'Claude Sonnet 4',              funcao: 'Pré-rascunho da reformulação do problema',                       acceptRate: 0.71, calls: 138, avgMs: 2210 },
+      // Fase Diagnose
+      { id: 'P08', template: 'T04', fase: 'Diagnose', categoria: 'geracao',  modelo: 'Claude Sonnet 4',              funcao: 'Sugestão proativa de causas por categoria 6M',                   acceptRate: 0.46, calls: 156, avgMs: 2480 },
+      { id: 'P09', template: 'T04', fase: 'Diagnose', categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Busca semântica de casos similares na biblioteca',               acceptRate: 0.39, calls: 141, avgMs: 380  },
+      { id: 'P10', template: 'T04', fase: 'Diagnose', categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detecção de anti-padrão "Parada precoce" nos 5 Porquês',         acceptRate: 0.28, calls:  73, avgMs: 180  },
+      { id: 'P11', template: 'T04', fase: 'Diagnose', categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detecção de anti-padrão "Sintoma como causa"',                   acceptRate: 0.31, calls:  68, avgMs: 190  },
+      { id: 'P12', template: 'T04', fase: 'Diagnose', categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detecção de anti-padrão "Atribuição pessoal"',                   acceptRate: 0.22, calls:  54, avgMs: 175  },
+      { id: 'P13', template: 'T05', fase: 'Diagnose', categoria: 'geracao',  modelo: 'Claude Haiku 4.5',             funcao: 'Sugestão de métrica de teste por hipótese',                      acceptRate: 0.43, calls: 119, avgMs: 640  },
+      { id: 'P14', template: 'T05', fase: 'Diagnose', categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Sugestão de benchmark com fonte verificável',                    acceptRate: 0.47, calls: 108, avgMs: 310  },
+      { id: 'P15', template: 'T05', fase: 'Diagnose', categoria: 'analise',  modelo: 'Computação Local (JS)',         funcao: 'Análise estatística automática (média, mediana, tendência)',     acceptRate: 0.89, calls: 204, avgMs:  42  },
+      // Fase Design
+      { id: 'P16', template: 'T06', fase: 'Design',   categoria: 'geracao',  modelo: 'Claude Sonnet 4',              funcao: 'Gerar alternativas baseadas em casos com causa raiz similar',    acceptRate: 0.52, calls: 132, avgMs: 2650 },
+      { id: 'P17', template: 'T06', fase: 'Design',   categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Suporte ao SCAMPER (7 perguntas pré-populadas)',                  acceptRate: 0.41, calls:  88, avgMs: 320  },
+      { id: 'P18', template: 'T06', fase: 'Design',   categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detecção de duplicatas e gaps de categoria nas alternativas',    acceptRate: 0.27, calls:  61, avgMs: 200  },
+      { id: 'P19', template: 'T06', fase: 'Design',   categoria: 'rag',      modelo: 'text-embedding-3-large',       funcao: 'Importar alternativas de casos similares na biblioteca',         acceptRate: 0.44, calls:  94, avgMs: 360  },
+      // Fase Decide
+      { id: 'P20', template: 'T07', fase: 'Decide',   categoria: 'geracao',  modelo: 'Claude Haiku 4.5',             funcao: 'Sugestão de scores Fibonacci baseada em casos similares',        acceptRate: 0.38, calls: 116, avgMs: 590  },
+      { id: 'P21', template: 'T07', fase: 'Decide',   categoria: 'validacao',modelo: 'Regex + Haiku',                funcao: 'Detecção de inconsistências entre componentes WSJF',              acceptRate: 0.24, calls:  49, avgMs: 185  },
+      { id: 'P22', template: 'T08', fase: 'Decide',   categoria: 'geracao',  modelo: 'Claude Sonnet 4',              funcao: 'Geração de ações 5W2H baseada em casos similares',               acceptRate: 0.49, calls: 124, avgMs: 2320 },
+      { id: 'P23', template: 'T08', fase: 'Decide',   categoria: 'geracao',  modelo: 'Claude Haiku 4.5',             funcao: 'Sugestão de riscos por padrão setorial',                         acceptRate: 0.56, calls: 131, avgMs: 710  },
+      // Fase Deliver
+      { id: 'P24', template: 'T09', fase: 'Deliver',  categoria: 'curadoria',modelo: 'Claude Sonnet 4',              funcao: 'Revisão de coerência narrativa entre templates',                  acceptRate: 0.63, calls:  87, avgMs: 3140 },
+      { id: 'P25', template: 'T09', fase: 'Deliver',  categoria: 'curadoria',modelo: 'Claude Sonnet 4',              funcao: 'Sugestão de síntese textual (Background, Current State)',        acceptRate: 0.68, calls:  79, avgMs: 2890 },
+      { id: 'P26', template: 'T09', fase: 'Deliver',  categoria: 'curadoria',modelo: 'Claude Sonnet 4',              funcao: 'Detecção de "buracos visuais" no A3',                            acceptRate: 0.41, calls:  72, avgMs: 1640 },
+    ]
+  }
 };

@@ -94,6 +94,10 @@ function render() {
     app.innerHTML = renderAppShell('hub', renderHubProto());
   } else if (view === 'hub_library') {
     app.innerHTML = renderAppShell('hub', renderHubLibrary());
+  } else if (view === 'hub_ia_quality') {
+    app.innerHTML = renderAppShell('hub', renderHubIA());
+    bindHubIAEvents();
+    bindTabEvents();
   } else if (view === 'hub_financial') {
     app.innerHTML = renderAppShell('hub', renderHubFinancial());
   } else {
@@ -142,15 +146,16 @@ function renderSidebar(universe) {
       { icon: 'message',  label: 'Chat com Hub',      view: 'candidate_dashboard' },
     ],
     hub: [
-      { icon: 'home',      label: 'Dashboard',      view: 'hub_dashboard' },
-      { icon: 'users',     label: 'Franqueados',    view: 'hub_franchisees' },
-      { icon: 'funnel',    label: 'Candidatos',     view: 'hub_candidates' },
-      { icon: 'trending_up', label: 'Leads da Rede', view: 'hub_leads' },
-      { icon: 'shield',    label: 'Revisão QA',     view: 'hub_qa', badge: '2' },
-      { icon: 'tool',      label: 'Prototipagem',   view: 'hub_proto', badge: '1' },
-      { icon: 'book',      label: 'Biblioteca',     view: 'hub_library' },
-      { icon: 'dollar',    label: 'Financeiro',     view: 'hub_financial' },
-      { icon: 'settings',  label: 'Configurações',  view: 'hub_dashboard' },
+      { icon: 'home',        label: 'Dashboard',      view: 'hub_dashboard' },
+      { icon: 'users',       label: 'Franqueados',    view: 'hub_franchisees' },
+      { icon: 'funnel',      label: 'Candidatos',     view: 'hub_candidates' },
+      { icon: 'trending_up', label: 'Leads da Rede',  view: 'hub_leads' },
+      { icon: 'shield',      label: 'Revisão QA',     view: 'hub_qa', badge: '2' },
+      { icon: 'tool',        label: 'Prototipagem',   view: 'hub_proto', badge: '1' },
+      { icon: 'book',        label: 'Biblioteca',     view: 'hub_library' },
+      { icon: 'ai',          label: 'IA Copiloto',    view: 'hub_ia_quality', badge: '26' },
+      { icon: 'dollar',      label: 'Financeiro',     view: 'hub_financial' },
+      { icon: 'settings',    label: 'Configurações',  view: 'hub_dashboard' },
     ],
   };
 

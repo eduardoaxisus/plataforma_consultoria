@@ -491,57 +491,259 @@ function renderHubProto() {
 }
 
 function renderHubLibrary() {
+  const cases = AXISUS.libraryCases;
+  const setores = [...new Set(cases.map(c => c.setor))];
+  const totalConsultas = cases.reduce((s, c) => s + c.consultas_ia, 0);
+
+  const setorColors = {
+    'Logística':    { color: '#1E40AF', bg: '#EFF6FF' },
+    'Manufatura':   { color: '#065F46', bg: '#ECFDF5' },
+    'Varejo':       { color: '#B45309', bg: '#FFFBEB' },
+    'Saúde':        { color: '#9D174D', bg: '#FDF2F8' },
+    'Construção':   { color: '#6B21A8', bg: '#F5F3FF' },
+    'Tecnologia':   { color: '#0369A1', bg: '#F0F9FF' },
+    'Alimentação':  { color: '#065F46', bg: '#F0FDF4' },
+    'RH / Pessoas': { color: '#7C3AED', bg: '#F5F3FF' },
+  };
+
   return `
-    <div>
+    <div class="fade-in">
+      <!-- Header -->
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-xl font-bold">Biblioteca de Casos</h1>
-          <p class="text-secondary text-sm">Casos anonimizados que alimentam o IA Copiloto via RAG</p>
+          <h1 style="font-size:24px;font-weight:800;">Biblioteca de Casos</h1>
+          <p class="text-secondary">Casos anonimizados que alimentam o IA Copiloto via RAG · ${cases.length} casos · ${cases.filter(c=>c.aprovado_rag).length} aprovados para IA</p>
         </div>
-        <button class="btn btn-primary btn-sm">${icon('plus',14)} Adicionar Caso</button>
-      </div>
-
-      <!-- Busca -->
-      <div class="card mb-6" style="padding:16px;">
-        <div style="display:flex;gap:12px;align-items:center;">
-          <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;">
-            ${icon('search',16)} <input type="text" placeholder="Buscar por setor, problema, solução..." style="border:none;outline:none;font-size:13px;width:100%;background:transparent;">
-          </div>
-          <button class="btn btn-accent btn-sm">${icon('ai',14)} Busca Semântica (IA)</button>
+        <div class="flex gap-2">
+          <button class="btn btn-secondary btn-sm" onclick="showToast('Filtros avançados — em breve')">
+            ${icon('settings', 14)} Filtros
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Formulário de novo caso — em breve')">
+            ${icon('plus', 14)} Adicionar Caso
+          </button>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;">
-        ${AXISUS.libraryCases.map(c => `
-          <div class="card" style="cursor:pointer;" onclick="showToast('Abrindo caso da biblioteca...')">
-            <div class="flex items-center justify-between mb-3">
-              <span class="badge badge-primary">${c.setor}</span>
-              <span class="text-xs text-muted">${c.lições} lições extraídas</span>
-            </div>
-            <div class="font-semibold mb-2">${c.problema}</div>
-            <div class="text-sm text-secondary mb-3">${c.solucao}</div>
-            <div class="flex items-center gap-2">
-              <span class="badge badge-green">${c.roi}</span>
-            </div>
-          </div>
-        `).join('')}
+      <!-- Stats no topo -->
+      <div class="grid-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-label">Casos na Biblioteca</div>
+          <div class="stat-value">${cases.length}</div>
+          <div class="badge badge-green mt-1">+3 este mês</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Aprovados para RAG</div>
+          <div class="stat-value">${cases.filter(c=>c.aprovado_rag).length}</div>
+          <div class="badge badge-green mt-1">${Math.round(cases.filter(c=>c.aprovado_rag).length/cases.length*100)}% aprovação</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Consultas IA este mês</div>
+          <div class="stat-value">${totalConsultas}</div>
+          <div class="badge badge-yellow mt-1">↑ 18% vs. mês anterior</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Setores Cobertos</div>
+          <div class="stat-value">${setores.length}</div>
+          <div class="badge badge-gray mt-1">${setores.slice(0,2).join(', ')}...</div>
+        </div>
       </div>
 
-      <div class="card mt-6">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Estatísticas da Biblioteca</div>
-            <div class="card-subtitle">Qualidade e uso pelo IA Copiloto</div>
+      <!-- Busca Semântica -->
+      <div class="card mb-4" style="padding:16px 20px;">
+        <div class="flex items-center gap-3 mb-3">
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1.5px solid var(--border);border-radius:8px;padding:9px 14px;flex:1;">
+            ${icon('search', 16)}
+            <input id="lib-search" type="text" placeholder="Buscar por setor, problema, causa raiz, solução..." style="border:none;outline:none;font-size:13px;width:100%;background:transparent;">
           </div>
+          <button class="btn btn-accent btn-sm" onclick="runSemanticSearch()">
+            ${icon('ai', 14)} Busca Semântica (IA)
+          </button>
         </div>
-        <div class="grid-3">
-          <div class="text-center"><div class="text-2xl font-bold text-primary-color">47</div><div class="text-xs text-muted">Casos na biblioteca</div></div>
-          <div class="text-center"><div class="text-2xl font-bold text-accent">94%</div><div class="text-xs text-muted">Aprovados para uso pela IA</div></div>
-          <div class="text-center"><div class="text-2xl font-bold" style="color:#F59E0B;">312</div><div class="text-xs text-muted">Consultas à IA este mês</div></div>
+        <!-- Filtros rápidos por setor -->
+        <div class="flex gap-2" style="flex-wrap:wrap;">
+          <button class="btn btn-secondary btn-sm lib-filter active" data-setor="all" onclick="filterLibrary('all')">Todos</button>
+          ${setores.map(s => {
+            const sc = setorColors[s] || { color: '#374151', bg: '#F9FAFB' };
+            return `<button class="btn btn-secondary btn-sm lib-filter" data-setor="${s}" onclick="filterLibrary('${s}')"
+              style="border-color:${sc.color}40;" >${s}</button>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Resultado de busca semântica (oculto por padrão) -->
+      <div id="semantic-result" class="card mb-4 hidden" style="border-left:4px solid var(--accent);padding:16px 20px;">
+        <div class="flex items-center gap-2 mb-3">
+          ${icon('ai', 16)}
+          <div style="font-size:13px;font-weight:700;">Resultado da Busca Semântica</div>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto;font-size:11px;" onclick="document.getElementById('semantic-result').classList.add('hidden')">Limpar</button>
+        </div>
+        <div id="semantic-result-content"></div>
+      </div>
+
+      <!-- Grid de casos -->
+      <div id="lib-grid" style="display:flex;flex-direction:column;gap:12px;">
+        ${cases.map(c => {
+          const sc = setorColors[c.setor] || { color: '#374151', bg: '#F9FAFB' };
+          const diasFases = Object.values(c.fases).reduce((s, v) => s + v, 0);
+          return `
+            <div class="lib-case-card" data-setor="${c.setor}"
+              style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:all 0.15s;">
+              <!-- Header do card -->
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;background:white;"
+                onclick="toggleLibCase('${c.id}')">
+                <!-- Setor badge -->
+                <div style="width:44px;height:44px;border-radius:10px;background:${sc.bg};border:1.5px solid ${sc.color}30;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <span style="font-size:10px;font-weight:800;color:${sc.color};text-align:center;line-height:1.2;">${c.setor.substring(0,4)}</span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13px;font-weight:700;margin-bottom:2px;">${c.titulo}</div>
+                  <div style="font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.problema_reformulado}</div>
+                </div>
+                <div class="flex items-center gap-2" style="flex-shrink:0;">
+                  <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:${sc.bg};color:${sc.color};font-weight:700;">${c.setor}</span>
+                  ${c.aprovado_rag ? `<span class="badge badge-green" style="font-size:10px;">${icon('ai',10)} RAG</span>` : `<span class="badge badge-gray" style="font-size:10px;">Pendente</span>`}
+                  <span style="font-size:10px;color:var(--text-muted);">${c.consultas_ia} consultas</span>
+                  <div style="width:16px;height:16px;color:var(--text-muted);" id="chevron-${c.id}">${icon('arrow_right', 14)}</div>
+                </div>
+              </div>
+              <!-- Body expansível -->
+              <div id="lib-body-${c.id}" class="hidden" style="border-top:1px solid var(--border);background:var(--surface-2);">
+                <div style="padding:16px 18px;">
+                  <div class="grid-2" style="gap:16px;margin-bottom:16px;">
+                    <!-- Coluna 1: Problema e causa -->
+                    <div>
+                      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">Problema Reformulado</div>
+                      <div style="font-size:12px;line-height:1.6;margin-bottom:12px;">${c.problema_reformulado}</div>
+                      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">Causa Raiz Validada</div>
+                      <div style="font-size:12px;line-height:1.6;padding:10px;background:white;border-radius:8px;border-left:3px solid ${sc.color};">
+                        <span style="font-size:10px;font-weight:700;color:${sc.color};">[${c.causa_raiz_categoria}]</span> ${c.causa_raiz}
+                      </div>
+                    </div>
+                    <!-- Coluna 2: Solução e resultado -->
+                    <div>
+                      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">Solução Implementada</div>
+                      <div style="font-size:12px;line-height:1.6;margin-bottom:12px;">${c.solucao_implementada}</div>
+                      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">Resultado Quantificado</div>
+                      <div style="font-size:12px;line-height:1.6;padding:10px;background:#ECFDF5;border-radius:8px;border-left:3px solid #059669;color:#065F46;font-weight:600;">
+                        ${c.resultado}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Timeline de fases -->
+                  <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">Duração por Fase (dias)</div>
+                    <div class="flex gap-1" style="height:28px;">
+                      ${Object.entries(c.fases).map(([fase, dias]) => {
+                        const pct = Math.round((dias / diasFases) * 100);
+                        const faseColor = { define:'#065F46', diagnose:'#1E40AF', design:'#6B21A8', decide:'#B45309', deliver:'#04342C' }[fase] || '#888';
+                        return `
+                          <div title="${fase.charAt(0).toUpperCase()+fase.slice(1)}: ${dias} dias"
+                            style="flex:${pct};background:${faseColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;font-weight:700;min-width:24px;overflow:hidden;">
+                            ${dias}d
+                          </div>`;
+                      }).join('')}
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                      ${Object.keys(c.fases).map(fase => {
+                        const faseColor = { define:'#065F46', diagnose:'#1E40AF', design:'#6B21A8', decide:'#B45309', deliver:'#04342C' }[fase] || '#888';
+                        return `<div style="flex:1;font-size:9px;color:${faseColor};text-align:center;">${fase.substring(0,3)}</div>`;
+                      }).join('')}
+                    </div>
+                  </div>
+                  <!-- Tags e ações -->
+                  <div class="flex items-center justify-between mt-3">
+                    <div class="flex gap-1" style="flex-wrap:wrap;">
+                      ${c.tags.map(t => `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${sc.bg};color:${sc.color};font-weight:600;">#${t}</span>`).join('')}
+                    </div>
+                    <div class="flex gap-2">
+                      <button class="btn btn-ghost btn-sm" style="font-size:11px;" onclick="showToast('Caso ${c.id} copiado como referência para o caso atual')">
+                        ${icon('file', 12)} Usar como Referência
+                      </button>
+                      <button class="btn btn-accent btn-sm" style="font-size:11px;" onclick="showToast('IA buscando padrões similares ao ${c.id}...')">
+                        ${icon('ai', 12)} Buscar Similares
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+
+      <!-- Distribuição por setor -->
+      <div class="card mt-6" style="padding:16px 20px;">
+        <div class="card-title mb-3">Distribuição por Setor</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${setores.map(s => {
+            const n = cases.filter(c => c.setor === s).length;
+            const pct = Math.round((n / cases.length) * 100);
+            const sc = setorColors[s] || { color: '#374151', bg: '#F9FAFB' };
+            const consultas = cases.filter(c=>c.setor===s).reduce((x,c)=>x+c.consultas_ia,0);
+            return `
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:90px;font-size:12px;font-weight:600;color:${sc.color};">${s}</div>
+                <div style="flex:1;height:8px;background:var(--surface-3);border-radius:4px;overflow:hidden;">
+                  <div style="height:100%;width:${pct}%;background:${sc.color};border-radius:4px;"></div>
+                </div>
+                <div style="width:32px;font-size:12px;font-weight:700;text-align:right;">${pct}%</div>
+                <div style="width:60px;font-size:11px;color:var(--text-muted);">${consultas} consult.</div>
+              </div>`;
+          }).join('')}
         </div>
       </div>
     </div>
   `;
+}
+
+function toggleLibCase(id) {
+  const body = document.getElementById('lib-body-' + id);
+  const chevron = document.getElementById('chevron-' + id);
+  if (!body) return;
+  const isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (chevron) chevron.style.transform = isHidden ? 'rotate(90deg)' : '';
+}
+
+function filterLibrary(setor) {
+  document.querySelectorAll('.lib-filter').forEach(b => {
+    b.classList.toggle('active', b.dataset.setor === setor);
+  });
+  document.querySelectorAll('.lib-case-card').forEach(card => {
+    card.style.display = (setor === 'all' || card.dataset.setor === setor) ? '' : 'none';
+  });
+}
+
+function runSemanticSearch() {
+  const query = document.getElementById('lib-search')?.value?.trim();
+  if (!query) { showToast('Digite algo para buscar', 'error'); return; }
+  showToast('Buscando via embeddings semânticos...');
+  const result = document.getElementById('semantic-result');
+  const content = document.getElementById('semantic-result-content');
+  if (!result || !content) return;
+  result.classList.remove('hidden');
+  content.innerHTML = `<div style="font-size:12px;color:var(--text-muted);">Calculando similaridade vetorial...</div>`;
+  setTimeout(() => {
+    const matches = AXISUS.libraryCases.slice(0, 3).map((c, i) => {
+      const score = [94, 81, 67][i];
+      const sc = { 'Logística': { color: '#1E40AF', bg: '#EFF6FF' }, 'Manufatura': { color: '#065F46', bg: '#ECFDF5' } };
+      const col = sc[c.setor] || { color: '#374151', bg: '#F9FAFB' };
+      return `
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:8px;background:white;">
+          <div style="font-size:15px;font-weight:900;color:${score>=80?'#065F46':score>=65?'#B45309':'#6B7280'};width:36px;text-align:center;">${score}%</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;">${c.titulo}</div>
+            <div style="font-size:11px;color:var(--text-muted);">${c.causa_raiz.substring(0,80)}...</div>
+          </div>
+          <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:${col.bg};color:${col.color};font-weight:700;">${c.setor}</span>
+          <button class="btn btn-accent btn-sm" style="font-size:11px;" onclick="showToast('Caso ${c.id} selecionado como referência RAG')">Usar</button>
+        </div>`;
+    });
+    content.innerHTML = `
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">
+        ${icon('ai',13)} Encontrados <strong>3 casos similares</strong> para: "<em>${query}</em>" · Ordenados por score de similaridade vetorial
+      </div>
+      ${matches.join('')}`;
+  }, 1400);
 }
 
 function renderHubFinancial() {
