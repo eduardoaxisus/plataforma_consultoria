@@ -43,6 +43,8 @@ function render() {
     bindFrancheeCaseEvents();
   } else if (view === 'franchisee_financial') {
     app.innerHTML = renderAppShell('franchisee', renderFrancheeFinancial());
+  } else if (view === 'franchisee_templates') {
+    app.innerHTML = renderAppShell('franchisee', renderTemplatesHub());
   } else if (view === 'template_t01') {
     app.innerHTML = renderAppShell('franchisee', renderT01());
     bindT01Events();
@@ -129,6 +131,7 @@ function renderSidebar(universe) {
       { icon: 'home',      label: 'Dashboard',    view: 'franchisee_dashboard' },
       { icon: 'funnel',    label: 'Pipeline',     view: 'franchisee_pipeline' },
       { icon: 'briefcase', label: 'Casos',        view: 'franchisee_case' },
+      { icon: 'file',      label: 'Método 5D',    view: 'franchisee_templates' },
       { icon: 'message',   label: 'Mensagens',    view: 'franchisee_dashboard', badge: '3' },
       { icon: 'dollar',    label: 'Financeiro',   view: 'franchisee_financial' },
       { icon: 'chart',     label: 'Indicadores',  view: 'franchisee_dashboard' },

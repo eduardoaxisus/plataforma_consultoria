@@ -319,6 +319,7 @@ function renderFrancheeCase() {
               ${cs.artifacts.map(a => {
                 const phaseN_map = { define:1, diagnose:2, design:3, decide:4, deliver:5 };
                 const artPhaseN = phaseN_map[a.fase];
+                // Todos os templates das fases já completadas + fase atual são acessíveis
                 const isAccessible = artPhaseN <= currentN;
                 const stMap = {
                   completed:   { cls: 'badge-green',  label: 'Completo'    },
@@ -618,6 +619,161 @@ function renderFrancheeFinancial() {
             <div class="stat-card"><div class="stat-label">Agosto (estimado)</div><div class="stat-value">R$ 42k</div><div class="badge badge-gray mt-1">Projetado</div></div>
           </div>
           <div class="alert alert-success">${icon('trending_up',16)} Pipeline atual em negociação pode gerar +R$ 97k nos próximos 3 meses.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────────────────────
+// HUB DO MÉTODO 5D — Acesso direto a todos os templates T01–T09
+// ─────────────────────────────────────────────────────────────
+function renderTemplatesHub() {
+  const fases = [
+    {
+      id: 'define', label: 'Fase 1 — Define', color: '#065F46', bg: '#ECFDF5',
+      desc: 'Entender e delimitar o problema com precisão antes de diagnosticar.',
+      templates: [
+        { id: 'T01', nome: 'Briefing Inicial', desc: 'Captura estruturada do problema reportado pelo cliente, contexto operacional e expectativas.', route: 'template_t01', status: 'completed' },
+        { id: 'T02', nome: 'Is / Is Not + Stakeholders', desc: 'Delimitação do escopo (o que é e o que não é o problema) e mapeamento de stakeholders com matriz Poder × Interesse.', route: 'template_t02', status: 'completed' },
+        { id: 'T03', nome: 'Quantificação da Dor', desc: 'Quantificação em 4 dimensões (financeira, operacional, reputacional, estratégica) e reformulação do problema.', route: 'template_t03', status: 'completed' },
+      ]
+    },
+    {
+      id: 'diagnose', label: 'Fase 2 — Diagnose', color: '#1E40AF', bg: '#EFF6FF',
+      desc: 'Identificar a causa raiz com rigor metodológico e validação empírica.',
+      templates: [
+        { id: 'T04', nome: 'Ishikawa + 5 Porquês', desc: 'Canvas SVG interativo com diagrama de espinha de peixe (6M) e técnica dos 5 Porquês para cada causa candidata.', route: 'template_t04', status: 'completed' },
+        { id: 'T05', nome: 'Validação da Causa Raiz', desc: 'Verificação empírica da causa raiz com dados reais do cliente — análise estatística e gráfico de série temporal.', route: 'template_t05', status: 'completed' },
+      ]
+    },
+    {
+      id: 'design', label: 'Fase 3 — Design', color: '#6B21A8', bg: '#F5F3FF',
+      desc: 'Gerar múltiplas alternativas de solução para a causa raiz validada.',
+      templates: [
+        { id: 'T06', nome: 'Canvas de Alternativas', desc: 'Geração estruturada de 6–12 alternativas usando SCAMPER, Análise Morfológica e Biblioteca de Casos. Avaliação por 6 critérios.', route: 'template_t06', status: 'completed' },
+      ]
+    },
+    {
+      id: 'decide', label: 'Fase 4 — Decide', color: '#B45309', bg: '#FFFBEB',
+      desc: 'Priorizar matematicamente e planejar a implementação da solução escolhida.',
+      templates: [
+        { id: 'T07', nome: 'Priorização WSJF AXISUS', desc: 'Tabela interativa com fórmula WSJF adaptada: (UV+TC+RR)/JS × Multiplicador de Aderência à Causa Raiz. Ranking automático.', route: 'template_t07', status: 'completed' },
+        { id: 'T08', nome: '5W2H + Riscos + KPIs', desc: 'Plano de implementação em 3 abas: 16 ações 5W2H com Gantt, Heatmap de riscos 5×5 com 8 riscos, 5 KPIs com metas 30/60/90/365 dias.', route: 'template_t08', status: 'completed' },
+      ]
+    },
+    {
+      id: 'deliver', label: 'Fase 5 — Deliver', color: '#04342C', bg: '#F0FDF4',
+      desc: 'Consolidar e entregar o A3 Expandido — o documento final para o cliente.',
+      templates: [
+        { id: 'T09', nome: 'A3 Expandido AXISUS', desc: 'Síntese de todo o método em uma página A3 paisagem. Modo Edição + Modo Apresentação. Exportação PDF/PNG. Sign-off via ClickSign.', route: 'template_t09', status: 'in_progress' },
+      ]
+    },
+  ];
+
+  const stMap = {
+    completed:   { cls: 'badge-green',  label: 'Completo',      icon: 'check'    },
+    in_progress: { cls: 'badge-yellow', label: 'Em andamento',  icon: 'eye'      },
+    pending:     { cls: 'badge-gray',   label: 'Pendente',      icon: 'calendar' },
+  };
+
+  const totalTemplates = fases.reduce((s, f) => s + f.templates.length, 0);
+  const totalConcluidos = fases.reduce((s, f) => s + f.templates.filter(t => t.status === 'completed').length, 0);
+
+  return `
+    <div class="fade-in">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 style="font-size:24px;font-weight:800;">Método 5D AXISUS</h1>
+          <p class="text-secondary">Todos os 9 templates do método · Caso: CASE-2026-0042 · Embalagens Atlântico</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="navigate('template_t09')">
+          ${icon('file',14)} Ver A3 Final
+        </button>
+      </div>
+
+      <!-- Barra de progresso geral -->
+      <div class="card mb-6" style="padding:16px 20px;">
+        <div class="flex items-center justify-between mb-3">
+          <div style="font-size:13px;font-weight:700;">Progresso do caso</div>
+          <div style="font-size:13px;font-weight:800;color:var(--primary);">${totalConcluidos}/${totalTemplates} templates concluídos</div>
+        </div>
+        <div class="progress-bar" style="height:10px;">
+          <div class="progress-fill" style="width:${Math.round(totalConcluidos/totalTemplates*100)}%;height:10px;border-radius:99px;"></div>
+        </div>
+        <!-- Mini stepper de fases -->
+        <div class="flex gap-0 mt-4" style="position:relative;">
+          ${fases.map((f, i) => {
+            const concl = f.templates.filter(t => t.status === 'completed').length;
+            const total = f.templates.length;
+            const isComplete = concl === total;
+            const isActive = f.id === 'deliver';
+            return `
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;position:relative;">
+                ${i < fases.length - 1 ? `<div style="position:absolute;top:14px;left:50%;width:100%;height:2px;background:${isComplete ? f.color : 'var(--border)'};z-index:0;"></div>` : ''}
+                <div style="width:28px;height:28px;border-radius:50%;background:${isComplete ? f.color : isActive ? f.color+'33' : 'var(--surface-3)'};border:2px solid ${isComplete || isActive ? f.color : 'var(--border)'};display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0;">
+                  ${isComplete ? `<span style="color:white;font-size:11px;">✓</span>` : `<span style="font-size:10px;font-weight:700;color:${isActive ? f.color : 'var(--text-muted)'};">${i+1}</span>`}
+                </div>
+                <div style="font-size:10px;font-weight:600;margin-top:5px;color:${isComplete || isActive ? f.color : 'var(--text-muted)'};">${f.id.charAt(0).toUpperCase()+f.id.slice(1)}</div>
+                <div style="font-size:9px;color:var(--text-muted);">${concl}/${total}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Templates por fase -->
+      ${fases.map(f => `
+        <div class="card mb-4" style="border-left:4px solid ${f.color};padding:0;overflow:hidden;">
+          <!-- Header da fase -->
+          <div style="background:${f.bg};padding:14px 18px;border-bottom:1px solid ${f.color}20;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:14px;font-weight:800;color:${f.color};">${f.label}</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${f.desc}</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:16px;">
+              <div style="font-size:11px;color:${f.color};font-weight:700;">
+                ${f.templates.filter(t => t.status==='completed').length}/${f.templates.length} completos
+              </div>
+            </div>
+          </div>
+          <!-- Lista de templates -->
+          <div style="padding:12px 18px;display:flex;flex-direction:column;gap:10px;">
+            ${f.templates.map(t => {
+              const st = stMap[t.status] || stMap.pending;
+              return `
+                <div onclick="navigate('${t.route}')"
+                  style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.15s;"
+                  onmouseover="this.style.borderColor='${f.color}';this.style.background='${f.bg}'"
+                  onmouseout="this.style.borderColor='var(--border)';this.style.background='white'">
+                  <!-- Badge do ID -->
+                  <div style="width:40px;height:40px;border-radius:10px;background:${f.color};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:white;flex-shrink:0;">${t.id}</div>
+                  <!-- Info -->
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:13px;font-weight:700;margin-bottom:3px;">${t.nome}</div>
+                    <div style="font-size:11px;color:var(--text-secondary);line-height:1.4;">${t.desc}</div>
+                  </div>
+                  <!-- Status -->
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                    <span class="badge ${st.cls}" style="font-size:11px;">${st.label}</span>
+                    <div style="width:32px;height:32px;border-radius:8px;background:${f.color}15;display:flex;align-items:center;justify-content:center;color:${f.color};">
+                      ${icon('arrow_right', 16)}
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('')}
+
+      <!-- Rodapé informativo -->
+      <div class="alert alert-info">
+        ${icon('eye', 16)}
+        <div style="margin-left:8px;">
+          <strong>Todos os 9 templates estão funcionais.</strong>
+          Os dados de demonstração usam o caso <strong>Embalagens Atlântico</strong> (CASE-2026-0042) como exemplo completo do Método 5D AXISUS do T01 ao T09.
         </div>
       </div>
     </div>
