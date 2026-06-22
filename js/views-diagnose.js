@@ -3,7 +3,7 @@
 // Especificação Técnica v1.0 · Junho 2026
 // ============================================================
 
-// ============ ESTADO DO ISHIKAWA ============
+// ============ ESTADO DO ISHIKAWA — caso Petshop Beta (AI Sprint) ============
 const T04_STATE = {
   selectedCauseId: null,
   porqueStep: 0,
@@ -11,43 +11,43 @@ const T04_STATE = {
   porqueActive: false,
   causas: {
     mao_de_obra: [
-      { id: 'c1', texto: 'Operadores sem treinamento em setup', estado: 'candidata',           porques: [], notas: '' },
-      { id: 'c2', texto: 'Alta rotatividade de técnicos de manutenção', estado: 'causa_raiz', porques: [
-        { ordem:1, pergunta:'Por que alta rotatividade?', resposta:'Salário abaixo do mercado' },
-        { ordem:2, pergunta:'Por que salário abaixo?',   resposta:'Política de RH não revisada desde 2019' },
-        { ordem:3, pergunta:'Por que não revisada?',     resposta:'Ausência de gestor de manutenção que defendesse a revisão' },
-      ], notas:'Confirmado em entrevistas com 3 técnicos saídos em 2024.' },
-      { id: 'c3', texto: 'Ausência de gestor de manutenção dedicado', estado: 'causa_raiz',   porques: [
-        { ordem:1, pergunta:'Por que ausência do gestor?',         resposta:'Cargo eliminado na reestruturação pós-pandemia (2022)' },
-        { ordem:2, pergunta:'Por que não foi recriado?',           resposta:'Não havia patrocinador interno para o cargo' },
-        { ordem:3, pergunta:'Por que não havia patrocinador?',     resposta:'Produção (Galpão A) não reporta ao mesmo VP que manutenção' },
-      ], notas:'Principal causa raiz candidata — confirmada por Roberto Lima (Ger. Produção).' },
+      { id: 'c1', texto: 'Time de catálogo sobrecarregado (1 pessoa p/ 5.000+ SKUs)', estado: 'candidata', porques: [], notas: '' },
+      { id: 'c2', texto: 'Nenhum profissional treinado em taxonomia de produtos para e-commerce', estado: 'causa_raiz', porques: [
+        { ordem:1, pergunta:'Por que sem conhecimento de taxonomia?', resposta:'Contratação focou em curadoria de conteúdo, não em estrutura de dados' },
+        { ordem:2, pergunta:'Por que foco errado?',                  resposta:'Nunca houve demanda explícita de um sistema de recomendação' },
+        { ordem:3, pergunta:'Por que nunca houve?',                  resposta:'Crescimento foi por volume de clientes, não por aumento de ticket — problema sistêmico ignorado' },
+      ], notas:'Confirmado com Andrea Santos (Gerente de Catálogo) na entrevista de diagnóstico.' },
     ],
     metodo: [
-      { id: 'c4', texto: 'Ausência de plano de manutenção preventiva', estado: 'causa_raiz',  porques: [
-        { ordem:1, pergunta:'Por que sem plano preventivo?',        resposta:'Ninguém responsável por elaborar — sem gestor de manutenção' },
-        { ordem:2, pergunta:'Por que responsabilidade não delegada?',resposta:'Mesma raiz: cargo eliminado e não redistribuído formalmente' },
-      ], notas:'' },
-      { id: 'c5', texto: 'Setup sem procedimento padronizado (SOP)', estado: 'em_investigacao', porques: [
-        { ordem:1, pergunta:'Por que sem SOP de setup?', resposta:'Em elaboração desde 2023 — nunca finalizado' },
+      { id: 'c3', texto: 'Ausência de modelo de complementaridade no catálogo', estado: 'causa_raiz', porques: [
+        { ordem:1, pergunta:'Por que sem modelo de complementaridade?',    resposta:'Catálogo cresceu de forma orgânica sem arquitetura de dados' },
+        { ordem:2, pergunta:'Por que crescimento orgânico?',               resposta:'Produtos adicionados por campanha, não por estratégia de cross-sell' },
+        { ordem:3, pergunta:'Por que sem estratégia?',                     resposta:'KPI principal era GMV total, não ticket médio — incentivo errado' },
+      ], notas:'68% dos 5.000+ SKUs não têm campo "produtos complementares" preenchido.' },
+      { id: 'c4', texto: 'Processo de cadastro de produto não exige atributos de cross-sell', estado: 'em_investigacao', porques: [
+        { ordem:1, pergunta:'Por que cadastro sem exigência?', resposta:'Formulário de cadastro no Shopify nunca foi atualizado com campos obrigatórios de complementaridade' },
       ], notas:'' },
     ],
     maquina: [
-      { id: 'c6', texto: 'Equipamento com 14 anos — próximo do fim de vida útil', estado: 'rejeitada', porques: [
-        { ordem:1, pergunta:'Por que relevante?', resposta:'Máquina 14 anos para flexografia média-alta — dentro da vida útil esperada (20 anos)' },
-      ], notas:'Rejeitado: vida útil não esgotada. Causa é gestão, não idade do equipamento.' },
-      { id: 'c7', texto: 'Falta de peças sobressalentes em estoque', estado: 'candidata',     porques: [], notas:'' },
+      { id: 'c5', texto: 'Shopify nativo não tem lógica de recomendação por co-compra', estado: 'candidata', porques: [
+        { ordem:1, pergunta:'Por que não tem?', resposta:'Shopify básico não inclui. Requer app pago ou desenvolvimento customizado.' },
+      ], notas:'Causa real mas secundária — sem catálogo organizado, nenhum sistema resolve.' },
+      { id: 'c6', texto: 'Ausência de ferramenta de análise de cesta de compra', estado: 'rejeitada', porques: [
+        { ordem:1, pergunta:'Por que relevante?', resposta:'Google Analytics 4 já tem dados de co-compra, mas nunca foram analisados sistematicamente' },
+      ], notas:'Rejeitado: dado existe, o problema é falta de análise e ação, não de ferramenta.' },
     ],
     material: [
-      { id: 'c8', texto: 'Variabilidade no substrato (papel/papelão) entre fornecedores', estado: 'candidata', porques: [], notas:'' },
+      { id: 'c7', texto: 'Dados históricos de co-compra disponíveis mas não estruturados', estado: 'candidata', porques: [], notas:'' },
+      { id: 'c8', texto: 'Sem dados de browsing (produtos visualizados mas não comprados)', estado: 'candidata', porques: [], notas:'' },
     ],
     medicao: [
-      { id: 'c9', texto: 'OEE não medido em tempo real (planilha manual)', estado: 'candidata', porques: [
-        { ordem:1, pergunta:'Por que manual?', resposta:'Sistema ERP não integrado à linha. Coleta diária por apontador.' },
-      ], notas:'' },
+      { id: 'c9', texto: 'KPI principal é GMV total, não ticket médio por pedido', estado: 'causa_raiz', porques: [
+        { ordem:1, pergunta:'Por que KPI errado?', resposta:'Estratégia comercial histórica foi crescer a base de clientes, não o ticket por cliente' },
+        { ordem:2, pergunta:'Por que estratégia de base?', resposta:'Concorrência de preço era mais fácil de medir que cross-sell. Dashboard de vendas nunca incluiu "itens/pedido".' },
+      ], notas:'Causa raiz de 2ª ordem — explica por que ninguém priorizou o problema antes.' },
     ],
     meio_ambiente: [
-      { id: 'c10', texto: 'Temperatura do galpão afeta secagem das tintas em dias quentes', estado: 'candidata', porques: [], notas:'' },
+      { id: 'c10', texto: 'Sazonalidade de pets (verão, fim de ano) muda padrão de co-compra', estado: 'candidata', porques: [], notas:'' },
     ],
   }
 };
@@ -674,55 +674,50 @@ function handleT04Keys(e) {
 // T05 — VALIDAÇÃO DA CAUSA RAIZ COM DADOS
 // ============================================================
 
+// T05 DATA — caso Petshop Beta (AI Sprint adequação v2)
 const T05_DATA = {
   causas_raiz: [
     {
       id: 'cr1',
-      titulo: 'Ausência de gestor de manutenção',
-      categoria: 'Mão de Obra',
-      categoria_color: '#6366F1',
+      titulo: 'Catálogo desorganizado — sem atributos de complementaridade',
+      categoria: 'Método',
+      categoria_color: '#F59E0B',
       status: 'validada',
-      hipotese: 'A ausência de gestor de manutenção (decorrente de reorganização pós-pandemia não revisada) é a causa raiz do baixo OEE da linha de flexografia, manifestada através de manutenção predominantemente corretiva-reativa, MTBF muito abaixo do benchmark setorial, e ausência de plano preventivo estruturado.',
+      hipotese: 'O catálogo da Petshop Beta não tem atributos de complementaridade em 68%+ dos SKUs. Isso impede qualquer sistema (com ou sem IA) de recomendar produtos relacionados de forma relevante, explicando a taxa de cross-sell de apenas 8% vs benchmark de 32%.',
       teste: {
-        metrica_principal: 'MTBF (Mean Time Between Failures) — linha flexográfica',
-        metrica_complementar: 'Razão manutenção corretiva / preventiva (%)',
-        periodo: '01/06/2025 a 30/04/2026 (11 meses)',
-        granularidade: 'Mensal',
-        benchmark: 240,
-        unidade: 'horas',
-        criterio: 'MTBF < 120h (50% do benchmark) confirma criticidade',
+        metrica_principal: '% de SKUs sem campo "produtos complementares" preenchido',
+        metrica_complementar: '% de clientes que visualizam ao menos 1 produto complementar por sessão',
+        periodo: 'Auditoria em 01/05/2026 · Base GA4 jan-abr/2026',
+        granularidade: 'Mensal (GA4) + snapshot pontual (catálogo)',
+        benchmark: 62,
+        unidade: '%',
+        criterio: '% SKUs sem complementar > 60% confirma hipótese',
       },
       coleta: {
-        fonte: 'Sistema ERP (módulo manutenção) + planilhas apontamento',
+        fonte: 'Exportação CSV do catálogo Shopify + Google Analytics 4',
         qualidade: 'completo',
-        responsavel: 'Cláudio Mendes (Líder de Manutenção)',
-        data_coleta: '2026-04-18',
+        responsavel: 'Andrea Santos (Gerente de Catálogo)',
+        data_coleta: '2026-05-06',
       },
       serie: [
-        { periodo:'Jun/25', mtbf:68, ratio_corr:85 },
-        { periodo:'Jul/25', mtbf:58, ratio_corr:88 },
-        { periodo:'Ago/25', mtbf:52, ratio_corr:90 },
-        { periodo:'Set/25', mtbf:49, ratio_corr:91 },
-        { periodo:'Out/25', mtbf:46, ratio_corr:92 },
-        { periodo:'Nov/25', mtbf:44, ratio_corr:93 },
-        { periodo:'Dez/25', mtbf:41, ratio_corr:94 },
-        { periodo:'Jan/26', mtbf:38, ratio_corr:92 },
-        { periodo:'Fev/26', mtbf:42, ratio_corr:91 },
-        { periodo:'Mar/26', mtbf:45, ratio_corr:89 },
-        { periodo:'Abr/26', mtbf:47, ratio_corr:88 },
+        { periodo:'Jan/26', mtbf:9,  ratio_corr:91 },
+        { periodo:'Fev/26', mtbf:8,  ratio_corr:92 },
+        { periodo:'Mar/26', mtbf:9,  ratio_corr:90 },
+        { periodo:'Abr/26', mtbf:8,  ratio_corr:89 },
+        { periodo:'Mai/26', mtbf:8,  ratio_corr:89 },
       ],
-      conclusao: 'A hipótese foi VALIDADA. MTBF de 47h representa 19,6% do benchmark setorial (240h), evidenciando claramente o impacto da gestão deficiente de manutenção. Razão de 89% corretiva versus 11% preventiva é inversamente proporcional ao padrão de operações maduras (30%/70%), confirmando o modus operandi reativo. A tendência decrescente até dez/2025 indica deterioração contínua até estabilização recente.',
+      conclusao: 'Hipótese VALIDADA. Auditoria do catálogo confirma: 68% dos 5.340 SKUs ativos não têm o campo "produtos complementares" preenchido. GA4 confirma: apenas 11% das sessões incluem visualização de produto da categoria "complementar" ao produto principal. Benchmark Petz/Cobasi: 60%+. A causa raiz é estrutural e anterior a qualquer decisão de IA.',
     },
     {
       id: 'cr2',
-      titulo: 'Ausência de plano de manutenção preventiva',
-      categoria: 'Método',
-      categoria_color: '#F59E0B',
+      titulo: 'KPI principal é GMV total, não ticket médio por pedido',
+      categoria: 'Medição',
+      categoria_color: '#8B5CF6',
       status: 'validada_parcial',
-      hipotese: 'A ausência de plano preventivo estruturado é consequência direta da ausência do gestor de manutenção (cr1) e amplifica o MTBF baixo ao impossibilitar programação de manutenção.',
-      teste: { metrica_principal: 'Taxa de execução de manutenção preventiva vs. plano', benchmark: 85, unidade: '%', criterio: 'Taxa < 50% confirma ausência de gestão preventiva' },
+      hipotese: 'O incentivo organizacional (KPI de GMV) nunca motivou foco em cross-sell, o que explica por que o catálogo ficou desorganizado por anos sem que ninguém priorizasse o problema.',
+      teste: { metrica_principal: 'Presença de "itens/pedido" no dashboard principal de vendas', benchmark: 100, unidade: '%', criterio: 'Ausência do KPI no dashboard confirma falta de visibilidade' },
       serie: [],
-      conclusao: 'Causa validada parcialmente — é consequência da cr1, não causa raiz independente.',
+      conclusao: 'Causa de 2ª ordem validada — explica a persistência do problema. KPI de "itens/pedido" não aparece em nenhum dashboard atual. Requer mudança de incentivo junto com a solução técnica.',
     },
   ],
   selectedId: 'cr1',

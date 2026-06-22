@@ -14,14 +14,14 @@ const AXISUS = {
   // ============ MOCK USERS ============
   users: {
     client: {
-      id: 'u1', role: 'client', name: 'Carlos Mendes', email: 'carlos@distribuidorasul.com.br',
-      company: 'Distribuidora Sul Ltda', avatar: 'CM', cnpj: '12.345.678/0001-99',
-      setor: 'Logística', porte: 'Médio'
+      id: 'u1', role: 'client', name: 'Renato Almeida', email: 'renato@petshopbeta.com.br',
+      company: 'Petshop Beta Comércio Ltda', avatar: 'RA', cnpj: '34.567.890/0001-11',
+      setor: 'E-commerce · Pets', porte: 'Médio'
     },
     franchisee: {
-      id: 'u2', role: 'franchisee', name: 'Ana Paula Rodrigues', email: 'ana@axisus.com.br',
-      avatar: 'AP', nivel: 'Pleno', regiao: 'Grande SP - Zona Sul', nps_medio: 9.2,
-      casos_ativos: 3, faturamento_mes: 48500
+      id: 'u2', role: 'franchisee', name: 'Eduardo Ricatto', email: 'eduardo@axisus.com.br',
+      avatar: 'ER', nivel: 'Sênior', regiao: 'Squad AXISUS — Líder de Sprint', nps_medio: 9.4,
+      casos_ativos: 3, faturamento_mes: 54000
     },
     candidate: {
       id: 'u3', role: 'candidate', name: 'Roberto Silva', email: 'roberto.silva@gmail.com',
@@ -36,19 +36,21 @@ const AXISUS = {
   // ============ MOCK CASES ============
   cases: [
     {
-      id: 'c1', codigo: 'CASE-2026-0042', client: 'Distribuidora Sul Ltda',
-      problema_inicial: 'Alto custo de frete e atrasos nas entregas causando perda de clientes',
-      problema_reformulado: 'Ineficiência no roteirizamento e falta de visibilidade da cadeia logística geram R$ 280k/ano em custos evitáveis.',
-      fase_atual: 'deliver', status: 'active', produto: 'Plataforma',
-      valor_contrato: 45000, data_inicio: '2026-04-01', prazo_dias: 75,
-      dias_decorridos: 68, progresso: 91,
-      franchisee: 'Ana Paula Rodrigues', franchisee_nivel: 'Pleno',
+      id: 'c1', codigo: 'CASE-2026-0042', client: 'Petshop Beta Comércio Ltda',
+      setor: 'E-commerce · Pets', porte: 'Médio',
+      problema_inicial: 'Clientes compram apenas 1 produto por pedido. Ticket médio R$ 80 quando benchmark é R$ 130-180. Queremos IA que recomende complementares no checkout.',
+      problema_reformulado: 'Taxa de cross-sell de 8% (vs benchmark 32%) e catálogo desorganizado no checkout geram gap de R$ 560k/mês em receita não realizada.',
+      fase_atual: 'deliver', status: 'active', produto: 'AI Sprint — Pacote Pleno',
+      valor_contrato: 48000, data_inicio: '2026-05-05', prazo_dias: 21,
+      dias_decorridos: 18, progresso: 87,
+      squad_lider: 'Eduardo Ricatto', squad_nivel: 'Sênior',
+      package_type: 'pleno', delivery_format: 'saas',
       phases: {
-        define:    { status: 'completed', data_inicio: '2026-04-01', data_fim: '2026-04-12', prazo: 10, real: 11 },
-        diagnose:  { status: 'completed', data_inicio: '2026-04-13', data_fim: '2026-05-02', prazo: 20, real: 19 },
-        design:    { status: 'completed', data_inicio: '2026-05-03', data_fim: '2026-05-18', prazo: 15, real: 15 },
-        decide:    { status: 'completed', data_inicio: '2026-05-19', data_fim: '2026-06-01', prazo: 10, real: 13 },
-        deliver:   { status: 'active',    data_inicio: '2026-06-02', data_fim: null,         prazo: 10, real: null },
+        define:    { status: 'completed', data_inicio: '2026-05-05', data_fim: '2026-05-07', prazo: 2, real: 2 },
+        diagnose:  { status: 'completed', data_inicio: '2026-05-08', data_fim: '2026-05-12', prazo: 4, real: 4 },
+        design:    { status: 'completed', data_inicio: '2026-05-13', data_fim: '2026-05-17', prazo: 4, real: 4 },
+        decide:    { status: 'completed', data_inicio: '2026-05-18', data_fim: '2026-05-21', prazo: 3, real: 3 },
+        deliver:   { status: 'active',    data_inicio: '2026-05-22', data_fim: null,          prazo: 3, real: null },
       },
       artifacts: [
         { id: 'T01', nome: 'Briefing Inicial',            fase: 'define',    status: 'completed' },
@@ -56,82 +58,105 @@ const AXISUS = {
         { id: 'T03', nome: 'Quantificação da Dor',        fase: 'define',    status: 'completed' },
         { id: 'T04', nome: 'Ishikawa + 5 Porquês',        fase: 'diagnose',  status: 'completed' },
         { id: 'T05', nome: 'Validação Causa Raiz',        fase: 'diagnose',  status: 'completed' },
-        { id: 'T06', nome: 'Canvas de Alternativas',      fase: 'design',    status: 'completed' },
+        { id: 'T06', nome: 'Canvas de Alternativas IA',   fase: 'design',    status: 'completed' },
         { id: 'T07', nome: 'Priorização WSJF AXISUS',     fase: 'decide',    status: 'completed' },
         { id: 'T08', nome: '5W2H + Riscos + KPIs',        fase: 'decide',    status: 'completed' },
-        { id: 'T09', nome: 'A3 Expandido (Entrega Final)', fase: 'deliver',   status: 'in_progress' },
+        { id: 'T09', nome: 'A3 Expandido (Entrega Final)', fase: 'deliver',  status: 'in_progress' },
       ],
       data_requests: [
-        { id: 'dr1', desc: 'Planilha de custos de frete (últimos 12 meses)', formato: 'Excel', prazo: '2026-04-20', status: 'received' },
-        { id: 'dr2', desc: 'Dados de OEE das rotas (por região)', formato: 'Excel/PDF', prazo: '2026-05-05', status: 'sent' },
-        { id: 'dr3', desc: 'Mapeamento de clientes por CEP e frequência', formato: 'CSV', prazo: '2026-05-20', status: 'pending' },
+        { id: 'dr1', desc: 'Relatório de conversão do checkout (últimos 90 dias)', formato: 'CSV/GA4', prazo: '2026-05-06', status: 'received' },
+        { id: 'dr2', desc: 'Catálogo de produtos com categorias e atributos', formato: 'JSON/CSV', prazo: '2026-05-08', status: 'received' },
+        { id: 'dr3', desc: 'Histórico de pedidos (12 meses) para análise de co-compra', formato: 'CSV', prazo: '2026-05-10', status: 'received' },
       ],
       meetings: [
-        { id: 'm1', tipo: 'briefing_inicial',    data: '2026-04-02', hora: '10:00', status: 'completed', notas: 'Alinhamento inicial. Problema principal: custo frete.' },
-        { id: 'm2', tipo: 'workshop_ishikawa',   data: '2026-04-22', hora: '14:00', status: 'completed', notas: 'Mapeadas 7 causas potenciais.' },
-        { id: 'm3', tipo: 'apresentacao_a3',     data: '2026-06-10', hora: '09:00', status: 'scheduled', link: 'https://meet.google.com/abc-def-ghi' },
+        { id: 'm1', tipo: 'briefing_inicial',    data: '2026-05-05', hora: '10:00', status: 'completed', notas: 'CEO e Gerente E-commerce. Problema: ticket médio baixo. CFO resistente ao investimento.' },
+        { id: 'm2', tipo: 'workshop_diagnose',   data: '2026-05-10', hora: '14:00', status: 'completed', notas: 'Análise do catálogo confirma causa: 68% dos SKUs sem atributos de complementaridade.' },
+        { id: 'm3', tipo: 'apresentacao_a3',     data: '2026-05-26', hora: '15:00', status: 'scheduled', link: 'https://meet.google.com/axisus-petshop' },
       ],
       invoices: [
-        { id: 'inv1', desc: 'Parcela 1/2 — Diagnóstico AXISUS', valor: 22500, status: 'paid',    venc: '2026-04-15', pago: '2026-04-14' },
-        { id: 'inv2', desc: 'Parcela 2/2 — Diagnóstico AXISUS', valor: 22500, status: 'pending', venc: '2026-06-15', pago: null },
+        { id: 'inv1', desc: 'AI Sprint — 50% entrada', valor: 24000, status: 'paid',    venc: '2026-05-05', pago: '2026-05-05' },
+        { id: 'inv2', desc: 'AI Sprint — 50% entrega A3', valor: 24000, status: 'pending', venc: '2026-05-26', pago: null },
       ],
       messages: [
-        { id: 'msg1', sender: 'Ana Paula', avatar: 'AP', own: false, content: 'Olá Carlos! Recebi os dados de frete. Já estou analisando. Algo mais importante que devo saber?', time: '14h32' },
-        { id: 'msg2', sender: 'Carlos', avatar: 'CM', own: true, content: 'Oi Ana! Sim, o problema é maior na região Sul — lá temos 40% dos custos com apenas 18% do volume.', time: '15h10' },
-        { id: 'msg3', sender: 'Ana Paula', avatar: 'AP', own: false, content: 'Perfeito, isso é exatamente o que o Ishikawa já apontou como hipótese. Vou validar com os dados. Obrigada!', time: '15h22' },
-      ]
+        { id: 'msg1', sender: 'Eduardo', avatar: 'ER', own: false, content: 'Renato, recebi os dados do checkout. A taxa de cliques nos blocos de "você também pode gostar" é de apenas 3,2%. Vou analisar antes do workshop.', time: '09h14' },
+        { id: 'msg2', sender: 'Renato', avatar: 'RA', own: true, content: 'Ótimo. A Beatriz (CFO) quer ver ROI claro antes de qualquer aprovação de orçamento. Pode preparar uma simulação financeira?', time: '10h02' },
+        { id: 'msg3', sender: 'Eduardo', avatar: 'ER', own: false, content: 'Sim! Com base no diagnóstico: se aumentarmos o cross-sell de 8% para 20% (conservador), são R$+ 110k/mês. Trago isso no A3.', time: '10h31' },
+      ],
+      // Dados de IA do caso (sugestões contextuais)
+      ia_context: {
+        causa_raiz: 'Catálogo desorganizado (68% SKUs sem atributos de complementaridade) + checkout sem bloco de cross-sell visível',
+        solucao_vencedora: 'A8 — Híbrida: Curadoria de catálogo + RAG para recomendação contextual',
+        wsjf_score: 3.80,
+        investimento: 24000,
+        roi_projetado: '12x em 12 meses (R$ 288k)',
+      }
     },
     {
-      id: 'c2', codigo: 'CASE-2026-0038', client: 'Metalúrgica Primus',
-      problema_inicial: 'OEE abaixo de 55% na linha principal',
-      problema_reformulado: 'Paradas não planejadas e setup demorado reduzem OEE em 22pp vs. benchmark.',
-      fase_atual: 'deliver', status: 'active', produto: 'Plataforma + Visitas',
-      valor_contrato: 72000, data_inicio: '2026-02-15', prazo_dias: 75, dias_decorridos: 68, progresso: 91,
-      franchisee: 'Ana Paula Rodrigues', franchisee_nivel: 'Pleno'
+      id: 'c2', codigo: 'CASE-2026-0039', client: 'Construtora Atlântica S.A.',
+      setor: 'Construção Civil', porte: 'Grande',
+      problema_inicial: 'Análise de propostas de fornecedor manual demora 5 dias por proposta',
+      problema_reformulado: '200 propostas/mês × 5 dias = 1.000 dias-pessoa/ano em análise manual, bloqueando negociações.',
+      fase_atual: 'diagnose', status: 'active', produto: 'AI Sprint — Pacote Essencial',
+      valor_contrato: 38000, data_inicio: '2026-06-01', prazo_dias: 14, dias_decorridos: 8, progresso: 42,
+      squad_lider: 'Ana Paula Rodrigues', squad_nivel: 'Pleno',
+      package_type: 'essencial', delivery_format: 'github',
     }
   ],
 
   // ============ MOCK LEADS ============
   leads: [
-    { id: 'l1', empresa: 'Construtora Beta S.A.',    setor: 'Construção', valor: 55000, estagio: 'qualified',       dias: 3,  contato: 'Felipe Santos', origem: 'hub_inbound' },
-    { id: 'l2', empresa: 'Farmácia Rede Saúde',      setor: 'Saúde',     valor: 38000, estagio: 'initial_meeting', dias: 7,  contato: 'Juliana Melo',  origem: 'franchisee' },
-    { id: 'l3', empresa: 'Transportadora Veloz',     setor: 'Logística', valor: 42000, estagio: 'proposal_sent',   dias: 12, contato: 'Ricardo Lima',  origem: 'indication' },
-    { id: 'l4', empresa: 'Supermercado Express',     setor: 'Varejo',    valor: 28000, estagio: 'negotiation',     dias: 5,  contato: 'Amanda Costa', origem: 'hub_inbound' },
-    { id: 'l5', empresa: 'Indústria Têxtil Moderna', setor: 'Ind.',      valor: 65000, estagio: 'cold',            dias: 1,  contato: 'Bruno Alves',  origem: 'hub_marketing' },
-    { id: 'l6', empresa: 'Clínica MedCenter',        setor: 'Saúde',     valor: 31000, estagio: 'won',             dias: 20, contato: 'Patrícia Silva', origem: 'indication' },
+    { id: 'l1', empresa: 'Fintech Crédito Ágil',    setor: 'Fintech',      valor: 52000, estagio: 'qualified',       dias: 3,  contato: 'Felipe Santos', origem: 'hub_inbound',    problema: 'Análise de crédito manual, 3 dias por proposta' },
+    { id: 'l2', empresa: 'Hospital São Marcos',      setor: 'Saúde',        valor: 38000, estagio: 'initial_meeting', dias: 7,  contato: 'Juliana Melo',  origem: 'vendor',         problema: 'Triagem de pacientes inconsistente por turno' },
+    { id: 'l3', empresa: 'Rede de Franquias FitLife',setor: 'Saúde Digital',valor: 44000, estagio: 'proposal_sent',   dias: 12, contato: 'Ricardo Lima',  origem: 'indication',     problema: 'Churn de clientes pós-onboarding acima de 40%' },
+    { id: 'l4', empresa: 'E-commerce ModaOn',        setor: 'Varejo',       valor: 28000, estagio: 'negotiation',     dias: 5,  contato: 'Amanda Costa', origem: 'hub_inbound',    problema: 'Taxa de abandono de carrinho de 74%' },
+    { id: 'l5', empresa: 'EdTech Aprende Mais',      setor: 'Educação',     valor: 36000, estagio: 'cold',            dias: 1,  contato: 'Bruno Alves',  origem: 'hub_marketing',  problema: 'Engajamento de alunos caindo 28% mês a mês' },
+    { id: 'l6', empresa: 'Clínica Médica Aurora',    setor: 'Saúde',        valor: 12000, estagio: 'won',             dias: 20, contato: 'Patrícia Silva',origem: 'indication',     problema: 'Triagem manual com tempo médio de espera 95 min' },
   ],
 
-  // ============ MOCK FRANCHISEES ============
+  // ============ MOCK SQUAD MEMBERS ============
   franchisees: [
-    { id: 'f1', nome: 'Ana Paula Rodrigues', nivel: 'Pleno',  regiao: 'SP - Zona Sul',  casos_ativos: 3, nps: 9.2, status: 'active',   mrr: 3800 },
-    { id: 'f2', nome: 'João Carlos Pereira', nivel: 'Sênior', regiao: 'SP - Zona Norte', casos_ativos: 5, nps: 9.5, status: 'active',   mrr: 3800 },
-    { id: 'f3', nome: 'Fernanda Lopes',      nivel: 'Júnior', regiao: 'RJ - Capital',    casos_ativos: 1, nps: 8.8, status: 'onboarding', mrr: 2900 },
-    { id: 'f4', nome: 'Marcelo Teixeira',    nivel: 'Master', regiao: 'MG - BH',         casos_ativos: 7, nps: 9.7, status: 'active',   mrr: 4500 },
-    { id: 'f5', nome: 'Camila Ferreira',     nivel: 'Pleno',  regiao: 'PR - Curitiba',   casos_ativos: 4, nps: 9.0, status: 'active',   mrr: 3800 },
+    { id: 'f1', nome: 'Ana Paula Rodrigues', nivel: 'Pleno',  regiao: 'SP - Zona Sul',  casos_ativos: 3, nps: 9.2, status: 'active',     mrr: 3800, role: 'squad', especialidade: 'E-commerce · Varejo' },
+    { id: 'f2', nome: 'João Carlos Pereira', nivel: 'Sênior', regiao: 'SP - Zona Norte', casos_ativos: 5, nps: 9.5, status: 'active',   mrr: 3800, role: 'squad', especialidade: 'Manufatura · Logística' },
+    { id: 'f3', nome: 'Fernanda Lopes',      nivel: 'Júnior', regiao: 'RJ - Capital',    casos_ativos: 1, nps: 8.8, status: 'onboarding', mrr: 2900, role: 'squad', especialidade: 'Saúde · Serviços' },
+    { id: 'f4', nome: 'Marcelo Teixeira',    nivel: 'Master', regiao: 'MG - BH',         casos_ativos: 7, nps: 9.7, status: 'active',   mrr: 4500, role: 'squad', especialidade: 'Construção · Engenharia' },
+    { id: 'f5', nome: 'Camila Ferreira',     nivel: 'Pleno',  regiao: 'PR - Curitiba',   casos_ativos: 4, nps: 9.0, status: 'active',   mrr: 3800, role: 'squad', especialidade: 'RH · Gestão de Pessoas' },
+  ],
+
+  // ============ MOCK VENDEDORES REGIONAIS ============
+  vendors: [
+    { id: 'v1', nome: 'Ricardo Souza',   regiao: 'SP Interior', casos_fechados_mes: 3, comissao_mes: 4200, status: 'active' },
+    { id: 'v2', nome: 'Juliana Martins', regiao: 'RJ + ES',     casos_fechados_mes: 2, comissao_mes: 2800, status: 'active' },
+    { id: 'v3', nome: 'Pedro Gonçalves', regiao: 'Sul',         casos_fechados_mes: 4, comissao_mes: 5600, status: 'active' },
   ],
 
   // ============ MOCK CANDIDATES ============
   candidates: [
-    { id: 'cd1', nome: 'Roberto Silva',   estagio: 'approved_interview', dias: 2,  area: 'Manufatura', cert: 'Black Belt' },
-    { id: 'cd2', nome: 'Tatiana Borges',  estagio: 'in_analysis',        dias: 4,  area: 'Logística',  cert: 'PMP' },
-    { id: 'cd3', nome: 'Diego Martins',   estagio: 'technical_test',     dias: 5,  area: 'Serviços',   cert: 'Lean' },
-    { id: 'cd4', nome: 'Larissa Cunha',   estagio: 'cof_sent',           dias: 6,  area: 'Varejo',     cert: 'Black Belt' },
-    { id: 'cd5', nome: 'Eduardo Moraes',  estagio: 'ready_contract',     dias: 11, area: 'Manufatura', cert: 'MBB' },
-    { id: 'cd6', nome: 'Priscila Gomes',  estagio: 'converted',          dias: 30, area: 'Saúde',      cert: 'Lean' },
+    { id: 'cd1', nome: 'Roberto Silva',   estagio: 'approved_interview', dias: 2,  area: 'IA / Dados',    cert: 'Black Belt' },
+    { id: 'cd2', nome: 'Tatiana Borges',  estagio: 'in_analysis',        dias: 4,  area: 'E-commerce',   cert: 'PMP' },
+    { id: 'cd3', nome: 'Diego Martins',   estagio: 'technical_test',     dias: 5,  area: 'Saúde Digital', cert: 'Lean' },
+    { id: 'cd4', nome: 'Larissa Cunha',   estagio: 'cof_sent',           dias: 6,  area: 'Fintech',       cert: 'Black Belt' },
+    { id: 'cd5', nome: 'Eduardo Moraes',  estagio: 'ready_contract',     dias: 11, area: 'Logística',     cert: 'MBB' },
+    { id: 'cd6', nome: 'Priscila Gomes',  estagio: 'converted',          dias: 30, area: 'RH Tech',       cert: 'Lean' },
   ],
 
   // ============ HUB METRICS ============
   hubMetrics: {
-    franqueados_ativos: 18,
-    casos_em_andamento: 34,
-    mrr_licencas: 68400,
-    faturamento_rede_mes: 487000,
+    squad_membros: 4,
+    casos_em_andamento: 7,
+    mrr_saas: 18400,
+    arr_saas: 220800,
+    faturamento_sprints_mes: 144000,
     nps_medio_rede: 9.1,
     churn_anualizado: 0,
-    candidatos_funil: 23,
-    leads_mes: 47,
-    taxa_conversao_leads: 31,
-    ticket_medio: 48200
+    vendors_ativos: 3,
+    leads_mes: 14,
+    taxa_conversao_leads: 43,
+    ticket_medio: 48200,
+    // legado (mantido para compatibilidade)
+    franqueados_ativos: 4,
+    mrr_licencas: 18400,
+    faturamento_rede_mes: 144000,
+    candidatos_funil: 6,
   },
 
   // ============ QA REVIEWS ============

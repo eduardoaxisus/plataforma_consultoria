@@ -15,8 +15,8 @@ function renderFrancheeDashboard() {
     <div>
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 style="font-size:24px;font-weight:800;">Bom dia, Ana Paula!</h1>
-          <p class="text-secondary">Nível Pleno · Grande SP - Zona Sul</p>
+          <h1 style="font-size:24px;font-weight:800;">Bom dia, Eduardo!</h1>
+          <p class="text-secondary">Sênior · Squad AXISUS — Líder de Sprint</p>
         </div>
         <div class="flex gap-2">
           <button class="btn btn-secondary btn-sm">${icon('calendar',14)} Agendar Reunião</button>
@@ -686,7 +686,7 @@ function renderTemplatesHub() {
       <div class="flex items-center justify-between mb-6">
         <div>
           <h1 style="font-size:24px;font-weight:800;">Método 5D AXISUS</h1>
-          <p class="text-secondary">Todos os 9 templates do método · Caso: CASE-2026-0042 · Embalagens Atlântico</p>
+          <p class="text-secondary">Todos os 9 templates do método · Caso: CASE-2026-0042 · Petshop Beta · AI Sprint</p>
         </div>
         <button class="btn btn-primary btn-sm" onclick="navigate('template_t09')">
           ${icon('file',14)} Ver A3 Final
@@ -773,7 +773,7 @@ function renderTemplatesHub() {
         ${icon('eye', 16)}
         <div style="margin-left:8px;">
           <strong>Todos os 9 templates estão funcionais.</strong>
-          Os dados de demonstração usam o caso <strong>Embalagens Atlântico</strong> (CASE-2026-0042) como exemplo completo do Método 5D AXISUS do T01 ao T09.
+          Os dados de demonstração usam o caso <strong>Petshop Beta</strong> (CASE-2026-0042) como exemplo completo do AI Sprint AXISUS — Método 5D do T01 ao T09.
         </div>
       </div>
     </div>

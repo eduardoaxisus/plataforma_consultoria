@@ -8,68 +8,69 @@
 // ─────────────────────────────────────────────────────────────
 const FIBONACCI = [1, 2, 3, 5, 8, 13, 21];
 
+// T07 DATA — caso Petshop Beta (AI Sprint adequação v2)
 const T07_STATE = {
   selectedId: 'a8',
   scoring: [
     {
-      id: 'a1', num: 'A1', titulo: 'Contratar Gestor de Manutenção Sênior',
-      categoria: 'organizacional', catColor: '#0F6E56',
-      custo: 'R$ 240.000', prazo: '6 meses',
-      user_value: 13, time_criticality: 13, risk_reduction: 8, job_size: 13,
-      aderencia: true,
-      just_uv: 'Entrega valor direto ao tratamento da causa raiz. Alto impacto em OEE mas sozinho não resolve todos os sintomas.',
-      just_tc: 'Cada mês sem gestor é mais R$400k perdidos em OEE abaixo do potencial.',
-      just_rr: 'Reduz risco de continuidade do problema central mas não elimina sintomas processuais.',
-      just_js: 'Recrutamento sênior exige 2m + ramp-up 4m. Moderadamente complexo.',
-      just_aderencia: 'A1 trata diretamente a causa raiz validada em T05 — ausência do cargo de gestor de manutenção eliminado em 2022.',
-    },
-    {
-      id: 'a2', num: 'A2', titulo: 'Implementar SMED na Linha Flexográfica',
-      categoria: 'processual', catColor: '#5DCAA5',
-      custo: 'R$ 80.000', prazo: '4 meses',
-      user_value: 8, time_criticality: 13, risk_reduction: 5, job_size: 5,
+      id: 'a1', num: 'A1', titulo: 'Recommendation Engine SaaS (plug-and-play)',
+      categoria: 'llm_api', catColor: '#1E3A8A',
+      custo: 'R$ 6-12k/mês', prazo: '2 meses',
+      user_value: 8, time_criticality: 8, risk_reduction: 5, job_size: 3,
       aderencia: false,
-      just_uv: 'Reduz setup de 75min para 15min — ganho tangível mas não trata causa raiz da manutenção.',
-      just_tc: 'Setup demorado impacta capacidade diariamente. Urgência real.',
-      just_rr: 'Reduz apenas o risco de perda de capacidade por setup — não endereça manutenção.',
-      just_js: 'Metodologia madura. 4 meses com consultoria dedicada.',
-      just_aderencia: 'A2 trata sintoma relacionado (setup) e não a causa raiz da ausência de gestão de manutenção. Multiplicador 0,5 aplicado.',
+      just_uv: 'Resolve sintoma (ausência de recomendação) mas não causa raiz (catálogo). Funcionalidade limitada sem dados organizados.',
+      just_tc: 'Urgência baixa: tentativa similar em 2025 falhou. Repetir sem resolver causa raiz não é urgente.',
+      just_rr: 'Baixa redução de risco: problema principal (catálogo) continua intacto.',
+      just_js: 'Implementação simples — Shopify nativo. Baixo esforço técnico.',
+      just_aderencia: 'A1 NÃO trata a causa raiz validada (catálogo desorganizado). Multiplicador 0,5 aplicado.',
     },
     {
-      id: 'a3', num: 'A3', titulo: 'Implementar TPM (Total Productive Maintenance)',
-      categoria: 'processual', catColor: '#5DCAA5',
-      custo: 'R$ 180.000', prazo: '8 meses',
-      user_value: 13, time_criticality: 8, risk_reduction: 5, job_size: 8,
-      aderencia: true,
-      just_uv: 'TPM trata manutenção preventiva diretamente — alto valor se sustentado pelo gestor de A1.',
-      just_tc: 'Urgência moderada — melhora é gradual, não imediata.',
-      just_rr: 'Reduz risco de falhas não planejadas mas não resolve ausência de liderança.',
-      just_js: 'Mudança cultural significativa. 8 meses. Exige gestor para sustentar.',
-      just_aderencia: 'A3 trata manutenção preventiva — componente direto da causa raiz validada em T05.',
-    },
-    {
-      id: 'a4', num: 'A4', titulo: 'Sistema OEE Automatizado com IoT',
-      categoria: 'tecnologica', catColor: '#1E3A8A',
-      custo: 'R$ 95.000', prazo: '5 meses',
-      user_value: 5, time_criticality: 5, risk_reduction: 8, job_size: 8,
+      id: 'a2', num: 'A2', titulo: 'LLM via API — Prompt Engineering no Checkout',
+      categoria: 'llm_api', catColor: '#1E3A8A',
+      custo: 'R$ 8k + R$ 3k/mês', prazo: '3 meses',
+      user_value: 8, time_criticality: 8, risk_reduction: 5, job_size: 5,
       aderencia: false,
-      just_uv: 'Traz visibilidade mas não muda a realidade operacional por si só.',
-      just_tc: 'Sem urgência crítica — a empresa sobreviveu sem dados automatizados até agora.',
-      just_rr: 'Reduz risco de decisões cegas. Viabiliza acompanhamento pós-implementação.',
-      just_js: 'Projeto técnico de integração — moderado mas não trivial.',
-      just_aderencia: 'A4 trata visibilidade do problema mas não a gestão de manutenção em si. Sintoma.',
+      just_uv: 'LLM pode inferir complementos mesmo com catálogo ruim, mas qualidade limitada.',
+      just_tc: 'Urgência real mas sem pré-requisito de catálogo — pode implementar rápido.',
+      just_rr: 'Reduz risco de receita perdida no curto prazo mas não elimina causa raiz.',
+      just_js: 'Dev Shopify + API integration. Moderado.',
+      just_aderencia: 'A2 trata sintoma (falta de recomendação), não causa raiz (catálogo). Multiplicador 0,5.',
     },
     {
-      id: 'a8', num: 'A8', titulo: 'Pacote Combinado A1 + A2 + A3 (Híbrida)',
-      categoria: 'hibrida', catColor: '#4A5A56',
-      custo: 'R$ 500.000', prazo: '8 meses',
-      user_value: 21, time_criticality: 13, risk_reduction: 13, job_size: 13,
+      id: 'a3', num: 'A3', titulo: 'RAG — Recomendação via Base de Co-compra',
+      categoria: 'rag', catColor: '#0F6E56',
+      custo: 'R$ 12k + R$ 800/mês', prazo: '2 meses',
+      user_value: 13, time_criticality: 13, risk_reduction: 13, job_size: 5,
       aderencia: true,
-      just_uv: 'Máximo valor: trata causa raiz (A1) + sintomas principais (A2+A3) simultaneamente. Impacto transformador.',
-      just_tc: 'Cada mês de atraso perpetua perda de R$405k/mês em OEE subaproveitado.',
-      just_rr: 'Abordagem abrangente: reduz riscos de recaída, riscos operacionais e riscos de capacidade.',
-      just_js: 'Maior Job Size pelo escopo combinado — mas custo per R$ de WSJF é o mais baixo.',
-      just_aderencia: 'A8 inclui A1 que trata diretamente a causa raiz. Além disso, A3 (TPM) também trata a ausência de plano preventivo identificada como causa raiz secundária.',
+      just_uv: 'Alto valor: usa dados reais de comportamento de compra. Relevância aumenta com o tempo.',
+      just_tc: 'R$ 560k/mês em receita não realizada. Cada mês de atraso é perda direta mensurável.',
+      just_rr: 'Reduz risco de recomendações ruins (dados reais) e risco de custo excessivo (baixo custo/mês).',
+      just_js: 'Dev embedding + Supabase pgvector + integração Shopify. Moderado mas bem definido.',
+      just_aderencia: 'A3 usa dados de co-compra — responde diretamente à causa raiz de "catálogo sem estrutura de complementaridade".',
+    },
+    {
+      id: 'a5', num: 'A5', titulo: 'Organização do Catálogo (Solução Não-IA)',
+      categoria: 'nao_ia', catColor: '#4A5A56',
+      custo: 'R$ 15.000', prazo: '2 meses',
+      user_value: 13, time_criticality: 13, risk_reduction: 8, job_size: 3,
+      aderencia: true,
+      just_uv: 'Trata causa raiz diretamente. Habilita qualquer solução de IA subsequente.',
+      just_tc: 'Bloqueador para todas as outras alternativas. Cada mês sem catálogo organizado degrada resultado de qualquer IA.',
+      just_rr: 'Elimina o principal risco de falha de IA (catálogo ruim = recomendações ruins).',
+      just_js: 'Menor esforço técnico de todas as alternativas. Sprint de curadoria.',
+      just_aderencia: 'A5 é a única alternativa que trata diretamente a causa raiz estrutural (catálogo desorganizado).',
+    },
+    {
+      id: 'a8', num: 'A8', titulo: 'Híbrida: Curadoria de Catálogo (A5) + RAG (A3)',
+      categoria: 'hibrida', catColor: '#B45309',
+      custo: 'R$ 24.000 + R$ 800/mês', prazo: '2 meses',
+      user_value: 21, time_criticality: 13, risk_reduction: 13, job_size: 8,
+      aderencia: true,
+      just_uv: 'Máximo valor: elimina causa raiz (A5) e adiciona IA relevante (A3). ROI 12x em 12 meses.',
+      just_tc: 'R$ 560k/mês perdida. A solução certa desde o início é mais urgente que a solução rápida errada.',
+      just_rr: 'Risco mínimo: cada componente é baixo risco isoladamente. Juntos se potencializam.',
+      just_js: 'Sprint de curadoria (sem TI) + desenvolvimento RAG em Supabase. Esforço sequencial gerenciável.',
+      just_aderencia: 'A8 = A5 (trata causa raiz direta) + A3 (IA que funciona porque catálogo está organizado). Solução completa.',
     },
   ],
 };
@@ -422,46 +423,40 @@ function bindT07Events() {}
 // T08 — 5W2H EXPANDIDO + RISCOS + KPIs
 // ═══════════════════════════════════════════════════════════
 
+// T08 ACOES — caso Petshop Beta (AI Sprint adequação v2)
 const T08_ACOES = [
-  // F1 — Gestão de Manutenção
-  { id:'1.1', frente:'F1', titulo:'Definir perfil ideal e remuneração do Gestor de Manutenção Sênior', who:'RH + Diretor Industrial', when:'Sem 1-2', how:'Benchmark salarial + job description', how_much:'R$ 0 / 16h', where:'Interno', why:'Sem perfil claro, processo seletivo falha', dependencias:'—', status:'concluida' },
-  { id:'1.2', frente:'F1', titulo:'Publicar edital em canais especializados (LinkedIn, ABFlexo, indicações)', who:'RH', when:'Sem 2-6', how:'Publicação multi-canal com foco em flexografia', how_much:'R$ 8.000 / 40h', where:'Online', why:'Ampliar pool de candidatos qualificados', dependencias:'1.1', status:'em_andamento' },
-  { id:'1.3', frente:'F1', titulo:'Conduzir processo seletivo (3 etapas, ≥5 candidatos)', who:'RH + Diretor Industrial', when:'Sem 4-9', how:'Triagem → entrevista técnica → case prático', how_much:'R$ 12.000 / 60h', where:'Escritório + ERP', why:'Validar competência técnica antes da contratação', dependencias:'1.2', status:'pendente' },
-  { id:'1.4', frente:'F1', titulo:'Contratar e conduzir onboarding 90 dias', who:'RH + Diretor', when:'Sem 9-21', how:'Contrato CLT + onboarding estruturado + mentoria AXISUS', how_much:'R$ 200.000 / 480h', where:'Planta Galpão A', why:'Integrar gestor com processos e equipe existentes', dependencias:'1.3', status:'pendente' },
-  { id:'1.5', frente:'F1', titulo:'Acompanhar performance e marcos 30/60/90 do novo Gestor', who:'Diretor Industrial', when:'Sem 13-26', how:'Check-in semanal + relatório mensal de KPIs', how_much:'R$ 0 / 60h', where:'Planta', why:'Garantir entrega dos marcos de ramp-up', dependencias:'1.4', status:'pendente' },
-  // F2 — SMED
-  { id:'2.1', frente:'F2', titulo:'Mapear setup atual com filmagem (operações internas e externas)', who:'Consultoria SMED + Supervisor', when:'Sem 1-2', how:'Filmagem + cronometragem de 5 setups consecutivos', how_much:'R$ 8.000 / 24h', where:'Linha flexo', why:'Linha de base para medir ganho pós-SMED', dependencias:'—', status:'em_andamento' },
-  { id:'2.2', frente:'F2', titulo:'Workshop SMED com equipe operacional (separar operações internas/externas)', who:'Consultoria + Operadores', when:'Sem 3', how:'1 dia de workshop prático na linha', how_much:'R$ 15.000 / 16h', where:'Linha flexo', why:'Engajar equipe e gerar adesão às mudanças', dependencias:'2.1', status:'pendente' },
-  { id:'2.3', frente:'F2', titulo:'Produzir e instalar kits físicos de setup (gabaritos, carrinhos, etiquetas)', who:'Manutenção + Compras', when:'Sem 4-6', how:'Fabricação interna de gabaritos + compra de carrinho de ferramentas', how_much:'R$ 32.000 / 80h', where:'Linha flexo', why:'Hardware que viabiliza o novo procedimento', dependencias:'2.2', status:'pendente' },
-  { id:'2.4', frente:'F2', titulo:'Implementar SOP de setup e validar com meta ≤15 min', who:'Supervisor + Operadores', when:'Sem 7-16', how:'SOP documentado + 30 setups de validação com cronometragem', how_much:'R$ 25.000 / 60h', where:'Linha flexo', why:'Confirmar que a meta foi atingida antes de encerrar frente', dependencias:'2.3', status:'pendente' },
-  // F3 — TPM
-  { id:'3.1', frente:'F3', titulo:'Diagnóstico de maturidade em manutenção (linha de base TPM)', who:'Gestor de Manutenção (F1) + Consultoria', when:'Mês 3', how:'Auditoria de práticas atuais com checklist TPM', how_much:'R$ 18.000 / 40h', where:'Planta', why:'Saber onde estamos antes de implementar TPM', dependencias:'1.4', status:'pendente' },
-  { id:'3.2', frente:'F3', titulo:'Elaborar plano preventivo estruturado (todos os equipamentos linha A)', who:'Gestor de Manutenção', when:'Mês 4', how:'FMEA leve + plano preventivo no sistema', how_much:'R$ 0 / 120h (interno)', where:'ERP manutenção', why:'Core do TPM — sem plano, manutenção é sempre reativa', dependencias:'3.1', status:'pendente' },
-  { id:'3.3', frente:'F3', titulo:'Treinamento Autonomous Maintenance (AM) para operadores', who:'Gestor + Consultoria', when:'Mês 4-5', how:'12h de treinamento prático + certificação interna', how_much:'R$ 40.000 / 120h', where:'Planta', why:'Operadores identificam anomalias antes de virar falha', dependencias:'3.2', status:'pendente' },
-  { id:'3.4', frente:'F3', titulo:'Implementar reunião semanal de manutenção (planejamento preventivo)', who:'Gestor de Manutenção + Supervisores', when:'Mês 5+', how:'Reunião de 1h toda segunda-feira com pauta estruturada', how_much:'R$ 0 / recorrente', where:'Sala de reuniões Galpão A', why:'Institucionalizar a rotina preventiva', dependencias:'3.2', status:'pendente' },
-  { id:'3.5', frente:'F3', titulo:'Validar melhora de MTBF (marco: ≥120h em mês 6)', who:'Gestor + Diretor Industrial', when:'Mês 6', how:'Medição de MTBF nos 30 dias anteriores ao marco', how_much:'R$ 0 / 8h', where:'ERP', why:'Critério de sucesso da frente F3', dependencias:'3.4', status:'pendente' },
-  // F4 — Integração
-  { id:'4.1', frente:'F4', titulo:'Implementar dashboard OEE (sistema IoT opcional ou manual aprimorado)', who:'TI + Gestor de Manutenção', when:'Mês 2-5', how:'Sensores IoT na linha ou planilha estruturada com coleta diária', how_much:'R$ 0 (manual) ou R$95k (IoT)', where:'Linha flexo + sistemas', why:'Visibilidade real-time do OEE para decisões ágeis', dependencias:'1.4', status:'pendente' },
-  { id:'4.2', frente:'F4', titulo:'Revisão geral de KPIs e encaminhamento ao T09 (A3 Expandido)', who:'Consultor AXISUS + Diretor Industrial', when:'Mês 8', how:'Reunião de avaliação de marco final com todos os líderes de frente', how_much:'R$ 0 / 8h', where:'Escritório', why:'Avaliar se o caso está pronto para entrega (Fase Deliver)', dependencias:'todos', status:'pendente' },
+  // F1 — Curadoria do Catálogo (pré-requisito para a IA)
+  { id:'1.1', frente:'F1', titulo:'Auditoria do catálogo: mapear % de SKUs sem atributos de complementaridade', who:'Andrea Santos (Catálogo) + Eduardo (Squad)', when:'Sem 1', how:'Exportar CSV Shopify + análise de campos vazios', how_much:'R$ 0 / 8h', where:'Shopify Admin + planilha', why:'Confirmar baseline antes de definir escopo da curadoria', dependencias:'—', status:'concluida' },
+  { id:'1.2', frente:'F1', titulo:'Definir taxonomia de complementaridade por categoria de pet (raça, porte, necessidade)', who:'Andrea Santos + Squad AXISUS', when:'Sem 1-2', how:'Workshop de 4h + documento de taxonomia', how_much:'R$ 0 / 12h', where:'Remoto + Shopify', why:'Catálogo precisa de estrutura antes de dados', dependencias:'1.1', status:'concluida' },
+  { id:'1.3', frente:'F1', titulo:'Sprint de curadoria: mapear relações de complementaridade nos top 500 SKUs (80% do GMV)', who:'Andrea Santos + freelancer de catálogo', when:'Sem 2-4', how:'Planilha de curadoria com IA de suporte (GPT-4o para sugerir relações)', how_much:'R$ 8.000 / 120h', where:'Shopify Admin', why:'Top 500 SKUs cobrem 80% dos pedidos — impacto imediato', dependencias:'1.2', status:'em_andamento' },
+  { id:'1.4', frente:'F1', titulo:'Criar campo "produtos_complementares" obrigatório no formulário de cadastro Shopify', who:'Dev full-stack (Daniel + TI)', when:'Sem 3', how:'Shopify metafields customizados', how_much:'R$ 2.000 / 8h', where:'Shopify Admin', why:'Garantir que novos produtos já entrem com a estrutura correta', dependencias:'1.2', status:'pendente' },
+  { id:'1.5', frente:'F1', titulo:'Expandir curadoria para os 2.000 SKUs restantes de alta relevância', who:'Andrea Santos + time de catálogo', when:'Sem 5-8', how:'Processo recorrente (4h/semana) usando IA para sugerir relações', how_much:'R$ 0 / 64h', where:'Shopify Admin', why:'Ampliar cobertura da IA progressivamente', dependencias:'1.3', status:'pendente' },
+  // F2 — RAG: construção da base vetorizada
+  { id:'2.1', frente:'F2', titulo:'Processar histórico de 12 meses de pedidos e gerar embeddings de co-compra', who:'Dev full-stack (Daniel)', when:'Sem 5', how:'Script Python + OpenAI Embeddings API + Supabase pgvector', how_much:'R$ 500 / 16h', where:'Supabase', why:'Base vetorizada é o coração do RAG de recomendação', dependencias:'1.3', status:'pendente' },
+  { id:'2.2', frente:'F2', titulo:'Desenvolver endpoint de recomendação RAG (top-5 produtos para dado carrinho)', who:'Dev full-stack (Daniel)', when:'Sem 5-6', how:'API Node/Python + query pgvector + ranqueamento por relevância', how_much:'R$ 3.000 / 24h', where:'Supabase + Vercel', why:'API que o Shopify vai consumir em tempo real', dependencias:'2.1', status:'pendente' },
+  { id:'2.3', frente:'F2', titulo:'Integrar endpoint de recomendação no checkout Shopify (widget "Clientes também levaram")', who:'Dev full-stack (Daniel)', when:'Sem 6-7', how:'Shopify Theme + Liquid template + API call', how_much:'R$ 5.000 / 32h', where:'Shopify storefront', why:'Ponto de conversão: produto certo na hora certa', dependencias:'2.2', status:'pendente' },
+  { id:'2.4', frente:'F2', titulo:'A/B test: 50% tráfego com recomendação RAG vs 50% sem (4 semanas)', who:'Daniel Oliveira + Pedro Silva (Marketing)', when:'Sem 8-12', how:'Shopify nativo A/B + Google Analytics 4', how_much:'R$ 0 / 8h', where:'Shopify + GA4', why:'Validar impacto antes de roll-out total', dependencias:'2.3', status:'pendente' },
+  // F3 — KPIs e acompanhamento
+  { id:'3.1', frente:'F3', titulo:'Configurar dashboard de cross-sell em tempo real (GA4 + Shopify Analytics)', who:'Pedro Silva (Marketing) + Dev', when:'Sem 7', how:'Google Looker Studio + Shopify Webhooks', how_much:'R$ 0 / 8h', where:'Looker Studio', why:'Visibilidade do impacto da IA em tempo real', dependencias:'2.3', status:'pendente' },
+  { id:'3.2', frente:'F3', titulo:'Treinamento do time: como interpretar dados de cross-sell e ajustar curadoria', who:'Eduardo (Squad) + Andrea + Daniel', when:'Sem 9', how:'Sessão de 2h com dashboard ao vivo', how_much:'R$ 0 / 8h', where:'Remoto', why:'Time autônomo para manutenção do sistema após o sprint', dependencias:'3.1', status:'pendente' },
+  { id:'3.3', frente:'F3', titulo:'Roll-out completo + entrega do A3 ao CEO e CFO', who:'Eduardo (Squad Líder)', when:'Sem 10', how:'Reunião formal de entrega + A3 digital + PDF anonimizado', how_much:'R$ 0 / 4h', where:'Reunião Petshop Beta', why:'Encerramento formal do AI Sprint', dependencias:'todos', status:'pendente' },
 ];
 
 const T08_RISCOS = [
-  { id:'R01', descricao:'Resistência ativa do CFO à contratação do gestor', categoria:'stakeholder', prob:4, imp:5, mitigacao:'Apresentar business case com payback em 60 dias antes da contratação. CFO presente em todas as reuniões de aprovação. Comunicação semanal de marcos financeiros.', contingencia:'Se CFO bloquear após 30 dias: escalar para CEO com acordo de blindagem já assinado (R07). Considerar remuneração variável por resultado para reduzir resistência.', responsavel:'Diretor Industrial' },
-  { id:'R02', descricao:'Não encontrar gestor qualificado em 6 meses', categoria:'pessoas', prob:3, imp:5, mitigacao:'Acionar 3 head-hunters em paralelo desde o início. Rede AXISUS pode indicar perfis de casos anteriores.', contingencia:'Plano B: candidato sub-ideal com mentoria externa mensal por 6 meses até contratar o ideal.', responsavel:'RH' },
-  { id:'R03', descricao:'Sindicato resistir a mudanças do SMED', categoria:'stakeholder', prob:3, imp:4, mitigacao:'Apresentar SMED como redução de stress operacional (menos correria). Incluir representante sindical nos workshops SMED como observador.', contingencia:'Se resistência formalizada: negociar bônus por adesão com representante sindical. Nunca impor unilateralmente.', responsavel:'RH + Supervisor' },
-  { id:'R04', descricao:'Operadores não engajarem com TPM Autonomous Maintenance', categoria:'pessoas', prob:4, imp:3, mitigacao:'Treinamento gamificado com pontuação. Reconhecimento público dos primeiros adotantes. Tempo dedicado durante turno (não horas extras).', contingencia:'Iniciar com piloto voluntário em equipe mais receptiva. Expandir somente após successo do piloto.', responsavel:'Gestor de Manutenção' },
-  { id:'R05', descricao:'Atraso na entrega de sensores IoT (F4)', categoria:'fornecedor', prob:2, imp:3, mitigacao:'Pedido com 30 dias de buffer. Fornecedor backup pré-qualificado antes da compra principal.', contingencia:'Operar com planilha manual aprimorada enquanto sensores não chegam — custo zero.', responsavel:'TI + Compras' },
-  { id:'R06', descricao:'Conflito de prioridades entre as 3 frentes paralelas', categoria:'execucao', prob:4, imp:4, mitigacao:'PMO leve: 1h/semana de sync entre líderes de frente. Comitê executivo mensal para decisões de prioridade.', contingencia:'Se conflito escalado: Diretor Industrial árbitro final. Sequencializar frentes temporariamente se necessário.', responsavel:'Consultor AXISUS' },
-  { id:'R07', descricao:'CEO mudar prioridade antes de concluir (nova "urgência")', categoria:'stakeholder', prob:3, imp:5, mitigacao:'Acordo formal de blindagem por 8 meses, assinado pelo CEO antes do início. Marco financeiro mensal para demonstrar progresso.', contingencia:'Se mudança de prioridade for inevitável: documentar estágio atual e retomar com menor esforço possível.', responsavel:'Diretor Industrial' },
-  { id:'R08', descricao:'Performance abaixo do esperado nos primeiros 90 dias gerando dúvida', categoria:'execucao', prob:3, imp:3, mitigacao:'Comunicar curva esperada de adoção ao CEO/CFO no kick-off (resultados a partir do mês 4). Marcos intermediários validados em 30/60/90.', contingencia:'Se questionamento surgir: reunião imediata de contexto com gráfico de curva de adoção esperada vs real.', responsavel:'Consultor AXISUS' },
+  { id:'R01', descricao:'CFO bloquear aprovação de orçamento antes do início', categoria:'stakeholder', prob:4, imp:5, mitigacao:'Apresentar simulação de ROI conservador (8% → 20% cross-sell = +R$110k/mês) antes da aprovação. Mostrar payback em <30 dias.', contingencia:'Se bloqueio persistir: iniciar F1 (curadoria, custo zero) enquanto negociação acontece. Demonstrar resultado parcial antes de pedir aprovação de F2.', responsavel:'Eduardo (Squad)' },
+  { id:'R02', descricao:'Time de catálogo não ter capacidade para o sprint de curadoria', categoria:'pessoas', prob:3, imp:5, mitigacao:'Contratar freelancer para suporte à curadoria (R$8k já no orçamento). Andrea supervisiona, não executa tudo.', contingencia:'Reducir escopo do sprint para top 200 SKUs (em vez de 500) na primeira iteração. Ampliar nas semanas 5-8.', responsavel:'Andrea Santos' },
+  { id:'R03', descricao:'Dev full-stack (Daniel) não ter disponibilidade durante o sprint', categoria:'pessoas', prob:3, imp:4, mitigacao:'Alinhar dedicação do dev antes do início. F1 (curadoria) não requer dev — buffer de 4 semanas para F2.', contingencia:'Contratar dev freelance para integração Shopify. R$5-8k adicional. Prazo estende 2 semanas.', responsavel:'Daniel Oliveira + Eduardo' },
+  { id:'R04', descricao:'Qualidade das recomendações RAG abaixo do esperado no A/B test', categoria:'execucao', prob:3, imp:4, mitigacao:'A/B test permite detecção precoce. Taxa de cliques < 5% aciona revisão do modelo antes do roll-out.', contingencia:'Ajuste de parâmetros do RAG (número de vizinhos, threshold de similaridade). Se não melhorar, fallback para regras manuais curadas.', responsavel:'Dev + Eduardo' },
+  { id:'R05', descricao:'Custo de tokens API Supabase/OpenAI escalar além do projetado', categoria:'financeiro', prob:2, imp:3, mitigacao:'Implementar cache de embeddings para produtos já processados. Custo por embedding só ocorre quando catálogo muda.', contingencia:'Cap mensal no Supabase (R$800/mês conforme orçado). Alertas automáticos se ultrapassar 80% do cap.', responsavel:'Dev' },
+  { id:'R06', descricao:'Plataforma Shopify limitando customizações do checkout', categoria:'tecnico', prob:2, imp:4, mitigacao:'Shopify Plus já verificado — permite customizações avançadas no checkout.', contingencia:'Se limitação específica aparecer: widget na página de produto (pré-checkout) como alternativa.', responsavel:'Dev' },
 ];
 
 const T08_KPIS = [
-  { id:'K01', nome:'OEE linha flexografia', tipo:'resultado', unidade:'%', baseline:18, a30:22, a60:28, a90:36, a365:60, freq:'Diária', fonte:'Sistema OEE / Apontamento', responsavel:'Gerente de Produção', icon:'chart' },
-  { id:'K02', nome:'MTBF — tempo médio entre falhas', tipo:'direcionador', unidade:'horas', baseline:47, a30:52, a60:72, a90:120, a365:210, freq:'Semanal', fonte:'ERP Manutenção', responsavel:'Gestor de Manutenção', icon:'tool' },
-  { id:'K03', nome:'Razão preventiva/corretiva', tipo:'direcionador', unidade:'%prev', baseline:11, a30:15, a60:30, a90:50, a365:70, freq:'Mensal', fonte:'ERP Manutenção', responsavel:'Gestor de Manutenção', icon:'shield' },
-  { id:'K04', nome:'Lead time pedido → entrega', tipo:'resultado', unidade:'dias', baseline:28, a30:26, a60:24, a90:20, a365:15, freq:'Semanal', fonte:'ERP Comercial', responsavel:'Gerente de Operações', icon:'calendar', inverter:true },
-  { id:'K05', nome:'% pedidos no prazo (OTD)', tipo:'resultado', unidade:'%', baseline:62, a30:68, a60:75, a90:85, a365:95, freq:'Semanal', fonte:'ERP Comercial', responsavel:'Gerente Comercial', icon:'check' },
+  { id:'K01', nome:'Taxa de cross-sell (% pedidos com >1 categoria)', tipo:'resultado', unidade:'%', baseline:8, a30:8, a60:12, a90:20, a365:32, freq:'Semanal', fonte:'Shopify Analytics + GA4', responsavel:'Daniel Oliveira', icon:'chart' },
+  { id:'K02', nome:'Ticket médio por pedido', tipo:'resultado', unidade:'BRL', baseline:80, a30:80, a60:90, a90:105, a365:130, freq:'Semanal', fonte:'Shopify Analytics', responsavel:'Daniel Oliveira', icon:'money' },
+  { id:'K03', nome:'% clientes que veem produtos complementares por sessão', tipo:'direcionador', unidade:'%', baseline:11, a30:15, a60:35, a90:55, a365:62, freq:'Semanal', fonte:'GA4 — Evento product_impression complementar', responsavel:'Pedro Silva', icon:'eye' },
+  { id:'K04', nome:'Taxa de cliques no widget de recomendação (CTR)', tipo:'direcionador', unidade:'%', baseline:3.2, a30:3.2, a60:6, a90:9, a365:12, freq:'Diária', fonte:'GA4 + Shopify Events', responsavel:'Pedro Silva', icon:'check' },
+  { id:'K05', nome:'NPS de clientes (e-commerce)', tipo:'resultado', unidade:'NPS', baseline:52, a30:52, a60:55, a90:58, a365:65, freq:'Mensal', fonte:'Pesquisa NPS mensal', responsavel:'Daniel Oliveira', icon:'star' },
 ];
 
 function renderT08() {
@@ -485,12 +480,12 @@ function renderT08() {
       <div style="background:linear-gradient(135deg,#4A5A56,#334155);color:white;padding:8px 20px;flex-shrink:0;display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
         <div>
           <span style="font-size:10px;opacity:0.6;">Alternativa Escolhida (T07)</span>
-          <div style="font-size:13px;font-weight:800;">A8 — Pacote Híbrido A1+A2+A3 · WSJF 3,62 (#1)</div>
+          <div style="font-size:13px;font-weight:800;">A8 — Híbrida: Curadoria Catálogo + RAG · WSJF 3,80 (#1)</div>
         </div>
         <div style="height:32px;width:1px;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>
-        <div style="font-size:12px;font-weight:500;opacity:0.85;">R$ 500.000 · 8 meses (paralelizado) · 16 ações · 4 frentes</div>
+        <div style="font-size:12px;font-weight:500;opacity:0.85;">R$ 24.000 + R$ 800/mês · 2 meses (sprint) · 13 ações · 3 frentes</div>
         <div style="margin-left:auto;display:flex;gap:12px;">
-          ${[['16','Ações 5W2H'],['8','Riscos'],['5','KPIs']].map(([n,l]) => `<div style="text-align:center;"><div style="font-size:18px;font-weight:900;">${n}</div><div style="font-size:10px;opacity:0.6;">${l}</div></div>`).join('')}
+          ${[['13','Ações 5W2H'],['6','Riscos'],['5','KPIs']].map(([n,l]) => `<div style="text-align:center;"><div style="font-size:18px;font-weight:900;">${n}</div><div style="font-size:10px;opacity:0.6;">${l}</div></div>`).join('')}
         </div>
       </div>
 

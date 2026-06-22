@@ -4,18 +4,18 @@ function renderHubDashboard() {
   const m = AXISUS.hubMetrics;
 
   const alerts = [
-    { type: 'danger',  msg: '3 franqueados com NPS < 60 nos últimos 90 dias' },
-    { type: 'warning', msg: '2 casos com atraso acima de 110% do prazo' },
-    { type: 'warning', msg: '5 contratos de franqueado vencendo em 60 dias' },
-    { type: 'info',    msg: '4 leads do Hub sem atribuição aguardam há +24h' },
+    { type: 'warning', msg: 'Gate Deliver pendente de revisão — CASE-2026-0042 (Petshop Beta)' },
+    { type: 'info',    msg: '2 casos com sprint ativo aguardando check-in do squad' },
+    { type: 'info',    msg: '3 leads qualificados sem squad atribuído — aguardam >12h' },
+    { type: 'success', msg: 'MRR SaaS atingiu R$ 18.4k — crescimento de 14% MoM' },
   ];
 
   const recentActivity = [
-    { icon: 'check',  color: 'var(--accent)',   text: 'Novo contrato assinado — Camila Ferreira (Franqueada Pleno · PR)', time: '32 min atrás' },
-    { icon: 'star',   color: '#F59E0B',          text: 'Caso CASE-2026-0038 concluído com NPS 10 — Ana Paula Rodrigues', time: '1h atrás' },
-    { icon: 'users',  color: 'var(--info)',       text: 'Novo candidato: Eduardo Moraes — Manufatura / MBB', time: '2h atrás' },
-    { icon: 'dollar', color: '#6366F1',           text: 'Pagamento de licença recebido — João Carlos Pereira · R$ 3.800', time: '3h atrás' },
-    { icon: 'shield', color: 'var(--primary)',    text: 'A3 aprovado no QA — CASE-2026-0037 (Ana Paula)', time: '5h atrás' },
+    { icon: 'check',  color: 'var(--accent)',   text: 'A3 Petshop Beta enviado ao cliente — Eduardo Ricatto (Squad Líder)', time: '18 min atrás' },
+    { icon: 'star',   color: '#F59E0B',          text: 'Caso Construtora Atlântica aprovado no Gate Diagnose — Ana Paula', time: '1h atrás' },
+    { icon: 'users',  color: 'var(--info)',       text: 'Novo candidato: Eduardo Moraes — IA / Dados / MBB', time: '2h atrás' },
+    { icon: 'dollar', color: '#6366F1',           text: 'Pagamento SaaS recebido — Fintech Crédito Ágil · R$ 2.400/mês', time: '3h atrás' },
+    { icon: 'shield', color: 'var(--primary)',    text: 'A3 aprovado no QA — CASE-2026-0041 (FitLife)', time: '5h atrás' },
   ];
 
   return `
@@ -27,7 +27,7 @@ function renderHubDashboard() {
         </div>
         <div class="flex gap-2">
           <button class="btn btn-secondary btn-sm">${icon('download',14)} Relatório</button>
-          <button class="btn btn-primary btn-sm" onclick="navigate('hub_franchisees')">${icon('plus',14)} Novo Franqueado</button>
+          <button class="btn btn-primary btn-sm" onclick="navigate('hub_franchisees')">${icon('plus',14)} Novo Sprint</button>
         </div>
       </div>
 
@@ -35,9 +35,9 @@ function renderHubDashboard() {
       <div class="grid-4 mb-6">
         <div class="stat-card" style="border-top:3px solid var(--primary);">
           <div style="width:40px;height:40px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${icon('users',20)}</div>
-          <div class="stat-label">Franqueados Ativos</div>
-          <div class="stat-value">${m.franqueados_ativos}</div>
-          <div class="stat-change up">${icon('arrow_up',12)} +2 este trimestre</div>
+          <div class="stat-label">Membros do Squad</div>
+          <div class="stat-value">${m.squad_membros || m.franqueados_ativos}</div>
+          <div class="stat-change up">${icon('arrow_up',12)} 4 ativos · 1 onboarding</div>
         </div>
         <div class="stat-card" style="border-top:3px solid #3B82F6;">
           <div style="width:40px;height:40px;border-radius:10px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${icon('layers',20)}</div>
@@ -47,14 +47,14 @@ function renderHubDashboard() {
         </div>
         <div class="stat-card" style="border-top:3px solid #10B981;">
           <div style="width:40px;height:40px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${icon('dollar',20)}</div>
-          <div class="stat-label">MRR (Licenças)</div>
-          <div class="stat-value">R$ ${(m.mrr_licencas/1000).toFixed(1)}k</div>
+          <div class="stat-label">MRR (SaaS)</div>
+          <div class="stat-value">R$ ${((m.mrr_saas||m.mrr_licencas)/1000).toFixed(1)}k</div>
           <div class="stat-change up">${icon('arrow_up',12)} +12% MoM</div>
         </div>
         <div class="stat-card" style="border-top:3px solid #F59E0B;">
           <div style="width:40px;height:40px;border-radius:10px;background:#FFFBEB;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${icon('chart',20)}</div>
-          <div class="stat-label">Fat. Rede no Mês</div>
-          <div class="stat-value">R$ ${(m.faturamento_rede_mes/1000).toFixed(0)}k</div>
+          <div class="stat-label">Fat. AI Sprint (Mês)</div>
+          <div class="stat-value">R$ ${((m.faturamento_sprints_mes||m.faturamento_rede_mes)/1000).toFixed(0)}k</div>
           <div class="stat-change up">${icon('arrow_up',12)} +19% MoM</div>
         </div>
       </div>
@@ -127,7 +127,7 @@ function renderHubFranchisees() {
     <div>
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-xl font-bold">Gestão de Franqueados</h1>
+          <h1 class="text-xl font-bold">Squad & Vendedores Regionais</h1>
           <p class="text-secondary text-sm">${AXISUS.franchisees.length} franqueados cadastrados</p>
         </div>
         <div class="flex gap-2">
@@ -149,7 +149,7 @@ function renderHubFranchisees() {
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>Franqueado</th><th>Nível</th><th>Região</th><th>Casos Ativos</th><th>NPS</th><th>Status</th><th>MRR</th><th>Ações</th>
+            <th>Membro / Squad</th><th>Nível</th><th>Especialidade</th><th>Casos Ativos</th><th>NPS</th><th>Status</th><th>MRR</th><th>Ações</th>
           </tr></thead>
           <tbody>
             ${AXISUS.franchisees.map(f => `
@@ -210,7 +210,7 @@ function showFranchiseeModal(nome) {
           <div class="flex gap-2">
             <button class="btn btn-secondary btn-sm" onclick="showToast('Alterando nível...')">Alterar Nível</button>
             <button class="btn btn-secondary btn-sm" onclick="showToast('Abrindo agendamento 1:1...')">Agendar 1:1</button>
-            <button class="btn btn-danger btn-sm" onclick="closeModal();showToast('Franqueado suspenso.','error')">Suspender</button>
+            <button class="btn btn-danger btn-sm" onclick="closeModal();showToast('Membro suspenso.','error')">Suspender</button>
           </div>
         </div>
         <div class="tab-content hidden" data-group="fr-modal-tabs" data-tab="casos">
@@ -338,7 +338,7 @@ function renderHubLeads() {
                   <td><span class="font-semibold text-sm">${l.empresa}</span><br><span class="text-xs text-muted">${l.contato}</span></td>
                   <td><span class="badge badge-gray">${l.setor}</span></td>
                   <td class="font-semibold">R$ ${(l.valor/1000).toFixed(0)}k</td>
-                  <td class="text-xs">${l.origem === 'hub_inbound' ? '🔵 Hub Inbound' : l.origem === 'hub_marketing' ? '🟣 Marketing' : '🟢 Franqueado'}</td>
+                  <td class="text-xs">${l.origem === 'hub_inbound' ? '🔵 Hub Inbound' : l.origem === 'hub_marketing' ? '🟣 Marketing' : l.origem === 'vendor' ? '🟠 Vendedor' : '🟢 Indicação'}</td>
                   <td class="text-xs text-muted">SP - Zona Sul</td>
                   <td><span class="badge ${l.estagio === 'won' ? 'badge-green' : l.estagio === 'cold' ? 'badge-gray' : 'badge-blue'}">${l.estagio.replace('_',' ')}</span></td>
                   <td>
@@ -394,7 +394,7 @@ function renderHubQA() {
               <div class="flex gap-2">
                 <button class="btn btn-secondary btn-sm" onclick="showQAReviewModal('${qa.caso}')">${icon('eye',14)} Revisar A3</button>
                 ${qa.status !== 'approved' ? `
-                  <button class="btn btn-accent btn-sm" onclick="showToast('A3 aprovado! Franqueado notificado.')">Aprovar</button>
+                  <button class="btn btn-accent btn-sm" onclick="showToast('A3 aprovado! Squad notificado.')">Aprovar</button>
                   <button class="btn btn-danger btn-sm" onclick="showToast('Revisão solicitada ao franqueado.')">Requerer Revisão</button>
                 ` : ''}
               </div>
@@ -789,7 +789,7 @@ function renderHubFinancial() {
           <div class="card-title mb-4">Cobranças de Licença</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Franqueado</th><th>Tipo</th><th>Valor</th><th>Vencimento</th><th>Status</th></tr></thead>
+              <thead><tr><th>Cliente / Squad</th><th>Tipo</th><th>Valor</th><th>Vencimento</th><th>Status</th></tr></thead>
               <tbody>
                 ${AXISUS.franchisees.map(f => `
                   <tr>

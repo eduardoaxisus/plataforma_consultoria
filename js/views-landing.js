@@ -7,9 +7,9 @@ function renderLanding() {
       <nav class="landing-nav">
         <h1>AXISUS</h1>
         <div class="flex items-center gap-3">
-          <a href="#metodo" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Método</a>
-          <a href="#produtos" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Produtos</a>
-          <a href="#franquia" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Seja Franqueado</a>
+          <a href="#metodo" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Método 5D</a>
+          <a href="#produtos" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">AI Sprint</a>
+          <a href="#squad" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Seja do Squad</a>
           <button class="btn btn-secondary btn-sm" onclick="navigate('login')">Acessar Plataforma</button>
         </div>
       </nav>
@@ -17,10 +17,10 @@ function renderLanding() {
       <!-- HERO -->
       <section class="hero">
         <div style="display:inline-block;background:rgba(255,255,255,0.1);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:1px;margin-bottom:24px;text-transform:uppercase;">
-          Sistema Operacional de Diagnóstico Empresarial
+          Estúdio de AI Sprint
         </div>
-        <h2>Traga o problema.<br>Entregamos a solução pronta.</h2>
-        <p>A AXISUS transforma desafios complexos em soluções estruturadas com o Método 5D — diagnóstico preciso, causa raiz validada, implementação real.</p>
+        <h2>Traga o problema de IA.<br>Entregamos o protótipo em 1 semana.</h2>
+        <p>A AXISUS aplica o Método 5D para diagnosticar problemas de negócio, identificar onde IA realmente resolve, e entregar protótipo funcional — com causa raiz validada e ROI comprovado.</p>
         <div class="flex gap-3" style="justify-content:center;">
           <button class="btn btn-lg" style="background:white;color:var(--primary);font-weight:700;" onclick="showContactModal()">
             Quero conhecer a AXISUS ${icon('arrow_right',18)}
@@ -32,7 +32,7 @@ function renderLanding() {
 
         <!-- Setores -->
         <div style="margin-top:60px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
-          ${['Indústria','Logística','Varejo','Saúde','Agro','Construção','Serviços'].map(s => `
+          ${['E-commerce','Fintech','Saúde Digital','Logística','Educação','Construção','RH Tech'].map(s => `
             <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;">${s}</span>
           `).join('')}
         </div>
@@ -61,13 +61,13 @@ function renderLanding() {
 
       <!-- PRODUTOS -->
       <section class="section section-center" id="produtos">
-        <h2>Produtos AXISUS</h2>
-        <p class="lead">Três formatos adaptados à complexidade e ao momento da sua operação.</p>
+        <h2>AI Sprint AXISUS</h2>
+        <p class="lead">Três pacotes adaptados ao momento da sua empresa. Todos entregam protótipo funcional ao final.</p>
         <div class="products-grid">
           ${[
-            { icon:'📋', name:'Plataforma',                price:'A partir de R$ 30k',  desc:'Diagnóstico remoto completo. Franqueado conduz todas as fases online, com entregável A3 Expandido e 3 check-ins.', featured:false },
-            { icon:'💻', name:'Plataforma + Online',       price:'A partir de R$ 45k',  desc:'Diagnóstico remoto com videoconferências estruturadas. Workshops Ishikawa ao vivo e apresentação executiva.', featured:true  },
-            { icon:'🏭', name:'Plataforma + Visitas',      price:'A partir de R$ 72k',  desc:'Diagnóstico presencial com visitas técnicas. Ideal para problemas operacionais complexos.', featured:false },
+            { icon:'🚀', name:'Essencial',              price:'A partir de R$ 24k',  desc:'Sprint de 2 semanas: diagnóstico + causa raiz + protótipo em GitHub. Ideal para startups e PMEs que precisam validar rápido.', featured:false },
+            { icon:'💻', name:'Pleno',                  price:'A partir de R$ 48k',  desc:'Sprint completo com protótipo funcional em SaaS dedicado (Supabase) + acompanhamento 30/60/90 dias de adoção.', featured:true  },
+            { icon:'⭐', name:'Premium',                price:'A partir de R$ 96k',  desc:'AI Sprint + squad dedicado por 60 dias + integração com sistemas existentes + treinamento da equipe do cliente.', featured:false },
           ].map(p => `
             <div class="product-card ${p.featured ? 'featured' : ''}">
               ${p.featured ? '<div class="badge badge-primary" style="margin-bottom:12px;">Mais escolhido</div>' : ''}
@@ -78,22 +78,22 @@ function renderLanding() {
               <div style="font-size:22px;font-weight:900;color:var(--primary);margin-bottom:12px;">${p.price}</div>
               <p style="font-size:13px;color:var(--text-secondary);margin-bottom:24px;">${p.desc}</p>
               <button class="btn ${p.featured ? 'btn-primary' : 'btn-secondary'} w-full" onclick="showContactModal()">
-                Solicitar Diagnóstico
+                Solicitar AI Sprint
               </button>
             </div>
           `).join('')}
         </div>
       </section>
 
-      <!-- FRANQUIA -->
-      <section class="section" id="franquia" style="background:var(--primary);color:white;">
+      <!-- SQUAD -->
+      <section class="section" id="squad" style="background:var(--primary);color:white;">
         <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
           <div>
-            <div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:0.6;text-transform:uppercase;margin-bottom:12px;">Seja Franqueado</div>
-            <h2 style="color:white;font-size:36px;font-weight:900;margin-bottom:16px;">Construa seu negócio com o método AXISUS.</h2>
-            <p style="opacity:0.8;font-size:16px;margin-bottom:32px;">Para Black Belts, engenheiros e gestores com experiência em manufatura, logística e operações. Sem royalty sobre faturamento.</p>
+            <div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:0.6;text-transform:uppercase;margin-bottom:12px;">Junte-se ao Squad AXISUS</div>
+            <h2 style="color:white;font-size:36px;font-weight:900;margin-bottom:16px;">Aplique o Método 5D em sprints de IA.</h2>
+            <p style="opacity:0.8;font-size:16px;margin-bottom:32px;">Para profissionais de negócio e tecnologia que querem trabalhar com diagnóstico real + IA. 1 sprint/semana, squad fixo de 4 pessoas, metodologia estruturada.</p>
             <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
-              ${['Sem royalty sobre faturamento','Território exclusivo','Biblioteca de casos + IA Copiloto','Suporte do Hub Central','Taxa inicial a partir de R$ 40k'].map(item => `
+              ${['Método 5D — diagnóstico real, não templates vazios','IA Copiloto em todos os 9 templates','Biblioteca de casos com aprovação RAG','Squad fixo — 1 sprint/semana','Comissão progressiva por performance'].map(item => `
                 <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
                   <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;">${icon('check',11)}</div>
                   ${item}
@@ -101,17 +101,17 @@ function renderLanding() {
               `).join('')}
             </div>
             <button class="btn btn-lg" style="background:white;color:var(--primary);font-weight:700;" onclick="navigate('login');AXISUS.state.loginMode='candidate';">
-              Quero Ser Franqueado ${icon('arrow_right',18)}
+              Quero Entrar no Squad ${icon('arrow_right',18)}
             </button>
           </div>
           <div>
             <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;">
-              <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:0.6;margin-bottom:20px;">Números da Rede</div>
+              <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:0.6;margin-bottom:20px;">Números do Estúdio</div>
               ${[
-                { v:'18',  l:'Franqueados ativos' },
-                { v:'34',  l:'Casos em andamento' },
-                { v:'9.1', l:'NPS médio da rede' },
-                { v:'R$ 0', l:'Royalty sobre faturamento' },
+                { v:'4',   l:'Membros do Squad' },
+                { v:'7',   l:'Casos em andamento' },
+                { v:'9.4', l:'NPS médio dos clientes' },
+                { v:'1sem',l:'Duração do AI Sprint (mínimo)' },
               ].map(s => `
                 <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);">
                   <span style="opacity:0.7;font-size:14px;">${s.l}</span>
@@ -148,7 +148,7 @@ function renderLanding() {
       <!-- FOOTER -->
       <div class="footer">
         <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.8);margin-bottom:8px;">AXISUS</div>
-        <div>Sistema Operacional Integrado de Diagnóstico Empresarial</div>
+        <div>Estúdio de AI Sprint · Método 5D · Protótipo em 1 semana</div>
         <div style="margin-top:8px;font-size:12px;">© 2026 AXISUS · Todos os direitos reservados</div>
       </div>
     </div>
@@ -190,13 +190,13 @@ function renderLogin() {
       <div class="login-card">
         <div class="login-logo">
           <h1>AXISUS</h1>
-          <p>Sistema Operacional Integrado</p>
+          <p>Estúdio de AI Sprint</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
           <div class="form-group">
             <label class="form-label">E-mail</label>
-            <input class="form-input" type="email" id="login-email" placeholder="seu@email.com" value="carlos@distribuidorasul.com.br">
+            <input class="form-input" type="email" id="login-email" placeholder="seu@email.com" value="renato@petshopbeta.com.br">
           </div>
           <div class="form-group">
             <label class="form-label">Senha</label>
@@ -218,7 +218,7 @@ function renderLogin() {
           <div class="text-xs text-muted text-center mb-3">Acessar como (demo)</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
             <button class="btn btn-secondary btn-sm" onclick="loginAs('client')">Cliente</button>
-            <button class="btn btn-secondary btn-sm" onclick="loginAs('franchisee')">Franqueado</button>
+            <button class="btn btn-secondary btn-sm" onclick="loginAs('franchisee')">Squad AXISUS</button>
             <button class="btn btn-secondary btn-sm" onclick="loginAs('candidate')">Candidato</button>
             <button class="btn btn-secondary btn-sm" onclick="loginAs('hub')">Hub Central</button>
           </div>
@@ -241,9 +241,9 @@ function bindLoginEvents() {
 function doLogin() {
   const email = document.getElementById('login-email')?.value || '';
 
-  if (email.includes('distribuidorasul')) {
+  if (email.includes('petshop') || email.includes('distribuidorasul')) {
     loginAs('client');
-  } else if (email.includes('axisus') && email.includes('ana')) {
+  } else if (email.includes('axisus') && email.includes('eduardo')) {
     loginAs('franchisee');
   } else if (email.includes('hub') || email.includes('mariana')) {
     loginAs('hub');

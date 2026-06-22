@@ -156,7 +156,7 @@ function renderT09Completude() {
 function renderS1Content() {
   return `
     <div class="grid-2" style="gap:8px;">
-      ${[['Código','CASE-2026-0042'],['Cliente','Embalagens Atlântico Ltda'],['Especialista','Ana Paula Rodrigues (Pleno · SP)'],['Início','01/04/2026'],['Conclusão Diagnóstico','15/06/2026'],['Aprovado pelo Hub','14/06/2026 — Lucas Andrade']].map(([k,v]) => `
+      ${[['Código','CASE-2026-0042'],['Cliente','Petshop Beta Comércio Ltda'],['Squad Líder','Eduardo Ricatto (Sênior)'],['Início Sprint','05/05/2026'],['Conclusão A3','26/05/2026'],['Aprovado pelo Hub','25/05/2026 — Hub AXISUS']].map(([k,v]) => `
         <div><div style="font-size:10px;color:var(--text-muted);">${k}</div><div style="font-weight:600;">${v}</div></div>
       `).join('')}
     </div>`;
@@ -165,18 +165,18 @@ function renderS1Content() {
 function renderS2Content() {
   return `
     <div style="color:var(--text-secondary);line-height:1.6;">
-      A fábrica não dá conta da demanda. Estamos perdendo pedidos para concorrentes porque o prazo de entrega aumentou de 15 para 28 dias. O comercial diz que precisamos comprar uma nova máquina de impressão flexográfica para aumentar a capacidade. A diretoria está dividida: alguns acham que é falta de equipamento, outros acham que é problema de planejamento. O CFO está pressionando porque a nova máquina custa R$ 4,8 milhões e ainda não sabemos se vai resolver.
+      Os clientes que compram na Petshop Beta tipicamente compram apenas 1 produto por pedido. Ticket médio R$ 80, quando o benchmark do setor é R$ 130-180. O cliente acreditava que o problema era a ausência de IA de recomendação. O diagnóstico AXISUS revelou que o problema real é o catálogo desorganizado — 68% dos SKUs sem atributos de complementaridade — que inviabiliza qualquer sistema de recomendação, com ou sem IA.
     </div>
-    <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">Tempo de existência: 14 meses · Urgência: Alta · Aprovação: CEO + CFO</div>`;
+    <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">Tempo de existência: 12+ meses · Urgência: Alta (R$560k/mês de receita não realizada) · Aprovação: CEO + CFO</div>`;
 }
 
 function renderS3Content() {
   const stakeholders = [
-    { nome:'Marcelo Atlântico', cargo:'CEO',                p:5, i:5, pos:'desconhecido', color:'#94A3B8' },
-    { nome:'Patrícia Souza',    cargo:'CFO',                p:5, i:4, pos:'resistente',   color:'#EF4444' },
-    { nome:'João Mendes',       cargo:'Dir. Comercial',     p:4, i:5, pos:'apoiador',     color:'#10B981' },
-    { nome:'Roberto Lima',      cargo:'Ger. Produção',      p:3, i:4, pos:'apoiador',     color:'#10B981' },
-    { nome:'Marcos Pereira',    cargo:'Repr. Sindical',     p:3, i:3, pos:'resistente',   color:'#EF4444' },
+    { nome:'Renato Almeida',  cargo:'CEO/Fundador',       p:5, i:5, pos:'desconhecido', color:'#94A3B8' },
+    { nome:'Beatriz Lima',    cargo:'CFO',                p:5, i:4, pos:'resistente',   color:'#EF4444' },
+    { nome:'Daniel Oliveira', cargo:'Ger. E-commerce',   p:4, i:5, pos:'apoiador',     color:'#10B981' },
+    { nome:'Andrea Santos',   cargo:'Ger. Catálogo',     p:3, i:4, pos:'neutro',       color:'#F59E0B' },
+    { nome:'Pedro Silva',     cargo:'Analista Marketing', p:2, i:4, pos:'apoiador',     color:'#10B981' },
   ];
   return `
     <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;">
@@ -214,14 +214,14 @@ function renderS3Content() {
 
 function renderS4Content() {
   const dims = [
-    { d:'Operacional (OEE)',  base:'18%',    bench:'68%',    gap:'-50pp',         color:'#EF4444' },
-    { d:'Financeiro',         base:'R$4,86mi/a', bench:'R$0', gap:'-R$4,86mi',    color:'#F59E0B' },
-    { d:'Reputacional (NPS)', base:'58',     bench:'72',     gap:'-14 pts',       color:'#6366F1' },
-    { d:'Estratégico',        base:'3 risco', bench:'0',     gap:'R$2,1mi risco', color:'#EC4899' },
+    { d:'Cross-sell',          base:'8%',       bench:'32%',       gap:'-24pp',        color:'#EF4444' },
+    { d:'Ticket médio',        base:'R$ 80',     bench:'R$ 150',    gap:'-R$ 70/pedido',color:'#F59E0B' },
+    { d:'Receita mensal',      base:'R$ 640k',   bench:'R$ 1.200k', gap:'-R$ 560k/mês', color:'#6366F1' },
+    { d:'NPS (e-commerce)',    base:'52',        bench:'68',        gap:'-16 pts',      color:'#EC4899' },
   ];
   return `
     <div style="font-size:12px;font-weight:700;color:#6B21A8;margin-bottom:8px;line-height:1.4;">
-      A linha de flexografia opera a <strong>18% de OEE</strong> (vs. benchmark 68%), gerando 38% de pedidos atrasados e impacto financeiro estimado em <strong>R$ 4,86 milhões/ano</strong>. O problema NÃO é falta de capacidade instalada, mas baixa utilização da capacidade existente.
+      Taxa de cross-sell de <strong>8%</strong> (vs. benchmark 32%), ticket médio de <strong>R$ 80</strong> (vs. R$ 150). Gap de <strong>R$ 560k/mês</strong>. 89% dos clientes não visualizam produtos complementares na sessão.
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
       ${dims.map(d => `
@@ -236,20 +236,20 @@ function renderS4Content() {
 
 function renderS5Content() {
   return `
-    <!-- Mini Ishikawa SVG -->
+    <!-- Mini Ishikawa SVG Petshop Beta -->
     <svg viewBox="0 0 340 90" width="100%" style="max-width:340px;display:block;margin-bottom:8px;">
       <line x1="30" y1="45" x2="290" y2="45" stroke="#04342C" stroke-width="2"/>
       <polygon points="290,45 278,39 278,51" fill="#04342C"/>
-      <rect x="292" y="28" width="44" height="34" rx="5" fill="#04342C"/>
-      <text x="314" y="42" fill="white" font-size="7" text-anchor="middle" font-weight="700">OEE</text>
-      <text x="314" y="52" fill="white" font-size="7" text-anchor="middle">18%</text>
+      <rect x="292" y="26" width="46" height="38" rx="5" fill="#04342C"/>
+      <text x="315" y="41" fill="white" font-size="6" text-anchor="middle" font-weight="700">Cross-sell</text>
+      <text x="315" y="52" fill="white" font-size="6" text-anchor="middle">8%</text>
       ${[
-        { x:80, above:true,  label:'Mão de Obra', causa:'Sem gestor', raiz:true  },
-        { x:160, above:true, label:'Método',      causa:'Sem prev.', raiz:true  },
-        { x:240, above:true, label:'Máquina',     causa:'Setup 75m', raiz:false },
-        { x:80,  above:false,label:'Material',    causa:'Variab.',   raiz:false },
-        { x:160, above:false,label:'Medição',     causa:'Manual',    raiz:false },
-        { x:240, above:false,label:'Meio Amb.',   causa:'Temp.',     raiz:false },
+        { x:80,  above:true,  causa:'Sem taxon.', raiz:true  },
+        { x:160, above:true,  causa:'KPI errado', raiz:true  },
+        { x:240, above:true,  causa:'Sem widget', raiz:false },
+        { x:80,  above:false, causa:'Dados brutos',raiz:false },
+        { x:160, above:false, causa:'Sem análise', raiz:false },
+        { x:240, above:false, causa:'Sazonalid.',  raiz:false },
       ].map(b => {
         const y2 = b.above ? 10 : 80;
         return `
@@ -261,34 +261,34 @@ function renderS5Content() {
     </svg>
     <div style="font-size:11px;font-weight:700;color:#B45309;margin-bottom:6px;">Causa Raiz Identificada:</div>
     <div style="background:#FEF3C7;border-left:3px solid #F59E0B;padding:6px 10px;border-radius:0 6px 6px 0;font-size:11px;margin-bottom:6px;font-weight:600;">
-      Ausência de gestor de manutenção — suprimido em reorganização pós-pandemia (2022)
+      Catálogo desorganizado — 68% dos SKUs sem atributos de complementaridade (estrutural, existe há 12+ meses)
     </div>
     <div style="font-size:10px;color:var(--text-muted);">
-      5 Porquês: Corretiva sem treino → Demora 4-6h → Sempre emergência → Sem preventivo → Gestor suprimido em 2022 → <strong>Reorganização esquecida</strong>
+      5 Porquês: Ninguém vê cross-sell → Sem recomendação → IA não funciona → Catálogo sem estrutura → KPI sempre foi GMV total → <strong>Incentivo errado desde o início</strong>
     </div>`;
 }
 
 function renderS6Content() {
-  const serie = [68,58,52,49,46,44,41,38,42,45,47];
-  const maxV  = 240;
-  const meses = ['J','A','S','O','N','D','J','F','M','A','M'];
+  const serie = [9,8,9,8,8];
+  const maxV  = 32;
+  const meses = ['J','F','M','A','M'];
 
   return `
     <div style="margin-bottom:8px;">
       <div style="font-size:11px;font-weight:700;color:#0891B2;margin-bottom:6px;">Hipótese testada:</div>
       <div style="font-size:11px;font-style:italic;color:var(--text-secondary);margin-bottom:8px;">
-        "Ausência de gestor causa MTBF abaixo do benchmark setorial"
+        "Catálogo desorganizado (68% SKUs sem complementaridade) é a causa raiz da taxa de cross-sell de 8%"
       </div>
-      <!-- Mini gráfico MTBF -->
+      <!-- Mini gráfico cross-sell -->
       <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:8px;margin-bottom:8px;">
         <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
-          <div style="width:14px;height:2px;background:#0891B2;border-top:2px dashed #10B981;"></div>
-          <span style="font-size:9px;color:#10B981;">Benchmark 240h</span>
+          <div style="width:14px;height:2px;border-top:2px dashed #10B981;"></div>
+          <span style="font-size:9px;color:#10B981;">Benchmark 32%</span>
           <div style="width:8px;height:8px;background:#EF4444;border-radius:2px;margin-left:6px;"></div>
-          <span style="font-size:9px;color:#EF4444;">MTBF medido</span>
+          <span style="font-size:9px;color:#EF4444;">Cross-sell medido</span>
         </div>
         <div style="display:flex;align-items:flex-end;gap:2px;height:50px;position:relative;">
-          <div style="position:absolute;left:0;right:0;bottom:${240/maxV*100}%;height:1px;border-top:1.5px dashed #10B981;opacity:0.6;"></div>
+          <div style="position:absolute;left:0;right:0;bottom:${32/maxV*100}%;height:1px;border-top:1.5px dashed #10B981;opacity:0.6;"></div>
           ${serie.map((v,i) => `
             <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;">
               <div style="width:100%;background:#EF4444;border-radius:2px 2px 0 0;height:${v/maxV*48}px;opacity:0.85;"></div>
@@ -301,8 +301,8 @@ function renderS6Content() {
       </div>
     </div>
     ${[
-      { m:'MTBF',           med:'47h',   bench:'240h', gap:'–80%',    ok:true },
-      { m:'Corretiva/Prev.','med':'89/11%', bench:'30/70%', gap:'Invertida', ok:true },
+      { m:'% SKUs sem complementares', med:'68%',  bench:'<20%',   gap:'–48pp',   ok:true },
+      { m:'Clientes que veem complem.', med:'11%',  bench:'62%',    gap:'–51pp',   ok:true },
     ].map(r => `
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
         <span class="badge badge-red" style="font-size:9px;flex-shrink:0;">Medido: ${r.med}</span>
@@ -318,11 +318,11 @@ function renderS6Content() {
 function renderS7Content() {
   const ranked = getScoredAndRanked ? getScoredAndRanked() : [];
   const alts = ranked.length > 0 ? ranked : [
-    { num:'A8', titulo:'Pacote Híbrido A1+A2+A3', custo:'R$ 500k', wsjf_final:3.62, ranking:1, aderencia:true, catColor:'#4A5A56' },
-    { num:'A1', titulo:'Gestor Sênior',            custo:'R$ 240k', wsjf_final:4.25, ranking:2, aderencia:true, catColor:'#0F6E56' },
-    { num:'A3', titulo:'TPM',                       custo:'R$ 180k', wsjf_final:3.25, ranking:3, aderencia:true, catColor:'#5DCAA5' },
-    { num:'A2', titulo:'SMED',                      custo:'R$ 80k',  wsjf_final:2.60, ranking:4, aderencia:false, catColor:'#5DCAA5' },
-    { num:'A4', titulo:'Sistema OEE IoT',           custo:'R$ 95k',  wsjf_final:1.13, ranking:5, aderencia:false, catColor:'#1E3A8A' },
+    { num:'A8', titulo:'Híbrida: Curadoria + RAG', custo:'R$ 24k',  wsjf_final:3.80, ranking:1, aderencia:true,  catColor:'#B45309' },
+    { num:'A3', titulo:'RAG Recomendação',          custo:'R$ 12k',  wsjf_final:3.40, ranking:2, aderencia:true,  catColor:'#0F6E56' },
+    { num:'A5', titulo:'Curadoria Catálogo',        custo:'R$ 15k',  wsjf_final:3.13, ranking:3, aderencia:true,  catColor:'#4A5A56' },
+    { num:'A2', titulo:'LLM via API',               custo:'R$ 8k+3k/mês', wsjf_final:1.60, ranking:4, aderencia:false, catColor:'#1E3A8A' },
+    { num:'A1', titulo:'SaaS Plug-and-play',        custo:'R$ 6-12k/mês', wsjf_final:1.40, ranking:5, aderencia:false, catColor:'#1E3A8A' },
   ];
 
   return `
@@ -401,11 +401,11 @@ function renderS8Content() {
 
 function renderS9Content() {
   const kpis = [
-    { id:'K01', nome:'OEE',           base:'18%',  a30:'22%',  a90:'36%',  a365:'60%', color:'#0F6E56' },
-    { id:'K02', nome:'MTBF',          base:'47h',  a30:'52h',  a90:'120h', a365:'210h',color:'#1E40AF' },
-    { id:'K03', nome:'Prev/Corret.',  base:'11%',  a30:'15%',  a90:'50%',  a365:'70%', color:'#6B21A8' },
-    { id:'K04', nome:'Lead Time',     base:'28d',  a30:'26d',  a90:'20d',  a365:'15d', color:'#B45309' },
-    { id:'K05', nome:'OTD',           base:'62%',  a30:'68%',  a90:'85%',  a365:'95%', color:'#0891B2' },
+    { id:'K01', nome:'Cross-sell',   base:'8%',      a30:'8%',   a90:'20%',  a365:'32%',   color:'#0F6E56' },
+    { id:'K02', nome:'Ticket Médio', base:'R$ 80',    a30:'R$80', a90:'R$105',a365:'R$130', color:'#1E40AF' },
+    { id:'K03', nome:'Receita/mês',  base:'R$640k',   a30:'R$640k',a90:'R$840k',a365:'R$1.2mi', color:'#6B21A8' },
+    { id:'K04', nome:'CTR Widget',   base:'3.2%',     a30:'3.2%', a90:'9%',   a365:'12%',   color:'#B45309' },
+    { id:'K05', nome:'NPS e-comm.',  base:'52',       a30:'52',   a90:'58',   a365:'65',    color:'#0891B2' },
   ];
   return `
     <table style="width:100%;font-size:11px;border-collapse:collapse;">
@@ -427,7 +427,7 @@ function renderS9Content() {
       </tbody>
     </table>
     <div style="margin-top:8px;background:#F0FDF4;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;color:#065F46;">
-      Payback estimado: &lt; 60 dias · ROI: 95x honorários AXISUS
+      Payback estimado: &lt; 30 dias · ROI projetado: 12x em 12 meses (R$288k/ano)
     </div>`;
 }
 
@@ -435,9 +435,9 @@ function renderS10Content() {
   return `
     <div class="grid-2" style="gap:8px;margin-bottom:10px;">
       ${[
-        { d:'Reunião 30 dias', dt:'15/07/2026', fmt:'Videoconferência 60min', s:'Revisão marcos iniciais' },
-        { d:'Reunião 60 dias', dt:'15/08/2026', fmt:'Presencial fábrica 90min', s:'Acompanhamento implementação' },
-        { d:'Reunião 90 dias', dt:'15/09/2026', fmt:'Videoconferência 60min', s:'Avaliação tendência KPIs' },
+        { d:'Reunião 30 dias', dt:'25/06/2026', fmt:'Videoconferência 60min', s:'Revisão do A/B test — CTR e cross-sell' },
+        { d:'Reunião 60 dias', dt:'25/07/2026', fmt:'Videoconferência 90min', s:'Resultado roll-out completo — ticket médio' },
+        { d:'Reunião 90 dias', dt:'25/08/2026', fmt:'Videoconferência 60min', s:'Avaliação de tendência NPS e receita' },
       ].map(r => `
         <div style="background:var(--surface-2);border-radius:8px;padding:8px;">
           <div style="font-size:10px;color:var(--text-muted);">${r.d}</div>
@@ -449,14 +449,14 @@ function renderS10Content() {
       <div style="background:${T09_STATE.signoff==='signed' ? '#F0FDF4' : '#FEF9C3'};border-radius:8px;padding:8px;border:1px solid ${T09_STATE.signoff==='signed' ? '#A7F3D0' : '#FCD34D'};">
         <div style="font-size:10px;color:var(--text-muted);">Sign-off do Cliente</div>
         <div style="font-size:12px;font-weight:700;color:${T09_STATE.signoff==='signed' ? '#065F46' : '#92400E'};">
-          ${T09_STATE.signoff==='signed' ? '✅ Assinado — Marcelo Atlântico' : '⏳ Aguardando assinatura'}
+          ${T09_STATE.signoff==='signed' ? '✅ Assinado — Renato Almeida (CEO)' : '⏳ Aguardando assinatura'}
         </div>
-        <div style="font-size:10px;">${T09_STATE.signoff==='signed' ? '14/06/2026 via ClickSign' : 'Marcelo Atlântico (CEO)'}</div>
+        <div style="font-size:10px;">${T09_STATE.signoff==='signed' ? '25/05/2026 via ClickSign' : 'Renato Almeida (CEO) + Beatriz Lima (CFO)'}</div>
         ${T09_STATE.signoff !== 'signed' ? `<button class="btn btn-accent btn-sm mt-2" style="font-size:10px;" onclick="sendSignoff()">Enviar para assinar</button>` : ''}
       </div>
     </div>
     <div style="font-size:11px;color:var(--text-muted);padding:6px 10px;background:var(--surface-2);border-radius:6px;">
-      <strong>Anexos:</strong> Planilha MTBF 11 meses · Ata reunião diagnóstico · Análise OEE linha A · Cotação RH
+      <strong>Anexos:</strong> Auditoria do Catálogo CSV · Relatório GA4 cross-sell · Análise de co-compra 12 meses · Protótipo RAG (repositório GitHub)
     </div>`;
 }
 
@@ -510,10 +510,10 @@ function renderT09Present() {
             <div style="flex:1;"></div>
             ${[
               ['Caso','CASE-2026-0042'],
-              ['Cliente','Embalagens Atlântico Ltda'],
-              ['Especialista','Ana Paula Rodrigues · Pleno SP'],
-              ['Início','01/04/2026'],
-              ['Conclusão','15/06/2026'],
+              ['Cliente','Petshop Beta Comércio Ltda'],
+              ['Squad Líder','Eduardo Ricatto · Sênior'],
+              ['Início Sprint','05/05/2026'],
+              ['Conclusão','26/05/2026'],
             ].map(([k,v]) => `
               <div style="text-align:right;margin-left:14px;">
                 <div style="font-size:8px;color:rgba(255,255,255,0.5);">${k}</div>
@@ -522,7 +522,7 @@ function renderT09Present() {
             `).join('')}
             <div style="margin-left:14px;background:#10B981;padding:4px 10px;border-radius:6px;text-align:center;">
               <div style="font-size:8px;color:white;opacity:0.8;">Hub Aprovado</div>
-              <div style="font-size:9px;font-weight:800;color:white;">14/06/2026</div>
+              <div style="font-size:9px;font-weight:800;color:white;">25/05/2026</div>
             </div>
           </div>
 
@@ -566,10 +566,10 @@ function renderT09Present() {
             <div style="padding:12px;border-right:1px solid var(--border);">
               ${a3SectionHeader('3', 'Current State', '#6B21A8')}
               <div style="font-size:9px;font-weight:700;color:#6B21A8;line-height:1.5;margin-bottom:8px;">
-                Linha de flexografia opera a <strong>18% de OEE</strong> (benchmark 68%). 82% da capacidade desperdiçada. Impacto: <strong>R$ 4,86mi/ano</strong>. NÃO é falta de capacidade — é baixa utilização.
+                Cross-sell de <strong>8%</strong> (benchmark 32%). Ticket médio <strong>R$ 80</strong> (benchmark R$ 150). Gap: <strong>R$ 560k/mês</strong>. 89% dos clientes não veem complementares.
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-                ${[{l:'OEE',v:'18%',b:'68%',c:'#EF4444'},{l:'Financeiro',v:'-R$4,86mi',b:'R$0/ano',c:'#F59E0B'},{l:'NPS B2B',v:'58',b:'72',c:'#6366F1'},{l:'Contratos risco',v:'3',b:'0',c:'#EC4899'}].map(d => `
+                ${[{l:'Cross-sell',v:'8%',b:'32%',c:'#EF4444'},{l:'Ticket médio',v:'R$80',b:'R$150',c:'#F59E0B'},{l:'NPS e-comm.',v:'52',b:'68',c:'#6366F1'},{l:'% vê complem.',v:'11%',b:'62%',c:'#EC4899'}].map(d => `
                   <div style="background:${d.c}10;border:1px solid ${d.c}30;border-radius:4px;padding:4px 6px;">
                     <div style="font-size:8px;color:var(--text-muted);">${d.l}</div>
                     <div style="font-size:11px;font-weight:800;color:${d.c};">${d.v}</div>
@@ -585,18 +585,18 @@ function renderT09Present() {
                 <line x1="15" y1="30" x2="180" y2="30" stroke="#04342C" stroke-width="2"/>
                 <polygon points="180,30 172,25 172,35" fill="#04342C"/>
                 <rect x="182" y="18" width="16" height="24" rx="3" fill="#04342C"/>
-                <text x="190" y="28" fill="white" font-size="5" text-anchor="middle">OEE</text>
-                <text x="190" y="35" fill="white" font-size="5" text-anchor="middle">18%</text>
-                ${[{x:50,a:true,l:'Mão de Obra',c:'#10B981',r:true},{x:100,a:true,l:'Método',c:'#10B981',r:true},{x:150,a:true,l:'Máquina',c:'#94A3B8',r:false},{x:50,a:false,l:'Material',c:'#94A3B8',r:false},{x:100,a:false,l:'Medição',c:'#94A3B8',r:false},{x:150,a:false,l:'Meio',c:'#94A3B8',r:false}].map(b => {
+                <text x="190" y="28" fill="white" font-size="5" text-anchor="middle">Cross</text>
+                <text x="190" y="35" fill="white" font-size="5" text-anchor="middle">8%</text>
+                ${[{x:50,a:true,l:'Sem taxon.',c:'#10B981',r:true},{x:100,a:true,l:'KPI errado',c:'#10B981',r:true},{x:150,a:true,l:'Sem widget',c:'#94A3B8',r:false},{x:50,a:false,l:'Dados raw',c:'#94A3B8',r:false},{x:100,a:false,l:'Medição',c:'#94A3B8',r:false},{x:150,a:false,l:'Sazonal.',c:'#94A3B8',r:false}].map(b => {
                   const y2 = b.a ? 5 : 55;
                   return `<line x1="${b.x}" y1="30" x2="${b.x}" y2="${y2}" stroke="${b.c}" stroke-width="${b.r?1.8:1}"/><rect x="${b.x-16}" y="${b.a?1:49}" width="32" height="10" rx="2" fill="${b.c}"/><text x="${b.x}" y="${b.a?8:56}" fill="white" font-size="5" text-anchor="middle">${b.l}</text>`;
                 }).join('')}
               </svg>
               <div style="background:#FEF3C7;border-left:2px solid #F59E0B;padding:5px 7px;border-radius:0 4px 4px 0;font-size:9px;margin-bottom:5px;font-weight:700;">
-                Ausência de gestor de manutenção — suprimido em 2022
+                Catálogo desorganizado — 68% SKUs sem complementaridade
               </div>
               <div style="font-size:8px;color:var(--text-muted);line-height:1.5;">
-                5 Porquês: Sem gestão → Sem preventivo → Sempre emergência → Gestor suprimido → Reorganização esquecida
+                5 Porquês: Sem recomendação → Catálogo sem estrutura → KPI era GMV → Incentivo errado desde 2020
               </div>
             </div>
 
@@ -605,14 +605,14 @@ function renderT09Present() {
               ${a3SectionHeader('5', 'Validação Empírica', '#0891B2')}
               <div style="margin-bottom:6px;">
                 <div style="display:flex;align-items:flex-end;gap:2px;height:40px;position:relative;background:#F8FAFC;border-radius:4px;padding:4px 4px 0;">
-                  <div style="position:absolute;left:0;right:0;bottom:${47/240*100}%;height:1px;border-top:1.5px dashed #10B981;opacity:0.8;"></div>
-                  ${[68,58,52,49,46,44,41,38,42,45,47].map(v => `
-                    <div style="flex:1;background:#EF4444;border-radius:2px 2px 0 0;height:${v/240*36}px;opacity:0.8;"></div>
+                  <div style="position:absolute;left:0;right:0;bottom:${32/32*100}%;height:1px;border-top:1.5px dashed #10B981;opacity:0.8;"></div>
+                  ${[9,8,9,8,8].map(v => `
+                    <div style="flex:1;background:#EF4444;border-radius:2px 2px 0 0;height:${v/32*36}px;opacity:0.8;"></div>
                   `).join('')}
                 </div>
-                <div style="font-size:8px;color:var(--text-muted);margin-top:2px;">MTBF 11 meses — dashed = benchmark 240h</div>
+                <div style="font-size:8px;color:var(--text-muted);margin-top:2px;">Cross-sell % mensal — dashed = benchmark 32%</div>
               </div>
-              ${[{m:'MTBF',v:'47h',b:'240h',g:'–80%'},{m:'Preventiva',v:'11%',b:'70%',g:'–59pp'}].map(r => `
+              ${[{m:'% SKUs sem complem.',v:'68%',b:'<20%',g:'–48pp'},{m:'% clientes vê complem.',v:'11%',b:'62%',g:'–51pp'}].map(r => `
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 5px;background:var(--surface-2);border-radius:4px;margin-bottom:3px;font-size:8px;">
                   <span>${r.m}</span><span style="color:#EF4444;font-weight:700;">${r.v} vs ${r.b}</span>
                   <span class="badge badge-green" style="font-size:7px;padding:1px 4px;">✓ Validado</span>
@@ -690,8 +690,8 @@ function renderT09Present() {
                 </tr></thead>
                 <tbody>
                   ${[
-                    {n:'OEE',b:'18%',a90:'36%',a365:'60%',c:'#0F6E56'},
-                    {n:'MTBF',b:'47h',a90:'120h',a365:'210h',c:'#1E40AF'},
+                    {n:'Cross-sell',b:'8%',a90:'20%',a365:'32%',c:'#0F6E56'},
+                    {n:'Ticket Médio',b:'R$80',a90:'R$105',a365:'R$130',c:'#1E40AF'},
                     {n:'Prev/Corr.',b:'11%',a90:'50%',a365:'70%',c:'#6B21A8'},
                     {n:'Lead Time',b:'28d',a90:'20d',a365:'15d',c:'#B45309'},
                     {n:'OTD',b:'62%',a90:'85%',a365:'95%',c:'#0891B2'},
@@ -801,10 +801,10 @@ function showT09AI() {
         <div class="alert alert-success mb-3" style="font-size:12px;">${icon('check',14)} A IA analisou a coerência narrativa do A3. Resultado: <strong>Alta coerência (94/100)</strong>.</div>
         ${[
           { tipo:'✅', msg:'Arco narrativo completo: problema relatado → causa raiz → recomendação → plano alinhados.' },
-          { tipo:'✅', msg:'Números consistentes entre templates (MTBF 47h aparece em T04, T05, T07 e A3 corretamente).' },
+          { tipo:'✅', msg:'Números consistentes entre templates (cross-sell 8%, catálogo 68% aparecem em T04, T05, T07 e A3 corretamente).' },
           { tipo:'✅', msg:'Sugestão original do cliente (comprar máquina) foi incluída, avaliada e descartada com critério.' },
           { tipo:'⚠️', msg:'Seção 2 (Background) poderia destacar mais explicitamente "14 meses de problema" para impacto emocional.' },
-          { tipo:'💡', msg:'Considere adicionar frase na Seção 6: "Cada mês sem gestor custa R$405k em OEE sub-aproveitado" — conecta causa raiz a urgência financeira.' },
+          { tipo:'💡', msg:'Considere adicionar frase na Seção 6: "Cada mês sem catálogo organizado é R$560k de receita não realizada" — conecta causa raiz à urgência financeira para a CFO.' },
         ].map(s => `
           <div style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;">
             <span style="flex-shrink:0;">${s.tipo}</span>
@@ -826,7 +826,7 @@ function requestGateDeliver() {
       </div>
       <div class="modal-body">
         <div class="alert alert-success mb-4" style="font-size:12px;">
-          ${icon('check',16)} A3 Expandido completo. Caso Embalagens Atlântico pronto para entrega formal.
+          ${icon('check',16)} A3 Expandido completo. Caso Petshop Beta pronto para entrega formal.
         </div>
         <div style="background:var(--surface-2);border-radius:10px;padding:14px;font-size:12px;margin-bottom:14px;">
           <div class="font-semibold mb-3">Checklist Final (Hub Central):</div>
@@ -848,7 +848,7 @@ function requestGateDeliver() {
 
         <!-- Impacto do caso -->
         <div style="background:linear-gradient(135deg,#04342C,#065F46);color:white;border-radius:10px;padding:14px;margin-bottom:14px;">
-          <div style="font-size:11px;opacity:0.7;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Impacto do Método 5D — Caso Embalagens Atlântico</div>
+          <div style="font-size:11px;opacity:0.7;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Impacto do Método 5D — Caso Petshop Beta · AI Sprint</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;">
             <div><div style="font-size:22px;font-weight:900;">R$4,3mi</div><div style="font-size:10px;opacity:0.7;">evitados vs. decisão original</div></div>
             <div><div style="font-size:22px;font-weight:900;">95×</div><div style="font-size:10px;opacity:0.7;">ROI sobre honorários</div></div>
@@ -863,7 +863,7 @@ function requestGateDeliver() {
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-accent" onclick="closeModal();showToast('Gate Deliver aprovado! Caso Embalagens Atlântico encerrado com sucesso. Parabéns!')">
+        <button class="btn btn-accent" onclick="closeModal();showToast('Gate Deliver aprovado! Caso Petshop Beta encerrado com sucesso. Parabéns!')">
           ${icon('check',14)} Encerrar Caso
         </button>
       </div>

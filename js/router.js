@@ -147,7 +147,7 @@ function renderSidebar(universe) {
     ],
     hub: [
       { icon: 'home',        label: 'Dashboard',      view: 'hub_dashboard' },
-      { icon: 'users',       label: 'Franqueados',    view: 'hub_franchisees' },
+      { icon: 'users',       label: 'Squad & Vendedores', view: 'hub_franchisees' },
       { icon: 'funnel',      label: 'Candidatos',     view: 'hub_candidates' },
       { icon: 'trending_up', label: 'Leads da Rede',  view: 'hub_leads' },
       { icon: 'shield',      label: 'Revisão QA',     view: 'hub_qa', badge: '2' },
@@ -160,7 +160,7 @@ function renderSidebar(universe) {
   };
 
   const user = AXISUS.state.currentUser;
-  const universeLabel = { client: 'Portal do Cliente', franchisee: 'Portal Franqueado', candidate: 'Candidatura', hub: 'Hub Central' }[universe];
+  const universeLabel = { client: 'Portal do Cliente', franchisee: 'Portal do Squad', candidate: 'Candidatura', hub: 'Hub Central' }[universe];
 
   const items = (menus[universe] || []).map(item => `
     <button class="nav-item ${AXISUS.state.currentView === item.view ? 'active' : ''}"
@@ -201,7 +201,7 @@ function renderSidebar(universe) {
 function renderTopbar(universe) {
   const titles = {
     client:     'Portal do Cliente',
-    franchisee: 'Portal do Franqueado',
+    franchisee: 'Portal do Squad',
     candidate:  'Candidatura AXISUS',
     hub:        'Hub Central AXISUS',
   };

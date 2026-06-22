@@ -3,61 +3,59 @@
 // Especificação Técnica v1.0 · Junho 2026
 // ============================================================
 
-// ============ DADOS DE EXEMPLO (caso Embalagens Atlântico) ============
+// ============ DADOS DE EXEMPLO (caso Petshop Beta — AI Sprint) ============
 const T01_EXAMPLE = {
   identificacao: {
-    caso: 'CASE-2026-0042', empresa: 'Embalagens Atlântico Ltda',
-    cnpj: '52.847.193/0001-77', setor: 'Manufatura — Embalagens',
-    porte: 'Médio (R$ 32mi/ano · 142 funcionários)',
-    especialista: 'Ana Paula Rodrigues (Pleno · SP)',
-    produto: 'Plataforma + Visitas Técnicas', data_inicio: '01/04/2026'
+    caso: 'CASE-2026-0042', empresa: 'Petshop Beta Comércio Ltda',
+    cnpj: '34.567.890/0001-11', setor: 'E-commerce · Produtos para Pets',
+    porte: 'Médio (R$ 12mi/ano · 25 funcionários)',
+    especialista: 'Eduardo Ricatto (Sênior · Squad AXISUS)',
+    produto: 'AI Sprint — Pacote Pleno', data_inicio: '05/05/2026'
   },
   problema_reportado: {
-    problema_principal: 'A fábrica não dá conta da demanda. Estamos perdendo pedidos para concorrentes porque o prazo de entrega aumentou de 15 para 28 dias. O comercial diz que precisamos comprar uma nova máquina de impressão flexográfica para aumentar a capacidade. A diretoria está dividida: alguns acham que é falta de equipamento, outros acham que é problema de planejamento. O CFO está pressionando porque a nova máquina custa R$ 4,8 milhões e ainda não sabemos se vai resolver.',
-    dor_sentida: 'Perdemos três contratos grandes nos últimos seis meses por causa do prazo. O comercial está desmotivado, a fábrica está estressada com a pressão de produção, e a diretoria está paralisada na decisão de investimento. Se não resolvermos até dezembro, vamos fechar o ano abaixo da meta de receita.',
-    solucao_imaginada: 'Comprar uma nova máquina flexográfica de 6 cores. Estamos com proposta de duas fornecedoras (Bobst e Comexi), prazo de entrega 8 meses. Custo estimado R$ 4,8mi.',
-    tentativas_anteriores: 'Em 2024, contratamos uma consultoria que recomendou aumentar o turno da fábrica para 3 turnos. Funcionou parcialmente nos primeiros 2 meses, depois os atrasos voltaram. A consultoria atribuiu ao "problema cultural" e não voltou.'
+    problema_principal: 'Os clientes que compram na Petshop Beta tipicamente compram apenas 1 produto por pedido. Ticket médio R$ 80, quando o benchmark do setor é R$ 130-180. O comercial diz que o cliente "não sabe que existem complementares" — quando compra ração, deveria estar comprando também petiscos, brinquedos, acessórios. Queremos IA que recomende complementares no checkout para aumentar o ticket médio. A diretoria está pressionando comercial por melhorar conversão e ticket. A CFO está cautelosa com investimento sem certeza de retorno.',
+    dor_sentida: 'Estamos deixando R$ 560k/mês na mesa. Cada pedido que sai sem complementares é receita perdida para sempre. Nossos concorrentes (Petz, Cobasi) têm widgets de recomendação e isso aparece visivelmente no nosso NPS — clientes reclamam que "nosso site não ajuda a descobrir produtos". Se não resolvermos, ficamos presos no ciclo de crescimento por volume de clientes, que é caro e lento.',
+    solucao_imaginada: 'Implantar IA de recomendação de produtos no checkout. Já conversamos com 3 fornecedoras de "recommendation engine as a service". A mais barata custa R$ 8k/mês. Queremos saber se vale a pena ou se tem uma opção melhor.',
+    tentativas_anteriores: 'Em 2025, tentamos resolver com uma seção "Você também pode gostar" estática, curada pelo time de catálogo manualmente. Taxa de cliques: 3,2%. Abandonamos porque o time não tinha tempo para manter. Tentativa 2: plugin Shopify de recomendação por R$ 500/mês. Taxa de conversão não mudou porque o catálogo estava desorganizado.'
   },
   contexto: {
-    areas_afetadas: ['Operações', 'Comercial', 'Financeiro'],
-    processo_principal: 'Impressão flexográfica → Corte → Vinco → Expedição',
-    quem_reportou: 'João Mendes (Diretor Comercial)',
-    tempo_existencia: '6-12 meses', frequencia: 'diaria', urgencia: 5
+    areas_afetadas: ['E-commerce', 'Comercial', 'Catálogo', 'Marketing'],
+    processo_principal: 'Busca no site → Página de produto → Checkout → Pagamento → Logística',
+    quem_reportou: 'Daniel Oliveira (Gerente de E-commerce)',
+    tempo_existencia: '12+ meses', frequencia: 'em_todo_pedido', urgencia: 4
   },
   expectativas: {
-    resultado_90_dias: 'Recomendação clara: comprar a máquina ou não. Se sim, justificar com dados. Se não, identificar onde está o gargalo real e plano de ação.',
-    resultado_12_meses: 'Prazo médio de entrega reduzido para 18 dias. Capacidade de aceitar pedidos atualmente recusados por prazo.',
-    indicador_sucesso: 'OEE da linha de flexografia + lead time de pedido a entrega.',
-    restricoes: 'Decisão precisa ser tomada antes de 31/07. Após essa data, há risco de perder a próxima safra de pedidos do setor de bebidas.',
-    aprovacao_depende_de: 'Marcelo Atlântico (CEO) com aval de Patrícia Souza (CFO) e João Mendes (Comercial)'
+    resultado_90_dias: 'Diagnóstico claro: qual é a solução de IA mais adequada para o problema de cross-sell, com ROI estimado e plano de implementação. Se a recomendação for "não use IA agora", explicar o porquê e qual alternativa é melhor.',
+    resultado_12_meses: 'Taxa de cross-sell de 8% para pelo menos 20% (conservador) ou 32% (meta benchmark). Ticket médio de R$ 80 para R$ 110-130.',
+    indicador_sucesso: 'Taxa de cross-sell (itens/pedido > 1) · Ticket médio · NPS de clientes · % clientes que visualizam complementares por sessão.',
+    restricoes: 'Orçamento máximo de R$ 30k de implementação. Time de TI limitado (1 dev full-stack). Plataforma: Shopify Plus.',
+    aprovacao_depende_de: 'Renato Almeida (CEO) com aval obrigatório de Beatriz Lima (CFO)'
   }
 };
 
 const T02_EXAMPLE = {
   is_is_not: [
-    { dimensao: 'ONDE',   is: 'Linha de impressão flexográfica 1 e 2 (galpão A)', is_not: 'Linha de impressão offset (galpão B), expedição, recebimento de matéria-prima', por_que: 'Atrasos concentrados na flexografia. Outras áreas têm OEE normal.', evidencia: 'Relatório OEE ago/set/out 2025' },
-    { dimensao: 'QUANDO', is: 'Pedidos com prazo até 18 dias úteis, todos os turnos', is_not: 'Pedidos urgentes (até 48h) — não temos histórico de atrasos nesses', por_que: 'Operação normal afetada, não exceções.', evidencia: 'Base de dados de ordens de produção 2025' },
-    { dimensao: 'O QUÊ',  is: 'Embalagens flexográficas para setor de bebidas e alimentos', is_not: 'Embalagens offset para setor cosmético (linha estável)', por_que: 'Setor de bebidas representa 68% do faturamento e 92% dos atrasos.', evidencia: 'Relatório comercial Q3/2025' },
-    { dimensao: 'QUANTO', is: 'Atrasos médios de 13 dias úteis sobre prazo combinado, em 38% dos pedidos', is_not: 'Atrasos pontuais menores que 3 dias (considerados aceitáveis)', por_que: 'Limite aceitável é 5 dias úteis pela política comercial.', evidencia: 'Entrevista João Mendes + dados ERP' },
+    { dimensao: 'ONDE',   is: 'Página de produto e etapa de checkout do e-commerce (Shopify Plus)', is_not: 'Loja física, aplicativo mobile (ainda em desenvolvimento), e-mail marketing', por_que: 'Cross-sell cai 78% após saída do checkout. Janela de oportunidade é no site.', evidencia: 'Análise Google Analytics — taxa de conversão cross-sell por canal' },
+    { dimensao: 'QUANDO', is: 'Durante a sessão de compra (especialmente ao adicionar ao carrinho e no checkout)', is_not: 'Pós-compra (recompra), campanhas de e-mail (problema diferente: retenção, não upsell)', por_que: 'Comportamento de compra de pets: cliente está no modo "resolvendo problema do pet agora".', evidencia: 'Mapa de calor Hotjar · Dados GA4 de sessão de compra' },
+    { dimensao: 'O QUÊ',  is: 'Produtos complementares dentro da mesma sessão (ex: ração → petisco, shampoo → condicionador)', is_not: 'Recomendação de produtos substitutos (troca de marca), promoções por volume, bundles fixos', por_que: 'Complementares têm correlação de co-compra demonstrável. Substitutos geram canibalização.', evidencia: 'Base de pedidos históricos 12 meses — análise de co-ocorrência' },
+    { dimensao: 'QUANTO', is: 'Gap de 24pp na taxa de cross-sell (8% atual vs 32% benchmark Petz/Cobasi)', is_not: 'Diferença de ticket por volume (clientes que compram mais itens da mesma categoria)', por_que: 'O problema é a ausência de complementares, não o volume da categoria principal.', evidencia: 'Relatório comercial Petshop Beta Q1/2026 + benchmark público Ebit/Nielsen' },
   ],
   stakeholders: [
-    { nome: 'Marcelo Atlântico', cargo: 'CEO',                       area: 'Diretoria',  poder: 5, interesse: 5, raci: 'Aprovador',   posicionamento: 'Desconhecido' },
-    { nome: 'Patrícia Souza',    cargo: 'CFO',                       area: 'Financeiro', poder: 5, interesse: 4, raci: 'Aprovador',   posicionamento: 'Resistente' },
-    { nome: 'João Mendes',       cargo: 'Diretor Comercial',         area: 'Comercial',  poder: 4, interesse: 5, raci: 'Consultado',  posicionamento: 'Apoiador' },
-    { nome: 'Roberto Lima',      cargo: 'Gerente de Produção',       area: 'Operações',  poder: 3, interesse: 4, raci: 'Responsável', posicionamento: 'Apoiador' },
-    { nome: 'Cláudio Mendes',    cargo: 'Líder de Manutenção',       area: 'Operações',  poder: 2, interesse: 4, raci: 'Consultado',  posicionamento: 'Neutro' },
-    { nome: 'Sandra Vieira',     cargo: 'Coordenadora de PCP',       area: 'Operações',  poder: 3, interesse: 5, raci: 'Consultado',  posicionamento: 'Apoiador' },
-    { nome: 'Marcos Pereira',    cargo: 'Rep. Sindicato',            area: 'RH',         poder: 3, interesse: 3, raci: 'Informado',   posicionamento: 'Resistente' },
+    { nome: 'Renato Almeida',  cargo: 'CEO / Sócio fundador',      area: 'Diretoria',  poder: 5, interesse: 5, raci: 'Aprovador',   posicionamento: 'Desconhecido' },
+    { nome: 'Beatriz Lima',    cargo: 'CFO',                       area: 'Financeiro', poder: 5, interesse: 4, raci: 'Aprovador',   posicionamento: 'Resistente' },
+    { nome: 'Daniel Oliveira', cargo: 'Gerente de E-commerce',     area: 'E-commerce', poder: 4, interesse: 5, raci: 'Responsável', posicionamento: 'Apoiador' },
+    { nome: 'Andrea Santos',   cargo: 'Gerente de Catálogo',       area: 'Catálogo',   poder: 3, interesse: 4, raci: 'Consultado',  posicionamento: 'Neutro' },
+    { nome: 'Pedro Silva',     cargo: 'Analista de Marketing',     area: 'Marketing',  poder: 2, interesse: 4, raci: 'Informado',   posicionamento: 'Apoiador' },
   ]
 };
 
 const T03_EXAMPLE = {
-  financeira:     { descricao: 'Receita perdida por atrasos, horas-extra para compensar e contratos plurianuais em risco.', indicador: 'Impacto financeiro total (R$/ano)', baseline: 4860000, unidade: 'BRL', benchmark: 0, fonte_benchmark: 'Cálculo interno com dados ERP', gap: -4860000 },
-  operacional:    { descricao: 'A linha de flexografia opera 22h/dia mas produz como se rodasse 4h. Paradas, setup, retrabalho e velocidade explicam o gap.', indicador: 'OEE linha flexográfica', baseline: 18, unidade: '%', benchmark: 68, fonte_benchmark: 'Pesquisa ABFlexo 2024', gap: -50 },
-  reputacional:   { descricao: 'Três contratos perdidos por prazo. Comercial desmotivado. Percepção de confiabilidade em queda.', indicador: 'NPS clientes B2B', baseline: 58, unidade: 'NPS', benchmark: 72, fonte_benchmark: 'Histórico próprio 2024', gap: -14 },
-  estrategica:    { descricao: 'Decisão de R$ 4,8mi paralisada. Janela crítica: segunda safra de pedidos do setor de bebidas.', indicador: 'Contratos plurianuais em risco', baseline: 3, unidade: 'contratos', benchmark: 0, fonte_benchmark: 'Política comercial', gap: 3 },
-  calc: { receita_perdida: 1840000, custo_evitavel: 920000, custo_oportunidade: 2100000, penalidade: 0 },
-  reformulacao: 'A linha de flexografia opera a 18% de OEE (vs. benchmark 68%), gerando 38% de pedidos atrasados e impacto financeiro estimado em R$ 4,86 milhões/ano. O problema NÃO É falta de capacidade instalada, mas baixa utilização da capacidade existente — 82% da capacidade da máquina atual está sendo desperdiçada em paradas, setup, retrabalho e velocidade subótima. A janela para reverter é o segundo semestre de 2026, antes da próxima safra de pedidos do setor de bebidas.'
+  financeira:     { descricao: 'Gap de receita entre cross-sell atual (8%) e benchmark (32%), multiplicado pelo volume mensal de 8.000 pedidos.', indicador: 'Receita mensal (cross-sell)', baseline: 640000, unidade: 'BRL', benchmark: 1200000, fonte_benchmark: 'Benchmark Petz/Cobasi + Webshoppers 2026', gap: -560000 },
+  operacional:    { descricao: 'Taxa de cross-sell mede o % de pedidos que incluem produtos de mais de 1 categoria. Está 24 pontos percentuais abaixo do benchmark.', indicador: 'Taxa de cross-sell (% pedidos multicitegoria)', baseline: 8, unidade: '%', benchmark: 32, fonte_benchmark: 'Ebit/Nielsen E-commerce Report Q1/2026', gap: -24 },
+  reputacional:   { descricao: 'NPS abaixo do benchmark, com reclamações explícitas sobre "site não ajuda a descobrir produtos" em 18% dos detratores.', indicador: 'NPS de clientes (e-commerce)', baseline: 52, unidade: 'NPS', benchmark: 68, fonte_benchmark: 'Benchmark setorial E-bit 2025', gap: -16 },
+  estrategica:    { descricao: 'Concorrentes (Petz, Cobasi, Pet Center) já têm recommendation engine. Atraso tecnológico está se tornando barreira de competição.', indicador: '% clientes que visualizam complementares por sessão', baseline: 11, unidade: '%', benchmark: 62, fonte_benchmark: 'Análise pública UX Petz + Cobasi', gap: -51 },
+  calc: { receita_perdida: 560000, custo_evitavel: 0, custo_oportunidade: 6720000, penalidade: 0 },
+  reformulacao: 'A Petshop Beta tem taxa de cross-sell de 8% (vs benchmark 32%), resultando em ticket médio de R$ 80 (vs R$ 150 benchmark) e gap de receita de R$ 560k/mês. O problema NÃO É falta de demanda — é que 89% dos clientes não visualizam produtos complementares durante a sessão de compra. A causa não é a ausência de IA de recomendação, mas o catálogo desorganizado (68% dos SKUs sem atributos de complementaridade mapeados) combinado com a ausência de um bloco de cross-sell visível no checkout. Qualquer solução de IA falhará se o catálogo não for organizado primeiro.'
 };
 
 // ============================================================
