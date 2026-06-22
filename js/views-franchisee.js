@@ -686,7 +686,7 @@ function renderTemplatesHub() {
       <div class="flex items-center justify-between mb-6">
         <div>
           <h1 style="font-size:24px;font-weight:800;">Método 5D AXISUS</h1>
-          <p class="text-secondary">Todos os 9 templates do método · Caso: CASE-2026-0042 · Petshop Beta · AI Sprint</p>
+          <p class="text-secondary">Todos os 9 templates do Método 5D · AXISUS AI-First Studio · Caso: Petshop Beta (CASE-2026-0042)</p>
         </div>
         <button class="btn btn-primary btn-sm" onclick="navigate('template_t09')">
           ${icon('file',14)} Ver A3 Final
@@ -773,7 +773,7 @@ function renderTemplatesHub() {
         ${icon('eye', 16)}
         <div style="margin-left:8px;">
           <strong>Todos os 9 templates estão funcionais.</strong>
-          Os dados de demonstração usam o caso <strong>Petshop Beta</strong> (CASE-2026-0042) como exemplo completo do AI Sprint AXISUS — Método 5D do T01 ao T09.
+          Os dados de demonstração usam o caso <strong>Petshop Beta</strong> (CASE-2026-0042) como exemplo completo do <strong>AXISUS AI-First Studio</strong> — Método 5D aplicado do T01 ao T09.
         </div>
       </div>
     </div>

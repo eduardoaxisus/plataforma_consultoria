@@ -175,6 +175,7 @@ function renderSidebar(universe) {
     <div class="sidebar">
       <div class="sidebar-logo">
         <h1>AXISUS</h1>
+        <span style="color:rgba(0,212,255,0.7);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:2px;">AI-First Studio</span>
         <span>${universeLabel}</span>
       </div>
       <div class="sidebar-section">

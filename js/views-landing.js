@@ -5,7 +5,10 @@ function renderLanding() {
     <div style="background:white;min-height:100vh;">
       <!-- NAV -->
       <nav class="landing-nav">
-        <h1>AXISUS</h1>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h1 style="letter-spacing:-0.5px;">AXISUS</h1>
+          <span style="font-size:11px;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border:1px solid rgba(0,212,255,0.4);border-radius:20px;">AI-First Studio</span>
+        </div>
         <div class="flex items-center gap-3">
           <a href="#metodo" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">Método 5D</a>
           <a href="#produtos" style="color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;">AI Sprint</a>
@@ -16,16 +19,17 @@ function renderLanding() {
 
       <!-- HERO -->
       <section class="hero">
-        <div style="display:inline-block;background:rgba(255,255,255,0.1);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:1px;margin-bottom:24px;text-transform:uppercase;">
-          Estúdio de AI Sprint
+        <div style="display:inline-block;background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.35);border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;margin-bottom:28px;text-transform:uppercase;color:#00D4FF;">
+          AI-First Studio · Método 5D · 5 dias úteis
         </div>
-        <h2>Traga o problema de IA.<br>Entregamos o protótipo em 1 semana.</h2>
-        <p>A AXISUS aplica o Método 5D para diagnosticar problemas de negócio, identificar onde IA realmente resolve, e entregar protótipo funcional — com causa raiz validada e ROI comprovado.</p>
+        <h2>Inteligência Aplicada.<br><span style="color:#00D4FF;">Com método.</span></h2>
+        <p style="font-size:18px;max-width:620px;">Somos AI-First com método. Traga o problema — entregamos protótipo funcional de IA em uma semana, com causa raiz validada e ROI comprovado.</p>
+        <div style="font-size:13px;letter-spacing:2px;font-weight:600;opacity:0.5;margin:-16px 0 32px;text-transform:uppercase;">Intelligence. Automated. Impact. Amplified.</div>
         <div class="flex gap-3" style="justify-content:center;">
-          <button class="btn btn-lg" style="background:white;color:var(--primary);font-weight:700;" onclick="showContactModal()">
-            Quero conhecer a AXISUS ${icon('arrow_right',18)}
+          <button class="btn btn-lg" style="background:#00D4FF;color:#0A192F;font-weight:700;" onclick="showContactModal()">
+            Quero um AI Sprint ${icon('arrow_right',18)}
           </button>
-          <button class="btn btn-lg" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.3);" onclick="navigate('login')">
+          <button class="btn btn-lg" style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2);" onclick="navigate('login')">
             Acessar Plataforma
           </button>
         </div>
@@ -33,7 +37,7 @@ function renderLanding() {
         <!-- Setores -->
         <div style="margin-top:60px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
           ${['E-commerce','Fintech','Saúde Digital','Logística','Educação','Construção','RH Tech'].map(s => `
-            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;">${s}</span>
+            <span style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">${s}</span>
           `).join('')}
         </div>
       </section>
@@ -89,33 +93,39 @@ function renderLanding() {
       <section class="section" id="squad" style="background:var(--primary);color:white;">
         <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
           <div>
-            <div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:0.6;text-transform:uppercase;margin-bottom:12px;">Junte-se ao Squad AXISUS</div>
-            <h2 style="color:white;font-size:36px;font-weight:900;margin-bottom:16px;">Aplique o Método 5D em sprints de IA.</h2>
-            <p style="opacity:0.8;font-size:16px;margin-bottom:32px;">Para profissionais de negócio e tecnologia que querem trabalhar com diagnóstico real + IA. 1 sprint/semana, squad fixo de 4 pessoas, metodologia estruturada.</p>
+            <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#00D4FF;text-transform:uppercase;margin-bottom:12px;">Junte-se ao Squad AXISUS</div>
+            <h2 style="color:white;font-size:36px;font-weight:900;margin-bottom:16px;line-height:1.1;">Aplique o Método 5D em sprints de IA.</h2>
+            <p style="opacity:0.75;font-size:15px;margin-bottom:28px;">Para profissionais de negócio e tecnologia que querem trabalhar com diagnóstico real + IA. Sem hype — com método. 1 sprint/semana, squad fixo de 4 pessoas.</p>
             <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
-              ${['Método 5D — diagnóstico real, não templates vazios','IA Copiloto em todos os 9 templates','Biblioteca de casos com aprovação RAG','Squad fixo — 1 sprint/semana','Comissão progressiva por performance'].map(item => `
+              ${[
+                'Método 5D — diagnóstico real, não templates vazios',
+                'Em 30% dos sprints, recomendamos não-IA — e o cliente confia mais por isso',
+                'IA Copiloto em todos os 9 templates',
+                'Cliente recebe o código via GitHub — sem amarras',
+                'Comissão progressiva por performance'
+              ].map(item => `
                 <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
-                  <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;">${icon('check',11)}</div>
+                  <div style="width:20px;height:20px;border-radius:50%;background:#00D4FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${icon('check',11)}</div>
                   ${item}
                 </div>
               `).join('')}
             </div>
-            <button class="btn btn-lg" style="background:white;color:var(--primary);font-weight:700;" onclick="navigate('login');AXISUS.state.loginMode='candidate';">
+            <button class="btn btn-lg" style="background:#00D4FF;color:#0A192F;font-weight:700;" onclick="navigate('login');AXISUS.state.loginMode='candidate';">
               Quero Entrar no Squad ${icon('arrow_right',18)}
             </button>
           </div>
           <div>
-            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;">
-              <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:0.6;margin-bottom:20px;">Números do Estúdio</div>
+            <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:16px;padding:28px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4FF;margin-bottom:20px;">Números do Estúdio</div>
               ${[
                 { v:'4',   l:'Membros do Squad' },
                 { v:'7',   l:'Casos em andamento' },
                 { v:'9.4', l:'NPS médio dos clientes' },
                 { v:'1sem',l:'Duração do AI Sprint (mínimo)' },
               ].map(s => `
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <span style="opacity:0.7;font-size:14px;">${s.l}</span>
-                  <span style="font-size:22px;font-weight:900;">${s.v}</span>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+                  <span style="opacity:0.6;font-size:14px;">${s.l}</span>
+                  <span style="font-size:22px;font-weight:900;color:#00D4FF;">${s.v}</span>
                 </div>
               `).join('')}
             </div>
@@ -147,8 +157,9 @@ function renderLanding() {
 
       <!-- FOOTER -->
       <div class="footer">
-        <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.8);margin-bottom:8px;">AXISUS</div>
-        <div>Estúdio de AI Sprint · Método 5D · Protótipo em 1 semana</div>
+        <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.8);margin-bottom:4px;">AXISUS</div>
+        <div style="font-size:12px;letter-spacing:2px;color:#00D4FF;font-weight:600;text-transform:uppercase;margin-bottom:8px;">AI-First Studio</div>
+        <div>Intelligence. Automated. Impact. Amplified.</div>
         <div style="margin-top:8px;font-size:12px;">© 2026 AXISUS · Todos os direitos reservados</div>
       </div>
     </div>
@@ -190,7 +201,7 @@ function renderLogin() {
       <div class="login-card">
         <div class="login-logo">
           <h1>AXISUS</h1>
-          <p>Estúdio de AI Sprint</p>
+          <p style="color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:11px;">AI-First Studio</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">

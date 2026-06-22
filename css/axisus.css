@@ -1,29 +1,38 @@
-/* AXISUS Platform - Design System */
+/* AXISUS Platform - Design System v2.1 — AI-First Studio */
+/* Branding: Deep Space Blue + Electric Cyan (Jun/2026) */
 
 :root {
-  --primary: #04342C;
-  --primary-light: #065946;
-  --primary-dark: #021f1a;
-  --accent: #10B981;
-  --accent-light: #34D399;
-  --gold: #D97706;
-  --danger: #DC2626;
-  --warning: #F59E0B;
+  /* Cores principais da marca */
+  --primary: #0A192F;        /* Deep Space Blue */
+  --primary-light: #112240;  /* Deep Space Blue claro */
+  --primary-dark: #060E1C;   /* Deep Space Blue escuro */
+  --accent: #00D4FF;         /* Electric Cyan */
+  --accent-light: #33DDFF;   /* Electric Cyan claro */
+  --accent-dark: #009ABD;    /* Electric Cyan escuro */
+  --gold: #D69E2E;           /* Warning amarelo */
+  --danger: #C53030;
+  --warning: #D69E2E;
   --info: #3B82F6;
+  --success: #10B981;
+
+  /* Superfícies */
   --surface: #FFFFFF;
-  --surface-2: #F8FAFC;
-  --surface-3: #F1F5F9;
+  --surface-2: #F0F4F8;      /* Light Background */
+  --surface-3: #FAFBFC;      /* Super Light Background */
   --border: #E2E8F0;
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
+
+  /* Texto */
+  --text-primary: #0A192F;   /* Text Dark = Deep Space Blue */
+  --text-secondary: #4A5568; /* Text Secondary */
+  --text-muted: #8A9AA6;     /* Text Muted */
+
   --sidebar-width: 260px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--surface-2);
   color: var(--text-primary);
   line-height: 1.5;
@@ -323,7 +332,8 @@ body {
 .badge-red { background: #FEE2E2; color: #991B1B; }
 .badge-gray { background: #F1F5F9; color: #475569; }
 .badge-purple { background: #EDE9FE; color: #5B21B6; }
-.badge-primary { background: #ECFDF5; color: var(--primary); }
+.badge-primary { background: rgba(0,212,255,0.12); color: var(--primary); border: 1px solid rgba(0,212,255,0.25); }
+.badge-cyan { background: rgba(0,212,255,0.12); color: #0097BF; border: 1px solid rgba(0,212,255,0.3); }
 
 /* ============ FORMS ============ */
 .form-group {
@@ -830,10 +840,23 @@ tbody tr:hover { background: var(--surface-2); }
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--primary) 0%, #065946 60%, #0a7260 100%);
+  background: linear-gradient(135deg, #060E1C 0%, #0A192F 50%, #0D2847 100%);
   padding: 100px 40px;
   text-align: center;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 60% 40%, rgba(0,212,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .hero h2 {
@@ -921,7 +944,7 @@ tbody tr:hover { background: var(--surface-2); }
   width: 60px;
   height: 60px;
   border-radius: 16px;
-  background: rgba(4,52,44,0.08);
+  background: rgba(10,25,47,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1030,16 +1053,17 @@ tbody tr:hover { background: var(--surface-2); }
   transition: all 0.15s;
 }
 
-.nps-btn:hover { border-color: var(--primary); background: rgba(4,52,44,0.04); }
+.nps-btn:hover { border-color: var(--accent); background: rgba(0,212,255,0.06); }
 .nps-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
 
 /* ============ COUNTER ============ */
 .countdown {
   text-align: center;
   padding: 24px;
-  background: linear-gradient(135deg, var(--primary), #065946);
+  background: linear-gradient(135deg, var(--primary), #0D2847);
   border-radius: 16px;
   color: white;
+  border: 1px solid rgba(0,212,255,0.2);
 }
 
 .countdown-value {
@@ -1059,9 +1083,9 @@ tbody tr:hover { background: var(--surface-2); }
 
 /* ============ ANIMATIONS ============ */
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(4,52,44,0.3); }
-  70% { box-shadow: 0 0 0 8px rgba(4,52,44,0); }
-  100% { box-shadow: 0 0 0 0 rgba(4,52,44,0); }
+  0% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0,212,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,212,255,0); }
 }
 
 .pulse { animation: pulse-ring 2s infinite; }
