@@ -102,9 +102,11 @@ function renderT07() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
 
+      ${renderBackButton()}
+
       <!-- Toolbar -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-shrink:0;">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t06')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t06')" title="Voltar para T06">${icon('arrow_left',14)}</button>
         <div style="flex:1;">
           <div style="font-size:15px;font-weight:800;">T07 — Priorização WSJF AXISUS</div>
           <div style="font-size:11px;color:var(--text-muted);">${scored}/${ranked.length} alternativas com scoring completo · Fórmula: (UV + TC + RR) / JS × Multiplicador Aderência</div>
@@ -463,9 +465,11 @@ function renderT08() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
 
+      ${renderBackButton()}
+
       <!-- Toolbar -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-shrink:0;">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t07')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t07')" title="Voltar para T07">${icon('arrow_left',14)}</button>
         <div style="flex:1;">
           <div style="font-size:15px;font-weight:800;">T08 — Plano de Implementação (5W2H + Riscos + KPIs)</div>
           <div style="font-size:11px;color:var(--text-muted);">Plano sério tem três dimensões: ações concretas, riscos mapeados, indicadores de acompanhamento. Sem as três, é boa intenção.</div>

@@ -71,8 +71,8 @@ function renderT01() {
 
       <!-- Cabeçalho -->
       <div class="flex items-center gap-3 mb-2">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('franchisee_case')">${icon('arrow_right',14)}</button>
-        <span class="text-muted text-sm">Caso CASE-2026-0042 /</span>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('franchisee_templates')" title="Voltar para Método 5D">${icon('arrow_left',14)}</button>
+        <span class="text-muted text-sm">Método 5D /</span>
         <span class="font-semibold text-sm">T01 — Briefing Inicial</span>
       </div>
       <div class="card mb-4" style="background:var(--primary);color:white;border:none;padding:20px 24px;">
@@ -529,7 +529,7 @@ function renderT02() {
 
       <!-- Cabeçalho -->
       <div class="flex items-center gap-3 mb-2">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t01')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t01')" title="Voltar para T01">${icon('arrow_left',14)}</button>
         <span class="text-muted text-sm">T01 — Briefing /</span>
         <span class="font-semibold text-sm">T02 — Is / Is Not + Stakeholders</span>
       </div>
@@ -918,7 +918,7 @@ function renderT03() {
 
       <!-- Cabeçalho -->
       <div class="flex items-center gap-3 mb-2">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t02')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t02')" title="Voltar para T02">${icon('arrow_left',14)}</button>
         <span class="text-muted text-sm">T02 — Is/Is Not /</span>
         <span class="font-semibold text-sm">T03 — Quantificação da Dor</span>
       </div>

@@ -26,9 +26,11 @@ function renderT09Edit() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
 
+      ${renderBackButton()}
+
       <!-- Toolbar -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t08')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t08')" title="Voltar para T08">${icon('arrow_left',14)}</button>
         <div style="flex:1;min-width:200px;">
           <div style="font-size:15px;font-weight:800;">T09 — A3 Expandido AXISUS</div>
           <div style="font-size:11px;color:var(--text-muted);">Síntese de todo o método em uma página · O documento que o cliente recebe</div>
@@ -466,6 +468,8 @@ function renderS10Content() {
 function renderT09Present() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
+
+      ${renderBackButton()}
 
       <!-- Toolbar Apresentação -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;">

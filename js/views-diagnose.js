@@ -77,10 +77,12 @@ function renderT04() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
 
+      ${renderBackButton()}
+
       <!-- Barra de ferramentas -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;">
         <div>
-          <button class="btn btn-ghost btn-sm" onclick="navigate('franchisee_case')">${icon('arrow_right',14)}</button>
+          <button class="btn btn-ghost btn-sm" onclick="navigate('template_t03')" title="Voltar para T03">${icon('arrow_left',14)}</button>
         </div>
         <div style="flex:1;">
           <div style="font-size:16px;font-weight:800;">T04 — Ishikawa + 5 Porquês</div>
@@ -730,9 +732,11 @@ function renderT05() {
   return `
     <div class="fade-in" style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
 
+      ${renderBackButton()}
+
       <!-- Barra de ferramentas -->
       <div style="background:white;border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;">
-        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t04')">${icon('arrow_right',14)}</button>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('template_t04')" title="Voltar para T04">${icon('arrow_left',14)}</button>
         <div style="flex:1;">
           <div style="font-size:16px;font-weight:800;">T05 — Validação da Causa Raiz com Dados</div>
           <div style="font-size:11px;color:var(--text-muted);">Hipótese sem dado é palpite. Aqui, cada causa raiz candidata é testada contra evidência real.</div>

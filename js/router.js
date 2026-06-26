@@ -199,6 +199,40 @@ function renderSidebar(universe) {
   `;
 }
 
+// ─────────────────────────────────────────────────────────────
+// Botão de retorno reutilizável para T01–T09
+// ─────────────────────────────────────────────────────────────
+function renderBackButton(destino = 'franchisee_templates', label = 'Método 5D') {
+  return `
+    <div style="
+      background:#0A192F;
+      border-bottom:1px solid rgba(0,212,255,0.15);
+      padding:7px 20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink:0;
+    ">
+      <button
+        onclick="navigate('${destino}')"
+        style="
+          display:flex;align-items:center;gap:6px;
+          background:none;border:none;cursor:pointer;
+          color:#00D4FF;font-size:12px;font-weight:600;
+          padding:4px 8px;border-radius:6px;
+          transition:background 0.15s;
+        "
+        onmouseover="this.style.background='rgba(0,212,255,0.12)'"
+        onmouseout="this.style.background='none'"
+      >
+        ${icon('arrow_left', 14)} Voltar · ${label}
+      </button>
+      <span style="font-size:11px;color:rgba(0,212,255,0.35);">|</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.3px;">AXISUS AI-First Studio · Método 5D</span>
+    </div>
+  `;
+}
+
 function renderTopbar(universe) {
   const titles = {
     client:     'Portal do Cliente',
