@@ -148,17 +148,18 @@ function renderIshikawaCanvas() {
 
   let svgContent = `
     <!-- Espinha central -->
-    <line x1="${SPINE_X1}" y1="${SPINE_Y}" x2="${SPINE_X2}" y2="${SPINE_Y}" stroke="#04342C" stroke-width="3"/>
+    <line x1="${SPINE_X1}" y1="${SPINE_Y}" x2="${SPINE_X2}" y2="${SPINE_Y}" stroke="#0A192F" stroke-width="3"/>
 
     <!-- Seta da cabeça -->
-    <polygon points="${SPINE_X2},${SPINE_Y} ${SPINE_X2-20},${SPINE_Y-8} ${SPINE_X2-20},${SPINE_Y+8}" fill="#04342C"/>
+    <polygon points="${SPINE_X2},${SPINE_Y} ${SPINE_X2-20},${SPINE_Y-8} ${SPINE_X2-20},${SPINE_Y+8}" fill="#0A192F"/>
 
     <!-- Problema central (cabeça) -->
-    <rect x="${HEAD_X-55}" y="${HEAD_Y-32}" width="110" height="64" rx="8" fill="#04342C"/>
-    <text x="${HEAD_X}" y="${HEAD_Y-12}" fill="white" font-size="9" font-weight="700" text-anchor="middle">OEE = 18%</text>
-    <text x="${HEAD_X}" y="${HEAD_Y+2}" fill="white" font-size="8" text-anchor="middle">(vs. benchmark</text>
-    <text x="${HEAD_X}" y="${HEAD_Y+14}" fill="white" font-size="8" text-anchor="middle">68%)</text>
-    <text x="${HEAD_X}" y="${HEAD_Y+28}" fill="rgba(255,255,255,0.6)" font-size="7" text-anchor="middle">← Problema</text>
+    <rect x="${HEAD_X-60}" y="${HEAD_Y-36}" width="120" height="72" rx="8" fill="#0A192F"/>
+    <text x="${HEAD_X}" y="${HEAD_Y-16}" fill="#00D4FF" font-size="8" font-weight="700" text-anchor="middle">Cross-sell: 8%</text>
+    <text x="${HEAD_X}" y="${HEAD_Y-4}" fill="white" font-size="7" text-anchor="middle">(vs benchmark</text>
+    <text x="${HEAD_X}" y="${HEAD_Y+8}" fill="white" font-size="7" text-anchor="middle">32% Petz/Cobasi)</text>
+    <text x="${HEAD_X}" y="${HEAD_Y+22}" fill="rgba(255,255,255,0.5)" font-size="6" text-anchor="middle">Ticket: R$ 80 vs R$ 150</text>
+    <text x="${HEAD_X}" y="${HEAD_Y+34}" fill="rgba(0,212,255,0.6)" font-size="6" text-anchor="middle">← Problema</text>
   `;
 
   // Ramos e causas
@@ -576,11 +577,11 @@ function showT04AISuggest() {
         <button class="btn btn-ghost btn-icon" onclick="closeModal()">${icon('x',18)}</button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('eye',14)} Com base em 47 casos da biblioteca AXISUS com problema de OEE em manufatura, as causas mais frequentes são:</div>
+        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('eye',14)} Com base em 31 casos da biblioteca AXISUS com problema de cross-sell em e-commerce, as causas mais frequentes são:</div>
         ${[
-          { cat:'Mão de Obra', color:'#6366F1', causas:['Ausência de gestor de manutenção (82% dos casos)','Operadores sem certificação no equipamento (67%)','Alta rotatividade de técnicos (54%)'] },
-          { cat:'Método',      color:'#F59E0B', causas:['Ausência de plano preventivo estruturado (91%)','Setup sem procedimento padronizado (73%)','Ausência de OEE em tempo real (61%)'] },
-          { cat:'Máquina',     color:'#3B82F6', causas:['Componentes desgastados sem substituição preventiva (58%)','Lubrificação irregular (47%)'] },
+          { cat:'Mão de Obra', color:'#6366F1', causas:['Time de catálogo sobrecarregado sem estrutura de taxonomia (87% dos casos)','Ausência de profissional treinado em arquitetura de dados de produto (71%)','Responsabilidade de catálogo pulverizada sem ownership claro (58%)'] },
+          { cat:'Método',      color:'#F59E0B', causas:['Catálogo cresceu organicamente sem modelo de complementaridade (93%)','Processo de cadastro não exige atributos de cross-sell (79%)','KPI focado em GMV total em vez de ticket médio (64%)'] },
+          { cat:'Máquina',     color:'#3B82F6', causas:['Plataforma (Shopify nativo) sem lógica de co-compra embutida (61%)','Ausência de análise sistemática de dados de cesta (48%)'] },
         ].map(g => `
           <div style="margin-bottom:14px;">
             <div style="font-size:12px;font-weight:700;color:${g.color};margin-bottom:6px;">${g.cat}</div>
@@ -610,8 +611,8 @@ function showCaseSimilarSearch(causaTexto) {
       <div class="modal-body">
         <div class="alert alert-info mb-3" style="font-size:12px;">${icon('ai',14)} Busca semântica por: "${causaTexto}"</div>
         ${[
-          { caso:'CASE-2025-0031', setor:'Manufatura', causa:'Ausência de gestão de manutenção preventiva', resultado:'MTBF de 34h → 189h em 6 meses após contratação de supervisor de manutenção + plano preventivo' },
-          { caso:'CASE-2025-0019', setor:'Logística',  causa:'Setup demorado sem procedimento padronizado', resultado:'Tempo de setup de 4,2h → 1,1h após implementação de SMED em 3 meses' },
+          { caso:'CASE-2026-0038', setor:'E-commerce', causa:'Catálogo sem atributos de complementaridade — 71% dos SKUs sem "complementares" preenchidos', resultado:'Taxa de cross-sell 6% → 24% em 90 dias após auditoria de catálogo + RAG sobre histórico de pedidos' },
+          { caso:'CASE-2025-0051', setor:'Varejo Digital', causa:'KPI de vendas focado em volume de pedidos, ignorando ticket médio por cliente', resultado:'Ticket médio +R$ 42 em 4 meses após mudança de KPI + widget de cross-sell no checkout' },
         ].map(c => `
           <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
             <div class="flex items-center gap-2 mb-2">
@@ -700,11 +701,11 @@ const T05_DATA = {
         data_coleta: '2026-05-06',
       },
       serie: [
-        { periodo:'Jan/26', mtbf:9,  ratio_corr:91 },
-        { periodo:'Fev/26', mtbf:8,  ratio_corr:92 },
-        { periodo:'Mar/26', mtbf:9,  ratio_corr:90 },
-        { periodo:'Abr/26', mtbf:8,  ratio_corr:89 },
-        { periodo:'Mai/26', mtbf:8,  ratio_corr:89 },
+        { periodo:'Jan/26', mtbf:71, ratio_corr:12 },
+        { periodo:'Fev/26', mtbf:70, ratio_corr:11 },
+        { periodo:'Mar/26', mtbf:69, ratio_corr:11 },
+        { periodo:'Abr/26', mtbf:68, ratio_corr:11 },
+        { periodo:'Mai/26', mtbf:68, ratio_corr:11 },
       ],
       conclusao: 'Hipótese VALIDADA. Auditoria do catálogo confirma: 68% dos 5.340 SKUs ativos não têm o campo "produtos complementares" preenchido. GA4 confirma: apenas 11% das sessões incluem visualização de produto da categoria "complementar" ao produto principal. Benchmark Petz/Cobasi: 60%+. A causa raiz é estrutural e anterior a qualquer decisão de IA.',
     },
@@ -956,7 +957,7 @@ function renderT05ValidationPanel(c) {
           </div>
           <div style="margin-top:10px;padding:12px;background:var(--surface-2);border-radius:10px;">
             <div style="font-size:12px;font-weight:700;margin-bottom:8px;">Próximas Etapas para a Fase Design:</div>
-            ${['Contratar gestor de manutenção sênior','Implementar plano de manutenção preventiva estruturado','Aplicar SMED para reduzir tempo de setup','Implementar sistema de medição automatizada de OEE'].map(e => `
+            ${['Auditoria do catálogo: mapear os 5.000+ SKUs e preencher atributos de complementaridade','Definir taxonomia de produtos complementares (mínimo: ração → petiscos, higiene → acessórios)','Processar histórico de pedidos (12 meses) para validar co-compra com dados reais','Avaliar alternativas de solução de IA de recomendação com catálogo organizado como pré-requisito'].map(e => `
               <div style="display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:4px;">
                 ${icon('arrow_right',12)} ${e}
               </div>
@@ -999,9 +1000,9 @@ function renderT05EvidencePanel(c) {
       <!-- Stats rápidas -->
       <div class="grid-2" style="gap:8px;margin-bottom:16px;">
         ${[
-          { l:'Média',    v:`${media}h`,   color:'var(--danger)', note:'vs 240h benchmark' },
-          { l:'Mediana',  v:`${mediana}h`, color:'var(--danger)', note:'' },
-          { l:'Desvio',   v:`${desvio}h`,  color:'var(--gold)',   note:'Variab. moderada'  },
+          { l:'Média',    v:`${media}%`,   color:'var(--danger)', note:`vs ${benchmark}% meta` },
+          { l:'Mediana',  v:`${mediana}%`, color:'var(--danger)', note:'' },
+          { l:'Desvio',   v:`${desvio}pp`, color:'var(--gold)',   note:'Variab. baixa'  },
           { l:'Tendência',v: tendencia,     color:'var(--primary)', note:'' },
         ].map(s => `
           <div style="background:var(--surface-2);border-radius:8px;padding:10px;">
@@ -1020,38 +1021,36 @@ function renderT05EvidencePanel(c) {
           <div style="flex:1;background:var(--surface-3);border-radius:99px;height:14px;overflow:hidden;">
             <div style="width:${(media / maxVal * 100).toFixed(0)}%;height:100%;background:var(--danger);border-radius:99px;"></div>
           </div>
-          <span style="font-size:12px;font-weight:700;color:var(--danger);">${media}h</span>
+          <span style="font-size:12px;font-weight:700;color:var(--danger);">${media}%</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:11px;width:60px;">Benchmark</span>
+          <span style="font-size:11px;width:60px;">Meta (&lt;30%)</span>
           <div style="flex:1;background:var(--surface-3);border-radius:99px;height:14px;overflow:hidden;">
             <div style="width:${(benchmark / maxVal * 100).toFixed(0)}%;height:100%;background:var(--accent);border-radius:99px;"></div>
           </div>
-          <span style="font-size:12px;font-weight:700;color:var(--accent);">${benchmark}h</span>
+          <span style="font-size:12px;font-weight:700;color:var(--accent);">${benchmark}%</span>
         </div>
         <div style="font-size:11px;color:var(--danger);font-weight:700;margin-top:8px;text-align:center;">
-          Gap: ${((1 - media/benchmark)*100).toFixed(1)}% abaixo do benchmark
+          Gap: ${(media - benchmark).toFixed(1)}pp acima da meta
         </div>
       </div>
 
-      <!-- Gráfico de série temporal MTBF -->
-      <div style="font-size:11px;font-weight:700;margin-bottom:8px;">Série Temporal — MTBF (horas)</div>
+      <!-- Gráfico de série temporal — % SKUs sem complementar -->
+      <div style="font-size:11px;font-weight:700;margin-bottom:8px;">Série Temporal — % SKUs sem atributo de complementaridade</div>
       <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:12px;">
-        <!-- Linha do benchmark -->
         <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
           <div style="width:20px;height:2px;background:var(--accent);border-top:2px dashed var(--accent);"></div>
-          <span style="font-size:10px;color:var(--accent);">Benchmark (${benchmark}h)</span>
+          <span style="font-size:10px;color:var(--accent);">Meta aceitável (&lt;30%)</span>
           <div style="width:16px;height:8px;background:var(--danger);border-radius:2px;margin-left:8px;"></div>
-          <span style="font-size:10px;color:var(--danger);">MTBF medido</span>
+          <span style="font-size:10px;color:var(--danger);">% SKUs sem complementar</span>
         </div>
         <div style="display:flex;align-items:flex-end;gap:4px;height:120px;position:relative;">
-          <!-- Linha de benchmark -->
-          <div style="position:absolute;left:0;right:0;bottom:${(benchmark/maxVal*100)}%;height:1px;background:var(--accent);border-top:2px dashed var(--accent);opacity:0.7;pointer-events:none;"></div>
+          <div style="position:absolute;left:0;right:0;bottom:${(30/maxVal*100)}%;height:1px;background:var(--accent);border-top:2px dashed var(--accent);opacity:0.7;pointer-events:none;"></div>
           ${c.serie.map(d => `
             <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
-              <span style="font-size:9px;color:var(--danger);font-weight:700;">${d.mtbf}</span>
+              <span style="font-size:9px;color:var(--danger);font-weight:700;">${d.mtbf}%</span>
               <div style="width:100%;background:var(--danger);border-radius:3px 3px 0 0;height:${(d.mtbf/maxVal*110).toFixed(0)}px;opacity:0.85;position:relative;">
-                <title>MTBF ${d.periodo}: ${d.mtbf}h · Corretiva: ${d.ratio_corr}%</title>
+                <title>SKUs sem complementar ${d.periodo}: ${d.mtbf}% · Sessões com cross-sell: ${d.ratio_corr}%</title>
               </div>
             </div>
           `).join('')}
@@ -1061,22 +1060,21 @@ function renderT05EvidencePanel(c) {
         </div>
       </div>
 
-      <!-- Razão Corretiva/Preventiva -->
-      <div style="font-size:11px;font-weight:700;margin-top:14px;margin-bottom:8px;">Razão Corretiva vs. Preventiva (%)</div>
+      <!-- Sessões com visualização de complementar -->
+      <div style="font-size:11px;font-weight:700;margin-top:14px;margin-bottom:8px;">Sessões com visualização de produto complementar (%)</div>
       <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:12px;">
         ${c.serie.map(d => `
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
             <span style="font-size:9px;color:var(--text-muted);width:36px;">${d.periodo.split('/')[0]}</span>
-            <div style="flex:1;height:12px;border-radius:99px;overflow:hidden;background:#D1FAE5;">
-              <div style="width:${d.ratio_corr}%;height:100%;background:var(--danger);border-radius:99px;"></div>
+            <div style="flex:1;height:12px;border-radius:99px;overflow:hidden;background:var(--surface-3);">
+              <div style="width:${d.ratio_corr}%;height:100%;background:#3B82F6;border-radius:99px;"></div>
             </div>
-            <span style="font-size:10px;color:var(--danger);width:32px;">${d.ratio_corr}%</span>
+            <span style="font-size:10px;color:#3B82F6;width:32px;">${d.ratio_corr}%</span>
           </div>
         `).join('')}
         <div style="display:flex;gap:12px;margin-top:8px;font-size:10px;">
-          <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:var(--danger);"></div> Corretiva</div>
-          <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#D1FAE5;border:1px solid var(--accent);"></div> Preventiva</div>
-          <div style="color:var(--text-muted);">Benchmark: 30% / 70%</div>
+          <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#3B82F6;"></div> Sessões c/ cross-sell view</div>
+          <div style="color:var(--text-muted);">Benchmark Petz: 60%+</div>
         </div>
       </div>
 
@@ -1120,7 +1118,7 @@ function suggestT05Conclusion(id) {
   setTimeout(() => {
     const el = document.getElementById(`t05-conclusao-${id}`);
     if (el) {
-      el.value = 'A hipótese foi VALIDADA. MTBF de 47h representa 19,6% do benchmark setorial (240h), evidenciando claramente o impacto da gestão deficiente de manutenção. Razão de 89% corretiva versus 11% preventiva é inversamente proporcional ao padrão de operações maduras (30%/70%), confirmando o modus operandi reativo. A tendência decrescente até dez/2025 indica deterioração contínua até estabilização recente. A causa raiz "ausência de gestor de manutenção e plano preventivo estruturado" é confirmada empiricamente.';
+      el.value = T05_DATA.causas_raiz.find(x => x.id === id)?.conclusao || 'A hipótese foi VALIDADA. Auditoria do catálogo confirma: 68% dos 5.340 SKUs ativos não têm o campo "produtos complementares" preenchido — 38pp acima da meta de 30%. GA4 confirma: apenas 11% das sessões incluem visualização de produto complementar ao produto principal, vs. 60%+ no benchmark Petz/Cobasi. A tendência estável nos últimos 5 meses indica problema estrutural (não sazonal). A causa raiz "catálogo desorganizado sem atributos de complementaridade" é confirmada empiricamente — é pré-requisito de qualquer solução de IA de recomendação.';
       validateT05Conclusion(el);
       showToast('Rascunho gerado. Revise antes de confirmar.');
     }
@@ -1135,12 +1133,12 @@ function showT05MetricSuggest() {
         <button class="btn btn-ghost btn-icon" onclick="closeModal()">${icon('x',18)}</button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('ai',13)} Para hipóteses de manutenção em manufatura, as métricas mais utilizadas na biblioteca AXISUS:</div>
+        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('ai',13)} Para hipóteses de cross-sell em e-commerce, as métricas mais utilizadas na biblioteca AXISUS:</div>
         ${[
-          { m:'MTBF (Mean Time Between Failures)', u:'horas', desc:'Tempo médio entre falhas não planejadas. Principal indicador de confiabilidade de equipamento.' },
-          { m:'MTTR (Mean Time To Repair)',         u:'horas', desc:'Tempo médio de reparo. Indica eficiência do time de manutenção.' },
-          { m:'Razão corretiva/preventiva',          u:'%',     desc:'Proporção de horas de manutenção corretiva vs. preventiva.' },
-          { m:'Disponibilidade (Availability)',      u:'%',     desc:'% do tempo que o equipamento estava disponível para produção.' },
+          { m:'Taxa de cross-sell',                     u:'%',   desc:'% de pedidos com produtos de mais de 1 categoria. Métrica principal — diretamente impactada pela solução.' },
+          { m:'Itens por pedido (items per order)',      u:'un.', desc:'Número médio de itens distintos por pedido. Indicador de diversidade de cesta.' },
+          { m:'% SKUs sem atributo de complementar',     u:'%',   desc:'Proporção do catálogo sem campo "complementares" preenchido. Baseline para a auditoria.' },
+          { m:'CTR do bloco de cross-sell (se existir)', u:'%',   desc:'Taxa de clique em widgets de recomendação. Mede visibilidade e relevância das sugestões.' },
         ].map(m => `
           <div style="display:flex;justify-content:space-between;align-items:start;padding:10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;">
             <div style="flex:1;">

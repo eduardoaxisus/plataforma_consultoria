@@ -503,8 +503,9 @@ function renderT09Present() {
         ">
 
           <!-- ── LINHA 1: Cabeçalho ── -->
-          <div style="background:#04342C;padding:8px 16px;display:flex;align-items:center;gap:12px;">
+          <div style="background:#0A192F;padding:8px 16px;display:flex;align-items:center;gap:12px;border-bottom:2px solid #00D4FF;">
             <div style="font-size:20px;font-weight:900;color:white;letter-spacing:-1px;flex-shrink:0;">AXISUS</div>
+            <div style="font-size:8px;color:#00D4FF;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;flex-shrink:0;">AI-First Studio</div>
             <div style="width:1px;height:24px;background:rgba(255,255,255,0.2);"></div>
             <div style="font-size:10px;color:rgba(255,255,255,0.6);">A3 Expandido · Método 5D</div>
             <div style="flex:1;"></div>
@@ -753,13 +754,49 @@ function setT09Mode(mode) {
 }
 
 function exportA3(format) {
-  const msgs = {
-    pdf: 'PDF gerado em alta resolução (300dpi). Adequado para impressão e arquivamento.',
-    png: 'PNG gerado. Útil para compartilhamento rápido via WhatsApp ou Slack.',
-    a4:  'Versão executiva A4 gerada. Anexe em e-mails ou apresente em reuniões breves.',
-  };
   T09_STATE.version++;
-  showToast(`${msgs[format]} — Versão ${T09_STATE.version}`);
+  if (format === 'pdf' || format === 'a4') {
+    const size = format === 'pdf' ? 'A3 landscape' : 'A4 portrait';
+    const style = document.createElement('style');
+    style.id = 'axisus-print-style';
+    style.textContent = `
+      @media print {
+        @page { size: ${size}; margin: 8mm; }
+        body > * { display: none !important; }
+        #axisus-print-wrapper { display: block !important; position: fixed; top:0; left:0; width:100%; }
+        #a3-canvas {
+          width: ${format === 'pdf' ? '1100px' : '780px'} !important;
+          min-height: auto !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          font-size: ${format === 'a4' ? '10px' : '11px'} !important;
+        }
+        .no-print { display: none !important; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    const wrapper = document.createElement('div');
+    wrapper.id = 'axisus-print-wrapper';
+    wrapper.style.cssText = 'display:none;';
+    const canvas = document.getElementById('a3-canvas');
+    if (canvas) {
+      const clone = canvas.cloneNode(true);
+      wrapper.appendChild(clone);
+      document.body.appendChild(wrapper);
+    }
+
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        style.remove();
+        wrapper.remove();
+        showToast(`A3 enviado para impressão/PDF (${size}). Use "Salvar como PDF" no diálogo de impressão. — Versão ${T09_STATE.version}`);
+      }, 1000);
+    }, 300);
+  } else {
+    showToast(`PNG: use a tecla Print Screen ou Ctrl+Shift+S no navegador para capturar o canvas. — Versão ${T09_STATE.version}`);
+  }
 }
 
 function sendSignoff() {
@@ -773,16 +810,16 @@ function sendSignoff() {
         <div class="alert alert-info mb-3" style="font-size:12px;">${icon('send',14)} O cliente recebe link via e-mail para assinar o A3 digitalmente via ClickSign.</div>
         <div class="form-group mb-2">
           <label class="form-label">Destinatário</label>
-          <input class="form-input" value="marcelo.atlantico@embalagensatlantico.com.br">
+          <input class="form-input" value="renato.almeida@petshopbeta.com.br">
         </div>
         <div class="form-group">
           <label class="form-label">Mensagem</label>
-          <textarea class="form-textarea" rows="3">Prezado Marcelo, segue o A3 Expandido do diagnóstico AXISUS para sua aprovação formal. Por favor, revise e assine digitalmente para iniciarmos a Fase Deliver.</textarea>
+          <textarea class="form-textarea" rows="3">Prezado Renato, segue o A3 Expandido do AI Sprint AXISUS para sua aprovação formal. Por favor, revise e assine digitalmente para encerrarmos o case Petshop Beta (CASE-2026-0042).</textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-accent" onclick="closeModal();T09_STATE.signoff='signed';navigate('template_t09');showToast('A3 enviado para sign-off! Marcelo Atlântico será notificado.')">
+        <button class="btn btn-accent" onclick="closeModal();T09_STATE.signoff='signed';navigate('template_t09');showToast('A3 enviado para sign-off! Renato Almeida (CEO Petshop Beta) será notificado.')">
           ${icon('send',14)} Enviar via ClickSign
         </button>
       </div>

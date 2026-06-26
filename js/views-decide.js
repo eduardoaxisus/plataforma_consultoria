@@ -120,15 +120,15 @@ function renderT07() {
         <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
           <div style="flex:2;min-width:220px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;">Causa Raiz Validada (T05)</div>
-            <div style="font-size:12px;font-weight:700;">Ausência de gestor de manutenção · MTBF 47h vs 240h</div>
+            <div style="font-size:12px;font-weight:700;">Catálogo desorganizado — 68% SKUs sem atributos de complementaridade</div>
           </div>
           <div style="flex:1;min-width:150px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;">Métrica-Alvo (T03)</div>
-            <div style="font-size:12px;font-weight:700;">OEE 18% → 50%+ em 12 meses</div>
+            <div style="font-size:12px;font-weight:700;">Cross-sell 8% → 20-32% · Ticket R$ 80 → R$ 130</div>
           </div>
           <div style="flex:1;min-width:150px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;">Restrição (T01)</div>
-            <div style="font-size:12px;font-weight:700;">Orçamento ≤ R$ 600k · Até 31/07/2026</div>
+            <div style="font-size:12px;font-weight:700;">Orçamento ≤ R$ 30k · 1 dev · Shopify Plus</div>
           </div>
           <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
             <div style="font-size:10px;opacity:0.7;">Vencedora</div>
@@ -242,7 +242,7 @@ function renderT07() {
               `;
             }).join('')}
             <div style="margin-top:12px;padding:10px;background:#F0FDF4;border-radius:8px;font-size:11px;">
-              <strong style="color:#065F46;">Nota metodológica:</strong> As alternativas A2 (SMED) e A4 (OEE IoT) foram penalizadas em 50% por tratar sintomas, não a causa raiz. Sem o Multiplicador AXISUS, A2 (WSJF base 2,60) superaria A3 (2,63) — levando à recomendação de uma alternativa que não resolve definitivamente o problema.
+              <strong style="color:#0A192F;">Nota metodológica:</strong> As alternativas A1 (SaaS Pronto) e A3 (RAG puro) foram penalizadas por ignorar o catálogo desorganizado como pré-requisito. Sem o Multiplicador AXISUS, A1 (WSJF base 2,45) superaria A8 (2,38) — levando à recomendação de uma solução que falharia sem curadoria do catálogo, como provam os 2 casos anteriores na biblioteca.
             </div>
           </div>
         </div>
@@ -860,7 +860,7 @@ function renderT08KPIs() {
     </div>
 
     <div class="alert alert-info mt-4" style="font-size:12px;">
-      ${icon('eye',13)} K01 (OEE) conecta-se diretamente com a métrica-alvo de T03 (OEE 18% → 50%+). K02 e K03 são direcionadores que predizem o OEE — se MTBF e razão preventiva/corretiva melhoram, OEE melhora. Monitorar os três conjuntamente.
+      ${icon('eye',13)} K01 (Taxa de cross-sell) conecta-se diretamente com a métrica-alvo de T03 (8% → 20-32%). K02 (Ticket médio) é o resultado financeiro direto. K03 (% SKUs com complementar) e K04 (CTR widget) são os leading indicators — se o catálogo melhora e o widget é relevante, o cross-sell melhora. Monitorar os quatro conjuntamente.
     </div>
   `;
 }
@@ -890,7 +890,7 @@ function requestGateDecide() {
             [`${T08_RISCOS.length} riscos mapeados (mínimo 6)`, T08_RISCOS.length >= 6],
             [`${riscosAlto.length} riscos alto/crítico com plano de contingência`, true],
             [`${T08_KPIS.length} KPIs definidos (mínimo 4) com marcos 30/60/90`, T08_KPIS.length >= 4],
-            ['KPIs conectados com métrica-alvo de T03 (OEE)', true],
+            ['KPIs conectados com métrica-alvo de T03 (cross-sell + ticket)', true],
             ['Custos consistentes entre T07 e T08 (R$500k)', true],
           ].map(([item, ok]) => `
             <div class="flex items-center gap-2 mb-2">
@@ -936,18 +936,18 @@ function showT08AISuggest() {
         <button class="btn btn-ghost btn-icon" onclick="closeModal()">${icon('x',18)}</button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-3" style="font-size:12px;">Com base em 23 casos similares (gestão de manutenção em manufatura), a IA identificou:</div>
+        <div class="alert alert-info mb-3" style="font-size:12px;">Com base em 31 casos similares (e-commerce + cross-sell + IA de recomendação), a IA identificou:</div>
         <div style="margin-bottom:12px;">
           <div style="font-size:12px;font-weight:700;margin-bottom:6px;">⏱️ Alerta de Prazo</div>
-          <div style="background:#FEF3C7;border-radius:8px;padding:10px;font-size:12px;color:#92400E;">Em casos parecidos, a Frente F1 (contratação) tomou em média 9 meses, não 6. Você está estimando 6 meses — considere adicionar 30% de buffer.</div>
+          <div style="background:#FEF3C7;border-radius:8px;padding:10px;font-size:12px;color:#92400E;">Em casos parecidos, a auditoria de catálogo (F1) tomou em média 6 semanas, não 3. Com 5.000+ SKUs e 1 pessoa de catálogo sobrecarregada, considere contratar curador temporário ou usar IA generativa para pré-preencher atributos.</div>
         </div>
         <div style="margin-bottom:12px;">
           <div style="font-size:12px;font-weight:700;margin-bottom:6px;">⚠️ Risco Não Mapeado</div>
-          <div style="background:#FEF3C7;border-radius:8px;padding:10px;font-size:12px;color:#92400E;">Em 78% dos casos com stakeholder resistente (CFO neste caso), houve tentativa de revisão do orçamento no mês 3. Você tem mitigação para este momento específico?</div>
+          <div style="background:#FEF3C7;border-radius:8px;padding:10px;font-size:12px;color:#92400E;">Em 72% dos casos com CFO resistente (Beatriz Lima), houve bloqueio de aprovação entre semana 3-4 após o sprint. Mitigação recomendada: apresentar ROI por cohort (clientes que fizeram cross-sell vs não fizeram) antes da reunião de decisão.</div>
         </div>
         <div>
-          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">📊 KPI Sugerido</div>
-          <div style="background:#F0FDF4;border-radius:8px;padding:10px;font-size:12px;color:#065F46;">Adicionar K06: "Taxa de atendimento ao plano preventivo" (% de OMs preventivas executadas no prazo). É o leading indicator mais preciso de MTBF futuro.</div>
+          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">📊 KPI Adicional Sugerido</div>
+          <div style="background:#EFF6FF;border-radius:8px;padding:10px;font-size:12px;color:#1D4ED8;">Adicionar K05: "% SKUs com atributo de complementar preenchido" — é o leading indicator mais preciso da qualidade futura das recomendações RAG. Meta: 80% em 30 dias.</div>
         </div>
       </div>
       <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Fechar</button></div>

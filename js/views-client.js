@@ -55,7 +55,7 @@ function renderClientDashboard() {
           ${icon('alert', 18)}
           <div>
             <div style="font-size:13px;font-weight:600;">Próxima ação esperada</div>
-            <div class="text-sm text-secondary">Aguardar entrega dos dados de OEE das rotas — prazo: 05/05/2026</div>
+            <div class="text-sm text-secondary">Aguardar exportação do histórico de pedidos (GA4 + Shopify) para análise de co-compra — prazo: 12/05/2026</div>
           </div>
         </div>
       </div>

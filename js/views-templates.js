@@ -339,8 +339,8 @@ function renderT01() {
         <div style="margin-bottom:20px;">
           <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin-bottom:10px;">Casos Similares na Biblioteca</div>
           ${[
-            { setor:'Manufatura', prob:'OEE baixo em linha produtiva', reformulado:'Subutilização de 74% da capacidade instalada por setup e paradas', resultado:'+18pp OEE em 90 dias' },
-            { setor:'Logística',  prob:'Atrasos crescentes nas entregas', reformulado:'Roteirização inadequada gera 23% de retrabalho logístico', resultado:'23% redução de custos' },
+            { setor:'E-commerce', prob:'Taxa de cross-sell estagnada em e-commerce de nicho', reformulado:'68% dos SKUs sem atributos de complementaridade → bloqueio de qualquer solução de IA', resultado:'+19pp cross-sell em 90 dias' },
+            { setor:'Fintech',    prob:'App com baixo uso de funcionalidades secundárias', reformulado:'Ausência de onboarding contextual + KPI focado em ativações, não em engajamento', resultado:'Feature adoption +34% em 60 dias' },
           ].map(c => `
             <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
               <div class="badge badge-primary" style="margin-bottom:6px;font-size:10px;">${c.setor}</div>
@@ -358,11 +358,11 @@ function renderT01() {
         <div style="margin-bottom:20px;">
           <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin-bottom:10px;">Perguntas de Aprofundamento</div>
           ${[
-            'Qual é o OEE atual de cada linha de produção, medido com os 3 componentes (disponibilidade, performance, qualidade)?',
-            'Quais foram as 5 maiores causas de parada não planejada nos últimos 6 meses?',
-            'Existe histórico do tempo de setup médio? Variou nos últimos 12 meses?',
-            'O retrabalho é registrado sistematicamente? Por turno, por operador, por produto?',
-            'A decisão de compra da máquina foi baseada em análise de capacidade ou em proposta comercial das fornecedoras?',
+            'Qual é a taxa de cross-sell atual (% de pedidos com mais de 1 categoria)? Existe série histórica dos últimos 12 meses?',
+            'Quais os top 10 SKUs mais vendidos? Cada um tem produtos complementares mapeados no catálogo?',
+            'O cliente já tentou recommendation engine ou widgets de cross-sell antes? Qual foi o resultado e por quê parou?',
+            'Quem é o responsável pelo catálogo? Qual o tempo médio de cadastro de um SKU novo com todos os atributos?',
+            'A plataforma (Shopify Plus) tem acesso ao histórico completo de pedidos em formato exportável para análise de co-compra?',
           ].map((q,i) => `
             <div style="border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:6px;font-size:12px;">
               <div style="color:var(--text-primary);margin-bottom:6px;">${i+1}. ${q}</div>
@@ -378,7 +378,7 @@ function renderT01() {
           <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin-bottom:10px;">Risco de Reformulação Prematura</div>
           <div class="alert alert-warning" style="font-size:12px;">
             ${icon('alert',14)}
-            <div style="margin-left:8px;">A solução imaginada (compra de máquina) é típica de diagnósticos de <strong>capacidade</strong>, mas os atrasos reportados frequentemente têm causa raiz em <strong>eficiência e processo</strong>. Recomenda-se validar com dados de OEE antes de qualquer recomendação.</div>
+            <div style="margin-left:8px;">A solução imaginada (comprar recommendation engine SaaS) é típica de diagnósticos que ignoram o catálogo. Em <strong>83% dos casos similares</strong>, a IA de recomendação falhou porque o catálogo não tinha atributos de complementaridade. Recomenda-se auditar o catálogo antes de qualquer recomendação de solução.</div>
           </div>
         </div>
       </div>
@@ -833,8 +833,8 @@ function showIsIsNotAI(dimensao, idx) {
       <div class="modal-body">
         <div class="alert alert-info mb-3" style="font-size:12px;">${icon('eye',14)} Exemplos de como outros casos AXISUS delimitaram esta dimensão para problemas similares.</div>
         ${[
-          { is:'Linha de produção principal (L1 e L2)', isnot:'Linhas auxiliares e área de embalagem final', fonte:'CASE-2025-0031 · Manufatura' },
-          { is:'Turnos de produção com ocorrência de parada ≥ 2h/dia', isnot:'Paradas programadas de manutenção preventiva', fonte:'CASE-2025-0028 · Manufatura' },
+          { is:'Página de produto e checkout do e-commerce (desktop e mobile web)', isnot:'Aplicativo mobile, loja física, e-mail de remarketing', fonte:'CASE-2026-0038 · E-commerce' },
+          { is:'Produtos complementares de categorias distintas comprados na mesma sessão', isnot:'Substitutos de marca, bundles fixos de preço, recompra recorrente', fonte:'CASE-2025-0051 · Varejo Digital' },
         ].map(s => `
           <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
             <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;">${s.fonte}</div>
@@ -861,12 +861,12 @@ function showT02StakeholderSuggest() {
         <button class="btn btn-ghost btn-icon" onclick="closeModal()">${icon('x',18)}</button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('eye',14)} Com base no setor (Manufatura) e nas áreas afetadas, a IA identificou cargos tipicamente envolvidos que podem estar faltando no seu mapa.</div>
+        <div class="alert alert-info mb-3" style="font-size:12px;">${icon('eye',14)} Com base no setor (E-commerce · Pets) e nas áreas afetadas, a IA identificou cargos tipicamente envolvidos que podem estar faltando no seu mapa.</div>
         ${[
-          { cargo:'Diretor de Qualidade / Quality Manager', motivo:'Em problemas de OEE, qualidade é frequentemente causa ou efeito. Tem dados de retrabalho.', ja_tem:false },
-          { cargo:'Engenheiro de Processos / IE',           motivo:'Responsável técnico pelos parâmetros de velocidade e setup. Fonte primária de dados.', ja_tem:false },
-          { cargo:'Controller / Analista Financeiro',       motivo:'Responsável pelos dados de custo de hora-máquina e impacto financeiro do atraso.', ja_tem:false },
-          { cargo:'Representante do Sindicato / CIPA',      motivo:'Em mudanças de turno ou processo, sindicato pode ser resistência não mapeada.', ja_tem:true },
+          { cargo:'Head de Dados / Data Analyst',          motivo:'Em problemas de recommendation engine, o analista de dados tem acesso aos logs de co-compra — fonte primária de evidência.', ja_tem:false },
+          { cargo:'Dev Full-Stack / Tech Lead',            motivo:'Responsável por avaliar viabilidade de integração de app Shopify ou API externa. Determina prazo real de implementação.', ja_tem:false },
+          { cargo:'Gerente de Customer Success / CX',     motivo:'Tem acesso às reclamações de clientes sobre navegação e descoberta. Fonte de dados qualitativos sobre NPS.', ja_tem:false },
+          { cargo:'Beatriz Lima (CFO)',                    motivo:'Já mapeada como Aprovadora — confirmar se precisa de análise de ROI específica antes da decisão de compra.', ja_tem:true },
         ].map(s => `
           <div style="border:1px solid ${s.ja_tem ? 'var(--accent)' : 'var(--border)'};border-radius:10px;padding:12px;margin-bottom:8px;${s.ja_tem?'opacity:0.6':''}">
             <div class="flex items-center gap-2 mb-2">
@@ -1242,16 +1242,16 @@ function showBenchmarkSuggest(dimensao, indicador) {
       <div class="modal-body">
         <div class="alert alert-warning mb-3" style="font-size:12px;">${icon('alert',14)} A IA apresenta faixas de referência com fonte. O benchmark final é responsabilidade do especialista.</div>
         <div style="border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px;">
-          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Setor Manufatura · Indústria de Embalagens</div>
-          <div style="font-size:13px;color:var(--text-primary);margin-bottom:8px;">OEE médio: <strong>58% – 72%</strong></div>
-          <div style="font-size:11px;color:var(--text-muted);">Fonte: Pesquisa ABFlexo 2024 · n=143 empresas · Brasil</div>
-          <button class="btn btn-primary btn-sm mt-2" onclick="closeModal();showToast('Benchmark 68% aplicado (média ABFlexo 2024)')">Usar 68% (média)</button>
+          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">E-commerce · Pets & Especializado · Brasil</div>
+          <div style="font-size:13px;color:var(--text-primary);margin-bottom:8px;">Taxa de cross-sell: <strong>22% – 34%</strong></div>
+          <div style="font-size:11px;color:var(--text-muted);">Fonte: Ebit/Nielsen Webshoppers 2026 · Petz/Cobasi relatórios públicos</div>
+          <button class="btn btn-primary btn-sm mt-2" onclick="closeModal();showToast('Benchmark 32% aplicado (Petz/Cobasi)')">Usar 32% (Petz/Cobasi)</button>
         </div>
         <div style="border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px;">
-          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Top quartil · Best-in-class</div>
-          <div style="font-size:13px;color:var(--text-primary);margin-bottom:8px;">OEE médio: <strong>82% – 90%</strong></div>
-          <div style="font-size:11px;color:var(--text-muted);">Fonte: SMRP Metrics 2024</div>
-          <button class="btn btn-secondary btn-sm mt-2" onclick="closeModal();showToast('Benchmark 85% (best-in-class) aplicado')">Usar 85% (best-in-class)</button>
+          <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Top performers · E-commerce com IA de recomendação</div>
+          <div style="font-size:13px;color:var(--text-primary);margin-bottom:8px;">Taxa de cross-sell: <strong>38% – 52%</strong></div>
+          <div style="font-size:11px;color:var(--text-muted);">Fonte: Shopify Plus Benchmarks 2025 · Segmento especializado</div>
+          <button class="btn btn-secondary btn-sm mt-2" onclick="closeModal();showToast('Benchmark 45% (best-in-class) aplicado')">Usar 45% (best-in-class)</button>
         </div>
       </div>
     </div>

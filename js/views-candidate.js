@@ -65,8 +65,8 @@ function renderCandidateDashboard() {
           <div class="card-title mb-2">Seu perfil</div>
           <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;">
             <div class="flex justify-between"><span class="text-muted">Nome</span><span class="font-semibold">Roberto Silva</span></div>
-            <div class="flex justify-between"><span class="text-muted">Área</span><span class="font-semibold">Manufatura</span></div>
-            <div class="flex justify-between"><span class="text-muted">Certificação</span><span class="font-semibold">Black Belt</span></div>
+            <div class="flex justify-between"><span class="text-muted">Área</span><span class="font-semibold">E-commerce · IA Aplicada</span></div>
+            <div class="flex justify-between"><span class="text-muted">Especialização</span><span class="font-semibold">Método 5D · AI Sprint</span></div>
             <div class="flex justify-between"><span class="text-muted">Cidade</span><span class="font-semibold">São Paulo - SP</span></div>
             <div class="flex justify-between"><span class="text-muted">Experiência</span><span class="font-semibold">12 anos</span></div>
           </div>

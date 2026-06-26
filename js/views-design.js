@@ -277,20 +277,20 @@ function renderT06() {
       </div>
 
       <!-- ── Cabeçalho de contexto ── -->
-      <div style="background:linear-gradient(135deg,#04342C,#065F46);color:white;padding:12px 20px;flex-shrink:0;">
+      <div style="background:linear-gradient(135deg,#0A192F,#0D2847);color:white;padding:12px 20px;flex-shrink:0;border-bottom:2px solid rgba(0,212,255,0.3);">
         <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
           <div style="flex:2;min-width:220px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;">Causa Raiz Validada em T05</div>
-            <div style="font-size:13px;font-weight:700;">Ausência de gestor de manutenção (reorganização pós-pandemia não revisada)</div>
-            <div style="font-size:11px;opacity:0.75;margin-top:3px;">Evidência: MTBF 47h vs benchmark 240h · Razão corretiva/preventiva 89% / 11%</div>
+            <div style="font-size:13px;font-weight:700;">Catálogo desorganizado — 68% dos SKUs sem atributos de complementaridade</div>
+            <div style="font-size:11px;opacity:0.75;margin-top:3px;">Evidência: 68% SKUs sem "complementares" preenchido · Sessões c/ cross-sell view: 11% vs 60% benchmark</div>
           </div>
           <div style="flex:1;min-width:160px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;">Métrica-Alvo</div>
-            <div style="font-size:13px;font-weight:700;">OEE: 18% → 50%+ em 12 meses</div>
+            <div style="font-size:13px;font-weight:700;">Cross-sell: 8% → 20-32% · Ticket: R$ 80 → R$ 130</div>
           </div>
           <div style="flex:1;min-width:160px;">
             <div style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;">Restrições (T01)</div>
-            <div style="font-size:12px;font-weight:500;">Decisão até 31/07/2026 · Orçamento ≤ R$ 600k</div>
+            <div style="font-size:12px;font-weight:500;">Orçamento ≤ R$ 30k · 1 dev full-stack · Shopify Plus</div>
           </div>
           <div style="text-align:center;background:rgba(255,255,255,0.12);border-radius:10px;padding:10px 16px;flex-shrink:0;">
             <div style="font-size:22px;font-weight:900;">${total}</div>
@@ -674,7 +674,7 @@ function addNovaAlt() {
 function showT06SCAMPER() {
   const perguntas = [
     { letra: 'S', nome: 'Substituir', cor: '#6366F1', pergunta: 'O que pode ser SUBSTITUÍDO? Um processo, responsável, tecnologia, fornecedor?', exemplo: 'Ex: substituir manutenção reativa por contrato performance-based' },
-    { letra: 'C', nome: 'Combinar',   cor: '#0891B2', pergunta: 'O que pode ser COMBINADO com outra coisa para criar mais valor?', exemplo: 'Ex: combinar gestor sênior com sistema OEE automatizado' },
+    { letra: 'C', nome: 'Combinar',   cor: '#0891B2', pergunta: 'O que pode ser COMBINADO com outra coisa para criar mais valor?', exemplo: 'Ex: combinar auditoria de catálogo com RAG sobre histórico de pedidos' },
     { letra: 'A', nome: 'Adaptar',    cor: '#10B981', pergunta: 'O que pode ser ADAPTADO de outro setor, caso, empresa para esta situação?', exemplo: 'Ex: adaptar metodologia TPM da indústria automotiva para flexografia' },
     { letra: 'M', nome: 'Modificar',  cor: '#F59E0B', pergunta: 'O que pode ser MODIFICADO, ampliado, reduzido, invertido?', exemplo: 'Ex: modificar escopo do cargo existente para absorver função de manutenção' },
     { letra: 'P', nome: 'Propor outro uso', cor: '#8B5CF6', pergunta: 'Algum recurso existente pode ser reaproveitado de outro jeito?', exemplo: 'Ex: técnico sênior existente pode assumir papel de gestor de manutenção interim' },
@@ -694,7 +694,7 @@ function showT06SCAMPER() {
       <div class="modal-body">
         <div class="alert alert-info mb-3" style="font-size:12px;">${icon('search',13)} Técnica clássica para destravar criatividade. Cada uma das 7 perguntas força você a olhar o problema por um ângulo diferente. Para cada insight, clique em "Adicionar" para criar uma alternativa.</div>
         <div style="font-size:11px;color:var(--text-secondary);margin-bottom:12px;padding:8px 12px;background:var(--surface-2);border-radius:8px;">
-          <strong>Problema em foco:</strong> Ausência de gestor de manutenção → MTBF 47h vs 240h benchmark
+          <strong>Problema em foco:</strong> Catálogo desorganizado → Cross-sell 8% vs 32% benchmark (Petz/Cobasi)
         </div>
         ${perguntas.map(p => `
           <div style="border-left:4px solid ${p.cor};padding:10px 14px;margin-bottom:10px;background:var(--surface-2);border-radius:0 8px 8px 0;">
@@ -786,9 +786,9 @@ function toggleMorfoCell(td) {
 // ─────────────────────────────────────────────────────────────
 function showT06Library() {
   const casos = [
-    { id: 'CASE-2025-0031', setor: 'Manufatura', causa: 'Ausência de gestão de manutenção preventiva', solucao: 'Contratação de supervisor de manutenção + plano preventivo (A1+A3)', resultado: 'MTBF 34h → 189h em 6 meses. OEE 22% → 54%.' },
-    { id: 'CASE-2025-0019', setor: 'Embalagens', causa: 'Setup demorado sem procedimento padronizado', solucao: 'SMED + treinamento operadores', resultado: 'Setup 4,2h → 1,1h em 3 meses. OEE +12 p.p.' },
-    { id: 'CASE-2024-0088', setor: 'Gráfica',    causa: 'OEE baixo por falta de medição e visibilidade', solucao: 'Sistema IoT + dashboard OEE real-time', resultado: 'Identificação de 3 gargalos ocultos. OEE +8 p.p. em 4 meses.' },
+    { id: 'CASE-2026-0038', setor: 'E-commerce',    causa: 'Catálogo sem atributos de complementaridade (71% SKUs)', solucao: 'Auditoria de catálogo + RAG sobre histórico de pedidos (A8 Híbrida)', resultado: 'Cross-sell 6% → 24% em 90 dias. Ticket médio +R$ 38.' },
+    { id: 'CASE-2025-0051', setor: 'Varejo Digital', causa: 'KPI de GMV ignorando ticket por cliente', solucao: 'Widget de cross-sell no checkout + mudança de KPI para itens/pedido', resultado: 'CTR widget 12,4%. Ticket médio +R$ 42 em 4 meses.' },
+    { id: 'CASE-2025-0044', setor: 'Fintech',        causa: 'Onboarding sem personalização por perfil de uso', solucao: 'LLM via API para geração de onboarding personalizado (A2)', resultado: 'Ativação de funcionalidades secundárias +34% em 60 dias.' },
     { id: 'CASE-2024-0055', setor: 'Flexografia', causa: 'Manutenção corretiva-reativa (89% das horas)', solucao: 'TPM completo + autonomous maintenance', resultado: 'Razão corretiva/preventiva 85%/15% → 35%/65% em 8 meses.' },
   ];
 
