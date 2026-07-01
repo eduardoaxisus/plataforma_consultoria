@@ -231,16 +231,6 @@ const T06_STATE = {
   ],
   avaliando: 'a8',
 };
-        prazo: '8 meses — dentro do horizonte com folga.',
-        complexidade: 'Múltiplas mudanças simultâneas geram mais resistência.',
-        risco: 'Baixo risco técnico. Risco de overload da equipe durante transição.',
-      },
-      pre_requisitos: 'Gestor sênior contratado antes de iniciar A2 e A3.',
-      premissas: 'Equipe capaz de absorver múltiplas mudanças simultâneas.',
-      motivo_descarte: '',
-    },
-  ],
-};
 
 // ─────────────────────────────────────────────────────────────
 // RENDER PRINCIPAL T06
